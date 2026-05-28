@@ -71,7 +71,7 @@
 
 ```
 my portfolio/
-├── portfolio-pm.html          ← 主站文件（展示层：UI 结构 + 样式 + 交互）
+├── index.html          ← 主站文件（原 portfolio-pm.html）
 ├── content.js                 ← 数据层：所有文本内容、索引、配置（新建）
 ├── portfolio-pm.md            ← 内容草稿（不修改）
 ├── portfolio-review/          ← 复盘分析 React 应用（不动）
