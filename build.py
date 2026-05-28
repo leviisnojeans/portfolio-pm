@@ -104,6 +104,20 @@ def extract_case_content(html):
     body = body_match.group(1) if body_match else html
     return css, body
 
+def rewrite_relative_image_paths(body):
+    """将 case study body 中的相对图片路径重写为项目根目录绝对路径。
+
+    源 HTML 在 source/项目/项目介绍-html格式/ 中，图片引用类似
+    src="../项目源材料/项目图片/xxx/yyy.png"
+    需要改为 src="source/项目/项目源材料/项目图片/xxx/yyy.png"
+    """
+    body = re.sub(
+        r'src="\.\./(项目源材料/项目图片/[^"]+)"',
+        r'src="source/项目/\1"',
+        body
+    )
+    return body
+
 
 # ── Metadata Extraction ──
 
@@ -389,6 +403,7 @@ def build():
 
             css, body = extract_case_content(processed)
             body = inject_project_images(body, proj_id)
+            body = rewrite_relative_image_paths(body)
             body = body.replace('\\', '\\\\').replace('`', '\\`').replace('${', '\\${')
 
             case_studies[proj_id][lang] = {'css': css, 'body': body}

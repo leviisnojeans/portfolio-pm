@@ -524,8 +524,8 @@ var CASE_DATA = {
     <div class="section-label">三个工作流</div>
 
       <div class="comp">
-        <img class="after" src="../项目源材料/项目图片/直播间重构/直播间主框架重构后.png" alt="重构后">
-        <img class="before" src="../项目源材料/项目图片/直播间重构/直播间主框架重构前.png" alt="重构前">
+        <img class="after" src="source/项目/项目源材料/项目图片/直播间重构/直播间主框架重构后.png" alt="重构后">
+        <img class="before" src="source/项目/项目源材料/项目图片/直播间重构/直播间主框架重构前.png" alt="重构前">
         <span class="comp-badge after">重构后</span>
         <span class="comp-badge before">重构前</span>
       </div>
@@ -772,8 +772,8 @@ var CASE_DATA = {
     <div class="section-label">Three workstreams</div>
 
       <div class="comp">
-        <img class="after" src="../项目源材料/项目图片/直播间重构/直播间主框架重构后.png" alt="After rebuild">
-        <img class="before" src="../项目源材料/项目图片/直播间重构/直播间主框架重构前.png" alt="Before rebuild">
+        <img class="after" src="source/项目/项目源材料/项目图片/直播间重构/直播间主框架重构后.png" alt="After rebuild">
+        <img class="before" src="source/项目/项目源材料/项目图片/直播间重构/直播间主框架重构前.png" alt="Before rebuild">
         <span class="comp-badge after">After</span>
         <span class="comp-badge before">Before</span>
       </div>
@@ -946,35 +946,21 @@ var CASE_DATA = {
   .stat-label { color: var(--color-text-secondary); flex: 1; }
   .stat-val { font-weight: 600; color: var(--color-text-primary); }
 
-  /* ── Before / After compare ── */
-  .compare-wrap { margin-top: 12px; }
-  .compare-hint { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
-  .compare-box {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: default;
-    border: 0.5px solid var(--color-border);
+  /* Before/after comparison — from shared component */
+  .comp { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin: 16px 0; cursor: pointer; background: var(--color-bg-secondary); aspect-ratio: 16 / 9; }
+  .comp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.35s ease; }
+  .comp .before { opacity: 0; }
+  @media (hover: hover) {
+    .comp:hover .before { opacity: 1; }
+    .comp:hover .after { opacity: 0; }
   }
-  .compare-box img { display: block; width: 100%; height: auto; }
-  .compare-box .cb-before {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  .comp-badge { position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; z-index: 2; pointer-events: none; }
+  .comp-badge.before { background: var(--color-indigo-mid); color: #fff; opacity: 0; transition: opacity 0.35s ease; }
+  .comp-badge.after { background: var(--color-blue-mid); color: #fff; }
+  @media (hover: hover) {
+    .comp:hover .comp-badge.before { opacity: 1; }
+    .comp:hover .comp-badge.after { opacity: 0; }
   }
-  .compare-box:hover .cb-before { opacity: 1; }
-  .cb-badge {
-    position: absolute; top: 12px; left: 12px;
-    border-radius: 20px; padding: 4px 10px;
-    font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
-    pointer-events: none;
-    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .cb-badge-after  { background: rgba(107,157,222,0.15); color: var(--color-blue); border: 0.5px solid rgba(107,157,222,0.35); opacity: 1; }
-  .cb-badge-before { background: rgba(149,133,216,0.15); color: var(--color-indigo); border: 0.5px solid rgba(149,133,216,0.35); opacity: 0; }
-  .compare-box:hover .cb-badge-after  { opacity: 0; }
-  .compare-box:hover .cb-badge-before { opacity: 1; }
 `,
       "body": `
 <div class="cs">
@@ -1043,6 +1029,13 @@ var CASE_DATA = {
   <div class="section">
     <div class="section-label">方案——四个工作流</div>
 
+      <div class="comp">
+        <img class="after" src="source/项目/项目源材料/项目图片/pc直播姬改版/PC直播姬改版后.png" alt="改版后">
+        <img class="before" src="source/项目/项目源材料/项目图片/pc直播姬改版/PC直播姬改版前.png" alt="改版前">
+        <span class="comp-badge after">改版后</span>
+        <span class="comp-badge before">改版前</span>
+      </div>
+
     <div class="workstream">
       <div class="ws-header">
         <div>
@@ -1105,18 +1098,6 @@ var CASE_DATA = {
   </div>
 
   <!-- Before / After -->
-  <div class="section">
-    <div class="section-label">改版前后对比</div>
-    <div class="compare-wrap">
-      <p class="compare-hint">悬停可对比改版前后界面</p>
-      <div class="compare-box">
-        <img class="cb-after"  src="assets/case-images/case-img-9a5a656ec8ebec89.png"  alt="Redesigned interface">
-        <img class="cb-before" src="assets/case-images/case-img-815139bd001246ed.png" alt="Original interface">
-        <span class="cb-badge cb-badge-after">After</span>
-        <span class="cb-badge cb-badge-before">Before</span>
-      </div>
-    </div>
-  </div>
 
   <!-- Results -->
   <div class="section">
@@ -1204,35 +1185,21 @@ var CASE_DATA = {
   .stat-label { color: var(--color-text-secondary); flex: 1; }
   .stat-val { font-weight: 600; color: var(--color-text-primary); }
 
-  /* ── Before / After compare ── */
-  .compare-wrap { margin-top: 12px; }
-  .compare-hint { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
-  .compare-box {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: default;
-    border: 0.5px solid var(--color-border);
+  /* Before/after comparison — from shared component */
+  .comp { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin: 16px 0; cursor: pointer; background: var(--color-bg-secondary); aspect-ratio: 16 / 9; }
+  .comp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.35s ease; }
+  .comp .before { opacity: 0; }
+  @media (hover: hover) {
+    .comp:hover .before { opacity: 1; }
+    .comp:hover .after { opacity: 0; }
   }
-  .compare-box img { display: block; width: 100%; height: auto; }
-  .compare-box .cb-before {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  .comp-badge { position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; z-index: 2; pointer-events: none; }
+  .comp-badge.before { background: var(--color-indigo-mid); color: #fff; opacity: 0; transition: opacity 0.35s ease; }
+  .comp-badge.after { background: var(--color-blue-mid); color: #fff; }
+  @media (hover: hover) {
+    .comp:hover .comp-badge.before { opacity: 1; }
+    .comp:hover .comp-badge.after { opacity: 0; }
   }
-  .compare-box:hover .cb-before { opacity: 1; }
-  .cb-badge {
-    position: absolute; top: 12px; left: 12px;
-    border-radius: 20px; padding: 4px 10px;
-    font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
-    pointer-events: none;
-    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .cb-badge-after  { background: rgba(107,157,222,0.15); color: var(--color-blue); border: 0.5px solid rgba(107,157,222,0.35); opacity: 1; }
-  .cb-badge-before { background: rgba(149,133,216,0.15); color: var(--color-indigo); border: 0.5px solid rgba(149,133,216,0.35); opacity: 0; }
-  .compare-box:hover .cb-badge-after  { opacity: 0; }
-  .compare-box:hover .cb-badge-before { opacity: 1; }
 `,
       "body": `
 <div class="cs">
@@ -1301,6 +1268,13 @@ var CASE_DATA = {
   <div class="section">
     <div class="section-label">Approach — four workstreams</div>
 
+      <div class="comp">
+        <img class="after" src="source/项目/项目源材料/项目图片/pc直播姬改版/PC直播姬改版后.png" alt="After rebuild">
+        <img class="before" src="source/项目/项目源材料/项目图片/pc直播姬改版/PC直播姬改版前.png" alt="Before rebuild">
+        <span class="comp-badge after">After</span>
+        <span class="comp-badge before">Before</span>
+      </div>
+
     <div class="workstream">
       <div class="ws-header">
         <div>
@@ -1363,18 +1337,6 @@ var CASE_DATA = {
   </div>
 
   <!-- Before / After -->
-  <div class="section">
-    <div class="section-label">Before &amp; After</div>
-    <div class="compare-wrap">
-      <p class="compare-hint">Hover to compare with the original interface</p>
-      <div class="compare-box">
-        <img class="cb-after"  src="assets/case-images/case-img-9a5a656ec8ebec89.png"  alt="Redesigned interface">
-        <img class="cb-before" src="assets/case-images/case-img-815139bd001246ed.png" alt="Original interface">
-        <span class="cb-badge cb-badge-after">After</span>
-        <span class="cb-badge cb-badge-before">Before</span>
-      </div>
-    </div>
-  </div>
 
   <!-- Results -->
   <div class="section">
