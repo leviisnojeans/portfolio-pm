@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Leverage of Less: How UI Decluttering Drives Retention & Conversion — A Product Analysis</title>
+<script type="x-metadata">
+{
+  "title": {"zh": "少即是多：C端界面降噪如何撬动用户停留与转化", "en": "The Leverage of Less: How UI Decluttering Drives Retention & Conversion"},
+  "tag": {"zh": "产品分析", "en": "Product Analysis"}
+}
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-accent: #7BAFD4; --color-accent-light: #0f1f2e;
+    --color-emphasis: #F0997B; --color-emphasis-light: #4A1B0C;
+    --color-green: #97C459; --color-green-light: #173404;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Georgia, 'Times New Roman', serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.8; padding: 3rem 1.5rem; }
+  .article { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .meta { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 8px; }
+  .meta-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; border: 0.5px solid var(--color-border); }
+  .meta-tag.accent { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-light); }
+  .meta-tag.emphasis { border-color: var(--color-emphasis); color: var(--color-emphasis); background: var(--color-emphasis-light); }
+  h1 { font-size: 26px; font-weight: 650; line-height: 1.35; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .subhead { font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 2.5rem; }
+  .byline { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--color-border); }
+
+  /* Body */
+  h2 { font-size: 18px; font-weight: 600; margin-top: 2.5rem; margin-bottom: 12px; line-height: 1.4; letter-spacing: -0.01em; color: var(--color-text-primary); }
+  h3 { font-size: 15px; font-weight: 600; margin-top: 1.8rem; margin-bottom: 8px; color: var(--color-text-primary); }
+  p { font-size: 14.5px; color: var(--color-text-primary); margin-bottom: 14px; }
+  p em { color: var(--color-accent); font-style: italic; }
+
+  .highlight { border-left: 2px solid var(--color-accent); padding-left: 16px; margin: 18px 0; font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+
+  .theory-box { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 18px 20px; margin: 18px 0; }
+  .theory-title { font-size: 12px; font-weight: 600; color: var(--color-accent); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .theory-body { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.75; }
+
+  .case-box { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 18px 20px; margin: 18px 0; }
+  .case-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; }
+  .case-body { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.75; }
+  .case-data { display: inline-flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+  .case-data-item { background: var(--color-bg); border-radius: 6px; padding: 6px 12px; font-size: 13px; }
+  .case-data-item .num { font-weight: 700; }
+  .case-data-item .num.teal { color: var(--color-accent); }
+  .case-data-item .num.amber { color: var(--color-emphasis); }
+
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+  @media (max-width: 540px) { .comparison { grid-template-columns: 1fr; } }
+  .comp-col { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; }
+  .comp-label { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 8px; }
+  .comp-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+  .comp-body { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.7; }
+
+  .implication { border-left: 2px solid var(--color-green); padding-left: 16px; margin: 18px 0; font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+  .implication strong { color: var(--color-green); }
+
+  .divider { height: 0.5px; background: var(--color-border); margin: 2.5rem 0; }
+
+  .footer-note { margin-top: 3rem; font-size: 12px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="article">
+
+<div class="meta">
+  <span class="meta-tag accent">Product Analysis</span>
+  <span class="meta-tag emphasis">UI/UX Strategy</span>
+  <span class="meta-tag" style="color:var(--color-text-secondary);">Cognitive Science × Product Design</span>
+</div>
+
+<h1>The Leverage of Less: How UI Decluttering Drives Retention &amp; Conversion</h1>
+<p class="subhead">Why removing interface elements often improves metrics more than adding them — and how to know what to cut.</p>
+<p class="byline">Weijie Liu · 2025 · Based on product experience at Bilibili Live Center</p>
+
+<!-- ============================================================ -->
+<h2>1. A Product Puzzle</h2>
+
+<p>A product team spends two sprints building a new feature: personalized recommendations, gamified badges, a social sharing panel. They launch it with a banner, a popup, and a persistent entry point. Conversion goes up 2%. But so does churn. Time-on-page drops. The support queue fills with "how do I turn this off?"</p>
+
+<p>Now consider the opposite move: a team removes clutter from the interaction zone. Collapses three competing signals into one prioritized layer. Hides the secondary noise behind intelligent filtering. Conversion goes up — and so does engagement.</p>
+
+<p>This is the paradox of UI decluttering. In consumer apps, <strong>adding is the default instinct</strong> — more features, more touchpoints, more monetization levers. The product manager's incentive structure rewards shipping. But the user's brain has a different incentive: it wants to achieve a goal with the least cognitive effort possible. Every pixel added is a tax on that goal.</p>
+
+<p>The question this article addresses: <strong>how do you know which signals to prioritize, which noise to suppress, and what metrics move when you do?</strong></p>
+
+<!-- ============================================================ -->
+<h2>2. Theoretical Framework</h2>
+
+<p>Three frameworks explain why less interface can drive more user behavior. They come from cognitive psychology and decision science, not design aesthetics. The point is not that minimalism "looks better" — it's that <strong>cognitive friction directly suppresses behavior</strong>.</p>
+
+<div class="theory-box">
+  <div class="theory-title">Framework 1 · Hick's Law</div>
+  <div class="theory-body">
+    <p style="margin-bottom: 6px; color: var(--color-text-primary); font-weight: 500;">Source: Hick, 1952; Hyman, 1953</p>
+    <p>Core thesis: The time it takes for a person to make a decision increases logarithmically with the number of choices. Doubling the options does not double decision time — but it adds a consistent increment per additional option. In practice: 4 choices ≈ 0.5s, 8 choices ≈ 0.8s, 16 choices ≈ 1.1s.</p>
+    <p style="margin-top: 8px;">What this means for product: Every additional button, tab, or card is not neutral. It imposes a measurable decision tax on every user, on every session, before they can reach the action you want them to take. For high-frequency actions, this tax compounds across sessions.</p>
+    <p style="margin-top: 8px;">Key nuance: Hick's Law applies most to <em>novel</em> or <em>perceptually distinct</em> choices. Familiar, habitual actions bypass the effect. This means the cost of clutter is highest for <strong>new users and infrequent tasks</strong> — exactly the populations retention efforts target.</p>
+  </div>
+</div>
+
+<div class="theory-box">
+  <div class="theory-title">Framework 2 · Cognitive Load Theory</div>
+  <div class="theory-body">
+    <p style="margin-bottom: 6px; color: var(--color-text-primary); font-weight: 500;">Source: Sweller, 1988</p>
+    <p>Core thesis: Working memory has finite capacity. Cognitive load comes in three types: <strong>intrinsic</strong> (complexity inherent to the task), <strong>extraneous</strong> (complexity added by the interface), and <strong>germane</strong> (effort devoted to learning). UI clutter primarily inflates extraneous load — it consumes working memory on irrelevant processing, leaving less capacity for the actual task.</p>
+    <p style="margin-top: 8px;">What this means for product: A cluttered interface doesn't just "look busy." It physically reduces the cognitive resources a user can allocate to understanding the environment, responding to social cues, or completing a transaction. When extraneous load exceeds a threshold, users don't "push through" — they <strong>abandon</strong>.</p>
+    <p style="margin-top: 8px;">Design implication: Every element competing for visual attention is competing for working memory. The goal of decluttering is not minimalism for its own sake — it is freeing cognitive capacity for the behaviors that drive retention and conversion.</p>
+  </div>
+</div>
+
+<div class="theory-box">
+  <div class="theory-title">Framework 3 · Signal Detection Theory</div>
+  <div class="theory-body">
+    <p style="margin-bottom: 6px; color: var(--color-text-primary); font-weight: 500;">Source: Green &amp; Swets, 1966; Tanner &amp; Swets, 1954</p>
+    <p>Core thesis: In any environment with multiple stimuli, a person's ability to detect a target signal depends not only on the signal's strength, but on the <strong>ratio of signal to noise</strong>. Increasing noise (competing elements) raises the detection threshold — the user needs a stronger signal to notice the same thing.</p>
+    <p style="margin-top: 8px;">What this means for product: In a live streaming interaction zone, the "signals" are: a new comment, a gift notification, a streamer's interaction. The "noise" is: other comments, system prompts, overlapping animations, persistent UI chrome. When noise exceeds a threshold, every signal degrades — users don't read comments, don't notice tips, don't feel present.</p>
+    <p style="margin-top: 8px;">Critical insight for PMs: You can improve signal detection in two ways — amplify the signal (bigger, brighter, longer) or <strong>reduce the noise</strong>. Noise reduction is often free. Signal amplification has a diminishing returns curve and a negative externality (it becomes noise for others). <strong>Decluttering is noise reduction.</strong></p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Case Study 1: Bilibili Danmaku — Decluttering Noise to Restore Readable Social Signals</h2>
+
+<p>Bilibili's signature interaction feature — danmaku (scrolling real-time comments overlaid on video) — is both a core engagement driver and a cognitive overload risk. At peak concurrency, the comment stream scrolls so fast that individual messages become unreadable. The feed becomes <strong>noise</strong>, not signal.</p>
+
+<p>From a decluttering perspective, the problem is clear: every user generates a signal, but the aggregate is a wall of text moving at high velocity. The interaction space has no hierarchy, no rhythm, no <strong>signal-to-noise ratio management</strong>.</p>
+
+<div class="case-box">
+  <div class="case-title">Problem</div>
+  <div class="case-body">During high-concurrency live streams, danmaku scroll speed exceeded the human reading rate. Users could detect "something is moving" but could not extract meaning from individual comments. Social presence (the feeling that "people are talking") collapsed into a generic sense of "the feed is busy." The extraneous cognitive load (Framework 2) was so high that the very feature designed to create connection was creating disconnection.</div>
+</div>
+
+<div class="case-box">
+  <div class="case-title">Solution: Decluttering the Interaction Space</div>
+  <div class="case-body">
+    <p>1. <strong>Scroll-rate modeling with a quality threshold</strong>: Quantified the relationship between QPS (queries per second), drop rate, and latency. Instead of showing everything at maximum speed, introduced a rate-limiting algorithm that prioritized content quality over throughput. The goal: ensure the median comment is readable, not just visible.</p>
+    <p style="margin-top: 6px;">2. <strong>Temporal clustering with natural pauses</strong>: Grouped burst comments into visual clusters and introduced micro-pauses in the scroll rhythm. This created "breathing room" — moments of reduced cognitive load that allowed users to re-engage with individual messages.</p>
+    <p style="margin-top: 6px;">3. <strong>Quality-weighted display duration</strong>: Higher-quality comments (measured by engagement signals such as likes or reply count) received extended display time before scrolling off-screen. Lower-quality or redundant comments cycled through faster. The feed became <em>curated</em>, not merely chronological.</p>
+  </div>
+</div>
+
+<p>Critically, this was not a "remove content" project. No comments were deleted. The change was in <strong>display logic</strong>: instead of treating all content equally (which made all content unreadable), the system introduced a signal hierarchy. The same volume of content became legible because noise was suppressed, not eliminated.</p>
+
+<div class="case-box">
+  <div class="case-title">Results</div>
+  <div class="case-body">
+    <div class="case-data">
+      <span class="case-data-item">Danmaku Penetration <span class="num teal">+0.43pp</span></span>
+      <span class="case-data-item">Avg Danmaku per User <span class="num teal">+33%</span></span>
+      <span class="case-data-item">Avg Watch Time <span class="num teal">+3.6%</span></span>
+      <span class="case-data-item">Avg Revenue per User <span class="num teal">+15%</span></span>
+    </div>
+  </div>
+</div>
+
+<p><strong>The mechanism</strong>: Reducing cognitive load in the interaction space restored social presence. Users could once again feel "people are talking" rather than "the feed is busy." This social presence recovery drove deeper engagement (more comments, longer watch time) and, critically, more tipping behavior — because tipping is a <strong>social</strong> act that requires a perceived social environment to occur. The +15% ARPU came not from a monetization feature, but from making the social context legible again.</p>
+
+<!-- ============================================================ -->
+<h2>4. Case Study 2: Bilibili Livestream Room — Decluttering Signal Layers to Protect the Tip → Feedback Loop</h2>
+
+<p>The livestream interaction zone on Bilibili aggregates multiple signal types in a single scrollable feed: danmaku (text comments), gift animations (visual effects), system entry/exit notifications, engagement prompts (like counts, follower alerts), and pinned announcements. By 2023, all of these competed for the same visual real estate — a narrow feed column in the right third of the screen on desktop, or an overlay panel on mobile.</p>
+
+<p>The user's experience was cacophonous: a gift animation would fire, but be partially occluded by incoming danmaku; a streamer's pinned question would scroll off-screen in under two seconds. The feed had no <strong>visual hierarchy</strong> — every signal had equal weight, which meant no signal had sufficient weight.</p>
+
+<div class="comparison">
+  <div class="comp-col">
+    <div class="comp-label">Before: Flat Hierarchy</div>
+    <div class="comp-title">Interaction Zone Layout</div>
+    <div class="comp-body">Gift animations, danmaku, system notifications, and engagement prompts all rendered in a single layer, competing for the same visual space.<br><br>Result: Tippers couldn't confirm their gift was seen; bystanders couldn't detect "someone just tipped."</div>
+  </div>
+  <div class="comp-col">
+    <div class="comp-label">After: XYZ-Axis Layering</div>
+    <div class="comp-title">Interaction Zone Layout</div>
+    <div class="comp-body">Gift effects anchored to primary Z-layer. Danmaku assigned to secondary layer. Engagement prompts converted to trigger-based display, not persistent.<br><br>Result: Clear feedback for tippers; visible social proof for bystanders.</div>
+  </div>
+</div>
+
+<div class="case-box">
+  <div class="case-title">Problem</div>
+  <div class="case-body">The interaction feed lacked signal hierarchy. When a user sent a gift, the resulting animation competed with danmaku and system notifications. Many tippers could not confirm their gesture was visible — the tip → feedback loop was broken. This is not a cosmetic issue: it is a <strong>social signal collapse</strong>. In parasocial relationship terms, if the user cannot confirm their "relationship maintenance behavior" was received, the motivation to repeat the behavior diminishes.</div>
+</div>
+
+<div class="case-box">
+  <div class="case-title">Solution: XYZ-Axis Decluttering</div>
+  <div class="case-body">
+    <p><strong>Z-axis (depth): Signal hierarchy by action type.</strong> Gift animations anchored to the top visual layer, ensuring they are never occluded by danmaku or system text. Danmaku assigned to a middle layer. System notifications and engagement prompts pushed to the bottom layer or converted to non-persistent triggers.</p>
+    <p style="margin-top: 8px;"><strong>Y-axis (vertical): Spatial separation.</strong> Gift signals and high-importance system alerts positioned in a reserved "signal zone" at the top of the feed, separate from the continuous danmaku stream below. This prevented important events from being scrolled away before the user could register them.</p>
+    <p style="margin-top: 8px;"><strong>X-axis (temporal): Trigger-based vs. persistent display.</strong> Engagement prompts (e.g., "X user entered the room," "X liked the stream") changed from persistent feed items to brief, fade-out notifications. This removed low-value persistent noise from the feed while preserving the <em>sense</em> of activity.</p>
+  </div>
+</div>
+
+<div class="case-box">
+  <div class="case-title">Results</div>
+  <div class="case-body">
+    <div class="case-data">
+      <span class="case-data-item">Interaction Zone Organic Revenue <span class="num teal">+2.58%</span></span>
+      <span class="case-data-item">Top Section Organic Revenue <span class="num teal">+3.18%</span></span>
+      <span class="case-data-item">Game Card Conversion Rate <span class="num amber">+1pp</span></span>
+    </div>
+  </div>
+</div>
+
+<p>The revenue uplift came from a non-obvious mechanism: by restoring the signal chain for tippers (your gift was seen) and bystanders (someone tipped), the decluttered feed <strong>lowered the social threshold for tipping</strong>. Users who previously hesitated — "will my gift get lost in the noise?" — now had social proof that tipping is visible and recognized. The cleaner the signal layer, the lower the participation barrier.</p>
+
+<p>Both projects share a common logic: they did not create new interaction models. They <strong>removed noise from existing signal paths</strong>. The first project made danmaku legible by managing scroll rhythm; the second made tipping visible by managing layer hierarchy. In both cases, the intervention was <strong>subtraction</strong>, not addition — and in both cases, subtraction drove measurable engagement and revenue growth.</p>
+
+<!-- ============================================================ -->
+<h2>5. Core Thesis: The Decluttering Decision Matrix</h2>
+
+<p>Across these two cases, a pattern emerges. The question is never "should we remove this element?" It is <strong>"what is this element's net contribution to the user's primary goal in this context?"</strong> If the answer is "it competes with a more important signal" or "it adds noise that buries social cues," the element is a net negative — it taxes every user for marginal benefit.</p>
+
+<div class="theory-box" style="border-left: 2px solid var(--color-accent);">
+  <div class="theory-title">Decluttering Decision Matrix · Four Questions Before Adding (or Keeping) Any UI Element</div>
+  <div class="theory-body">
+    <p style="margin-bottom: 10px;"><strong>Q1: Signal or noise?</strong></p>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 3px 0; font-size: 13px;">— Carries meaningful information for >50% of users → Signal. Keep visible.</li>
+      <li style="padding: 3px 0; font-size: 13px;">— Carries meaningful information for 5-50% → Conditional signal. Use progressive disclosure or trigger-based display.</li>
+      <li style="padding: 3px 0; font-size: 13px;">— Carries meaningful information for &lt;5% → Noise. Remove, defer, or deep-nest.</li>
+    </ul>
+    <p style="margin: 10px 0;"><strong>Q2: Does it support or compete with the primary action?</strong></p>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 3px 0; font-size: 13px;">— Supports → Keep. Amplify its visual hierarchy.</li>
+      <li style="padding: 3px 0; font-size: 13px;">— Competes → Defer or remove. A secondary signal at equal visual weight to the primary is a conversion leak.</li>
+    </ul>
+    <p style="margin: 10px 0;"><strong>Q3: What is the cognitive load baseline?</strong></p>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 3px 0; font-size: 13px;">— High already (fast-paced feed, real-time updates, multiple signal types) → Every new element must clear a higher bar. Default to defer.</li>
+      <li style="padding: 3px 0; font-size: 13px;">— Low (simple page, single task) → More tolerance for visible elements.</li>
+    </ul>
+    <p style="margin: 10px 0;"><strong>Q4: Does this serve the user's context or the org's context?</strong></p>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 3px 0; font-size: 13px;">— User context (helps the user achieve their goal) → Build. But prefer conditional visibility.</li>
+      <li style="padding: 3px 0; font-size: 13px;">— Org context (stakeholder request, competitive checkbox, "we need a presence") → Highest risk of noise. Challenge before building.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>6. Implications for Product Managers</h2>
+
+<div class="implication">
+  <p><strong>1. Treat UI elements as cognitive liabilities, not assets.</strong> Every element has a cognitive cost (competes for working memory and visual attention), a maintenance cost, and an opportunity cost. Before adding a new element, ask: "what existing element would this reduce or replace?" If the answer is none, the interface strictly gets more complex. <strong>Default to defer.</strong></p>
+</div>
+
+<div class="implication">
+  <p><strong>2. Decluttering is an org design problem disguised as a UX problem.</strong> The hardest part of cleaning up a feed or interaction zone is not the engineering — it's the stakeholders whose features are being deferred. The most effective strategy is not removal but <strong>conditional visibility by default</strong>: keep the element in the product but collapse it, defer it, or trigger-display it. If no one accesses it for two quarters, you have evidence for removal. If someone objects, you have evidence of real usage.</p>
+</div>
+
+<div class="implication">
+  <p><strong>3. Measure the mechanism, not just the outcome.</strong> The typical A/B test measures the target metric (e.g., revenue). But decluttering projects often affect intermediate variables: cognitive friction proxies (time-to-first-action, scroll depth before first interaction), social presence proxies (comment read rate, gift visibility confirmation), and support tickets. Include at least one <strong>cognitive-friction proxy metric</strong> to capture the mechanism — it makes the results explainable and replicable.</p>
+</div>
+
+<div class="implication">
+  <p><strong>4. Decluttering compounds.</strong> A single decluttering intervention on one element often produces small gains (0.5-3%). But multiple decluttering interventions across a product surface — each restoring signal clarity in its domain — compound into outsized retention and conversion improvements. The Bilibili cases are additive: fixing danmaku readability (+15% ARPU) and fixing tip signal hierarchy (+2-3% revenue) targeted different signal paths in the same ecosystem.</p>
+</div>
+
+<!-- ============================================================ -->
+<div class="divider"></div>
+
+<h2>7. In Closing</h2>
+
+<p>The instinct to add is natural. New features are visible progress. UI elements are tangible outputs. A cleaner interface, by contrast, looks like nothing happened — and in organizations that reward shipping, "nothing happened" is career risk.</p>
+
+<p>But the data consistently tells a different story. A well-decluttered interface does not just "look better." It <strong>reduces cognitive tax</strong>, <strong>lowers the threshold for social participation</strong>, and <strong>restores the signal paths that drive conversion</strong>. The three frameworks in this article — Hick's Law, Cognitive Load Theory, and Signal Detection Theory — each predict the same outcome from different angles: when you reduce competing signals, users detect the relevant one faster and act on it more readily.</p>
+
+<p>Decluttering is not about design philosophy. It is about <strong>cognitive resource allocation</strong>. Every pixel the user doesn't need is a pixel that slows them down. Every competing signal that buries a social cue is a lost conversion opportunity. Removing noise is not a loss of functionality — it is a recovery of user attention. And in consumer apps, attention is the only non-renewable resource.</p>
+
+<p style="margin-top: 16px; color: var(--color-text-secondary); font-size: 13px;">Theoretical references: Hick (1952), Hick's Law; Sweller (1988), Cognitive Load Theory; Green &amp; Swets (1966), Signal Detection Theory; Horton &amp; Wohl (1956), Parasocial Interaction (for the tipping-as-social-signal framework).</p>
+
+<div class="footer-note">
+  Weijie Liu · levi.liuweijie@gmail.com · Product Manager · Bilibili Live Center
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>弹幕体验优化 — Levi Liu (Bilibili)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-amber: #E8A840; --color-amber-light: #2a1f0a; --color-amber-mid: #C08020;
+    --color-purple: #AFA9EC; --color-purple-light: #1a1530; --color-purple-mid: #7A70D0;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.25rem; }
+  .cs { max-width: 720px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border); margin-bottom: 4px; }
+  .tag.amber { background: var(--color-amber-light); color: var(--color-amber); border-color: var(--color-amber-mid); }
+  .tag.purple { background: var(--color-purple-light); color: var(--color-purple); border-color: var(--color-purple-mid); }
+  h1 { font-size: 24px; font-weight: 600; color: var(--color-text-primary); margin: 12px 0 6px; line-height: 1.3; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--color-text-secondary); margin-bottom: 2.5rem; line-height: 1.65; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+  @media (max-width: 540px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 14px 12px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; }
+  .metric-value { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-text-primary); }
+  .metric-value.amber { color: var(--color-amber); }
+  .metric-value.purple { color: var(--color-purple); }
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); }
+  .section-text { font-size: 14.5px; color: var(--color-text-primary); line-height: 1.8; }
+  .insight-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; background: var(--color-bg); }
+  .insight-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 5px; }
+  .insight-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .outcome-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 2rem; }
+  @media (max-width: 540px) { .outcome-row { grid-template-columns: 1fr; } }
+  .outcome { border-radius: var(--radius-md); padding: 14px 12px; border: 0.5px solid var(--color-border); }
+  .outcome-title { font-size: 12px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
+  .outcome-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border); color: var(--color-text-secondary); background: var(--color-bg-secondary); }
+  .copy-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 7px 14px; border-radius: var(--radius-md); border: 0.5px solid var(--color-border); background: transparent; color: var(--color-text-primary); cursor: pointer; }
+  .copy-btn:hover { background: var(--color-bg-secondary); }
+  .divider { height: 0.5px; background: var(--color-border); margin: 2rem 0; }
+  .quote { border-left: 2px solid var(--color-amber-mid); padding-left: 14px; margin: 14px 0; font-size: 13.5px; color: var(--color-text-secondary); font-style: italic; line-height: 1.75; }
+  .stack { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .data-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border); }
+  .data-row:last-child { border-bottom: none; }
+  .data-metric { font-size: 16px; font-weight: 600; min-width: 70px; color: var(--color-text-primary); }
+  .data-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .footer { margin-top: 3rem; font-size: 12px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border); padding-top: 1rem; }
+</style>
+</head>
+<body>
+
+<div class="cs">
+  <span class="tag amber">互动设计</span>
+  <span class="tag purple" style="margin-left:6px;">实时系统</span>
+
+  <h1>B站弹幕体验优化</h1>
+  <p class="subtitle">重新设计直播弹幕的发送-阅读-互动闭环，将可读性问题转化为互动、观时和付费的量化增长</p>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-label">人均弹幕数</div>
+      <div class="metric-value amber">+33%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">弹幕渗透率</div>
+      <div class="metric-value amber">+0.43pp</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">人均观时</div>
+      <div class="metric-value purple">+3.6%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">人均付费（付费用户）</div>
+      <div class="metric-value purple">+15%</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">背景</div>
+    <p class="section-text">弹幕是B站的核心社交层——它是用户在直播间实时互动的主要方式。与视频平台异步评论不同，直播中的弹幕本身就是实时社交信号：看到别人在反应，会营造一种"共同在场"的氛围，驱动情感连接，并最终转化为打赏行为。</p>
+    <p class="section-text" style="margin-top:10px;">娱乐直播的商业模式依赖于这种情感连接。如果用户无法阅读或参与弹幕互动，核心社交闭环就会断裂。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">问题</div>
+    <p class="section-text">在高并发时段——晚高峰或大型活动期间——弹幕滚动速度过快，用户根本来不及阅读。这形成了一个悖论：最活跃、氛围最好的直播间，社交体验反而最混乱、最不可读。</p>
+
+    <div class="quote">
+      以前提升互动的方式一直是"加更多互动功能"——更多格式、更多提示、更多入口。到我接手这个项目时，这个策略的边际收益已经明显递减。我换了个思路：不再让发弹幕更容易，而是让看弹幕更有价值。
+    </div>
+
+    <p class="section-text">核心矛盾是一个实时系统问题带来的UX后果：</p>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">速度 vs 可读性的取舍</div>
+        <div class="insight-text">降低滚动速度可以提高可读性，但会增加丢弃率（多少弹幕永远不会出现）和延迟（弹幕发送后较晚才显示）。找到合适的平衡需要量化建模，而非凭直觉。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">多层特效带来的视觉噪声</div>
+        <div class="insight-text">礼物动效、互动横幅和弹幕文字挤在同一个视觉空间。每帧的显示内容都不可预测，用户无法建立稳定的阅读模式。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">互动提示打断观看体验</div>
+        <div class="insight-text">关注、分享、点赞的提示按固定时间间隔弹出，不考虑用户当前行为，反而破坏了沉浸式的观看状态。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">我的方案</div>
+    <p class="section-text">我将问题拆成三个独立的工作方向，分别针对"发送-阅读-互动"闭环的不同环节。</p>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">1. 滚动速率的量化建模</div>
+        <div class="insight-text">不是直接AB测试不同的滚动速度，而是先建一个模型：在不同QPS级别下，降低滚速对丢弃率和感知延迟的影响分别有多大？这样我们在跑实验之前就找到了一个可读性提升、同时丢弃率和延迟都在可接受范围内的配置方案。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">2. 可读性驱动的滚动微调</div>
+        <div class="insight-text">在全局滚速模型之外，我还优化了feed层的显示规则：对爆发式弹幕进行分组以减少视觉杂乱、确保高质量弹幕（如核心用户的评论）获得略长的展示时间、在滚动节奏中制造自然停顿。这些微观优化让弹幕流的节奏更平缓、更易读，且不涉及完整的互动区架构重构。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">3. 内容品类差异化策略</div>
+        <div class="insight-text">不同直播品类对延迟的容忍度不同：颜值和才艺直播间更看重可见性（用户希望马上看到弹幕，即使丢几条也没关系），而游戏直播间更看重实时性（一条针对操作的弹幕晚2秒出现就毫无意义）。我为每个品类设计了差异化策略，作为核心修复后的后续推进项。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">收益</div>
+    <div style="background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 12px;">
+      <div class="data-row">
+        <span class="data-metric">+33%</span>
+        <span class="data-desc">人均弹幕数——最直接的信号：更多人在真正阅读并参与弹幕互动</span>
+      </div>
+      <div class="data-row">
+        <span class="data-metric">+0.43pp</span>
+        <span class="data-desc">弹幕渗透率（发送至少一条弹幕的用户占比）——参与基数在扩大，而不仅仅是老用户发得更多</span>
+      </div>
+      <div class="data-row">
+        <span class="data-metric">+3.6%</span>
+        <span class="data-desc">人均观时——更长的观看时长说明体验确实变得更吸引人，而不仅仅是"没那么烦人"</span>
+      </div>
+      <div class="data-row">
+        <span class="data-metric">+15%</span>
+        <span class="data-desc">人均付费——印证了"更强的社交临场感驱动打赏行为"这一假设</span>
+      </div>
+    </div>
+    <p class="section-text">上述收益在中小及大型直播活动中均得到验证，确保在高并发极端条件下结果依然成立。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">我学到了什么</div>
+    <p class="section-text">最重要的洞察是娱乐平台中社交体验和营收之间的关系。人均付费+15%的提升并非来自任何付费机制的改变——我们没有动定价、礼物设计或促销策略。它完全来自于提升社交可读性。这有力地说明：在直播中，<strong>弹幕不是一个功能——它就是产品本身</strong>。弹幕的健康度直接决定了打赏所需的情感条件是否存在。</p>
+    <p class="section-text" style="margin-top: 10px;">说明：上述量化收益来自工作流1和2。按品类差异化策略（颜值vs游戏）因资源限制未在任职期间上线，但建模工作已完成，是可以预见的下一步方向。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pill-row">
+    <span class="pill">实时UX</span>
+    <span class="pill">AB实验</span>
+    <span class="pill">量化建模</span>
+    <span class="pill">社交机制</span>
+    <span class="pill">互动闭环</span>
+    <span class="pill">直播</span>
+    <span class="pill">商业化</span>
+  </div>
+
+</div>
+</body>
+</html>

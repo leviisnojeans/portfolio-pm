@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作品集 - Levi Liu 产品案例</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-teal: #4DB89A; --color-amber: #F5A623; --color-blue: #6B9DDE;
+    --color-coral: #F0997B; --color-purple: #AFA9EC;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.5rem; }
+  .container { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 2rem; }
+  .section { margin-bottom: 2rem; }
+  .section-title { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); letter-spacing: 0.05em; }
+
+  .card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 12px; background: var(--color-bg); }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+  .card-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 10px; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 0.5px solid var(--color-border); color: var(--color-text-primary); text-decoration: none; background: var(--color-bg-secondary); transition: background 0.15s; }
+  .link.zh { border-color: var(--color-teal); color: var(--color-teal); background: #052E24; }
+  .link.en { border-color: var(--color-blue); color: var(--color-blue); background: #0D1E3D; }
+  .link:hover { opacity: 0.8; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>刘维杰 · 产品案例集</h1>
+  <p class="sub">点击链接在浏览器中打开对应案例</p>
+
+  <div class="section">
+    <div class="section-title">B站 · 直播中心 (2023.09 - 至今)</div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-teal);"></span>
+        <span class="card-title">直播间主框架重构</span>
+      </div>
+      <div class="card-desc">互动区XYZ轴重构、顶部信息区结构扩展、引导组件区域治理 —— 观时/互动/自然实付流水同步正向增长</div>
+      <div class="links">
+        <a class="link zh" href="bilibili_live_room_case_study_zh.html" target="_blank">中文版</a>
+        <a class="link en" href="bilibili_live_room_case_study.html" target="_blank">English</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-amber);"></span>
+        <span class="card-title">弹幕体验优化</span>
+      </div>
+      <div class="card-desc">滚动速率量化建模与分级视觉降噪 —— 弹幕渗透+0.43pp，人均付费+15%</div>
+      <div class="links">
+        <a class="link zh" href="bullet_comment_case_study_zh.html" target="_blank">中文版</a>
+        <a class="link en" href="bullet_comment_case_study.html" target="_blank">English</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-blue);"></span>
+        <span class="card-title">PC直播姬改版</span>
+      </div>
+      <div class="card-desc">230+页面全量审计、UI治理、玩法体验优化、技术架构优化 —— 开播转化+2.4pp，玩法渗透+17pp</div>
+      <div class="links">
+        <a class="link zh" href="bilibili_streaming_tool_case_study_zh.html" target="_blank">中文版</a>
+        <a class="link en" href="bilibili_streaming_tool_case_study.html" target="_blank">English</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">阿里巴巴 · 优酷 (2022.02 - 2023.08)</div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-coral);"></span>
+        <span class="card-title">春晚直播专项</span>
+      </div>
+      <div class="card-desc">从0到1创新玩法"云蹦迪" + 节日低价DIY礼物 —— 营收同比增长60%，人均观时同比增长38%</div>
+      <div class="links">
+        <a class="link zh" href="spring_festival_case_study_zh.html" target="_blank">中文版</a>
+        <a class="link en" href="spring_festival_case_study.html" target="_blank">English</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">产品分析文章</div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-teal);"></span>
+        <span class="card-title">直播间的社交引擎：Parasocial Relationship 如何驱动互动与营收</span>
+      </div>
+      <div class="card-desc">基于B站和优酷两个项目的对比分析，用Parasocial Relationship Theory、Social Presence Theory、Collective Effervescence三个框架拆解直播互动的社交动力</div>
+      <div class="links">
+        <a class="link zh" href="parasocial_analysis.html" target="_blank">中文版</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">写作 · 文化观察</div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-amber);"></span>
+        <span class="card-title">公共空间的隐形门槛</span>
+      </div>
+      <div class="card-desc">在曼谷泼水节天桥上站了20分钟的田野观察：关于visibility的分配机制，以及品牌做diversity marketing时最容易犯的错</div>
+      <div class="links">
+        <a class="link zh" href="公共空间的隐形门槛.html" target="_blank">中文版</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-dot" style="background:var(--color-purple);"></span>
+        <span class="card-title">SONGKRAN: Field Notes on Legitimacy, Joy, and Who Gets to Take Up Space</span>
+      </div>
+      <div class="card-desc">A personal essay about the skywalk moment in Bangkok — internalized gatekeeping, the economics of solo joy, and what it means for brands building for contested spaces</div>
+      <div class="links">
+        <a class="link en" href="Songkran_Final_2026.html" target="_blank">English</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring Festival Case Study — Levi Liu (Youku · Alibaba)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #ffffff; --color-bg-secondary: #f5f5f3;
+    --color-text-primary: #1a1a18; --color-text-secondary: #6b6b67;
+    --color-border: rgba(0,0,0,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-coral: #993C1D; --color-coral-light: #FAECE7; --color-coral-mid: #F0997B;
+    --color-green: #3B6D11; --color-green-light: #EAF3DE; --color-green-mid: #97C459;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1c1c1a; --color-bg-secondary: #272724;
+      --color-text-primary: #f0ede8; --color-text-secondary: #9a9a94;
+      --color-border: rgba(255,255,255,0.10);
+      --color-coral: #F0997B; --color-coral-light: #4A1B0C; --color-coral-mid: #D85A30;
+      --color-green: #97C459; --color-green-light: #173404; --color-green-mid: #639922;
+    }
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.5rem; }
+  .cs { max-width: 720px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border); margin-bottom: 4px; }
+  .tag.coral { background: var(--color-coral-light); color: var(--color-coral); border-color: var(--color-coral-mid); }
+  .tag.green { background: var(--color-green-light); color: var(--color-green); border-color: var(--color-green-mid); }
+  h1 { font-size: 26px; font-weight: 600; color: var(--color-text-primary); margin: 12px 0 6px; line-height: 1.3; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--color-text-secondary); margin-bottom: 2.5rem; line-height: 1.65; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+  @media (max-width: 540px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 14px 12px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-value { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-text-primary); }
+  .metric-value.coral { color: var(--color-coral); }
+  .metric-value.green { color: var(--color-green); }
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); }
+  .section-text { font-size: 14.5px; color: var(--color-text-primary); line-height: 1.8; }
+  .insight-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; background: var(--color-bg); }
+  .insight-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 5px; }
+  .insight-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .stack { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .quote { border-left: 2px solid var(--color-coral-mid); padding-left: 14px; margin: 14px 0; font-size: 13.5px; color: var(--color-text-secondary); font-style: italic; line-height: 1.75; }
+  .gmv-box { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 14px 16px; margin-top: 12px; }
+  .gmv-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); margin-bottom: 10px; }
+  .gmv-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 7px 0; border-bottom: 0.5px solid var(--color-border); }
+  .gmv-row:last-child { border-bottom: none; }
+  .gmv-label { color: var(--color-text-secondary); }
+  .gmv-val { font-weight: 500; color: var(--color-text-primary); }
+  .gmv-val.highlight { color: var(--color-green); }
+  .timeline { margin-top: 12px; }
+  .tl-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border); align-items: flex-start; }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-label { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); min-width: 68px; padding-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tl-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.65; }
+  .data-box { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 12px; }
+  .data-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border); }
+  .data-row:last-child { border-bottom: none; }
+  .data-metric { font-size: 16px; font-weight: 600; min-width: 72px; color: var(--color-text-primary); }
+  .data-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border); color: var(--color-text-secondary); background: var(--color-bg-secondary); }
+  .divider { height: 0.5px; background: var(--color-border); margin: 2rem 0; }
+  .footer { margin-top: 3rem; font-size: 12px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="cs">
+
+  <span class="tag coral">0-to-1 innovation</span>
+  <span class="tag green" style="margin-left:6px;">Cross-functional</span>
+
+  <h1>Designing Youku's Spring Festival live experience from scratch</h1>
+  <p class="subtitle">How I identified a user emotion gap in broadcast live streaming at Alibaba's Youku, invented a new interaction format in under a month, and delivered 60% revenue growth — with no precedent to follow</p>
+
+  <div style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary);background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:4px 10px;margin-bottom:1.25rem;">
+    🏢 Alibaba · Youku (大文娱) · 2022–2023
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-label">Revenue YoY</div><div class="metric-value green">+60%</div></div>
+    <div class="metric"><div class="metric-label">Watch time YoY</div><div class="metric-value green">+38%</div></div>
+    <div class="metric"><div class="metric-label">Teams coordinated</div><div class="metric-value coral">6+</div></div>
+    <div class="metric"><div class="metric-label">Timeline</div><div class="metric-value">~4 wks</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Context</div>
+    <p class="section-text">Youku, Alibaba's video and live streaming platform, broadcasts Spring Festival gala content — China's equivalent of the Super Bowl halftime show, but for TV. It draws massive simultaneous viewership and is a key platform showcase moment for brand advertising and user acquisition. But broadcast live presents a fundamentally different product challenge from standard UGC live streaming: viewers are not fans of a specific streamer, there is no host-audience relationship, and the content is entirely out of the platform's control.</p>
+    <p class="section-text" style="margin-top:10px;">The result: without a social hook native to the broadcast format, most viewers were passive. They watched and left. There was no mechanism converting attention into either engagement or revenue.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">The opportunity</div>
+    <p class="section-text">I started from a user emotion question rather than a product question: <em>what does someone actually want to feel during a Spring Festival gala?</em></p>
+    <div class="quote">
+      The answer wasn't "I want to talk to a streamer." It was "I want to celebrate with everyone around me at the same time." That's a fundamentally different social need — group participation, not parasocial connection. Existing live room features were designed for the latter. Nothing existed for the former.
+    </div>
+    <p class="section-text">This framing had two immediate product implications: the interaction mechanic needed to be ambient and low-friction (you shouldn't have to think to participate), and the revenue mechanic needed to be tied to the festive atmosphere rather than to a streamer relationship.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What I built</div>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">One-tap ambient interaction ("Cloud Party")</div>
+        <div class="insight-text">Inspired by an existing AI-powered visual effect framework used elsewhere on the platform, I identified that the underlying tech could be redeployed in the live room with a single week's engineering work. The result: a one-tap interaction that triggered synchronized visual effects across all viewers simultaneously — no typing, no navigation, just immediate collective participation. During program lulls, this became the primary engagement driver, lifting watch time by 38% year-over-year.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Festival-specific DIY gift at low price point</div>
+        <div class="insight-text">Standard tipping in UGC live streaming is driven by a fan-streamer relationship. That relationship doesn't exist in broadcast. I reframed the gifting motivation: instead of "support your favorite streamer," the driver was "participate in the festive moment." A seasonal gift (rabbit-year illustration, shareable poster, personalized avatar effect) at a deliberately low price point targeted the maximum viable buyer pool — casual viewers who wouldn't tip a streamer but would spend for a festival moment. Conversion strategy: volume over ARPU.</div>
+      </div>
+    </div>
+    <div class="gmv-box">
+      <div class="gmv-title">Revenue logic (GMV decomposition)</div>
+      <div class="gmv-row"><span class="gmv-label">GMV formula</span><span class="gmv-val">Viewers × Conversion rate × Price</span></div>
+      <div class="gmv-row"><span class="gmv-label">Lever chosen</span><span class="gmv-val">Conversion rate (not price)</span></div>
+      <div class="gmv-row"><span class="gmv-label">Rationale</span><span class="gmv-val">Broadcast audience has weak pay habit; low price widens funnel</span></div>
+      <div class="gmv-row"><span class="gmv-label">Result</span><span class="gmv-val highlight">Revenue +60% YoY</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">How I executed it</div>
+    <p class="section-text">The full project ran in under four weeks across Youku's product, engineering, business, sales, legal, and design teams.</p>
+    <div class="timeline">
+      <div class="tl-row"><span class="tl-label">Week −4</span><span class="tl-text">Identified the interaction gap and scoped the "Cloud Party" concept. Confirmed technical feasibility by evaluating Youku's existing AI visual framework for reuse. Locked creative direction.</span></div>
+      <div class="tl-row"><span class="tl-label">Week −3</span><span class="tl-text">Coordinated with business, sales, and legal teams to design the DIY gift product. Finalized pricing model, compliance requirements, and launch plan. Confirmed artwork brief with design.</span></div>
+      <div class="tl-row"><span class="tl-label">Week −2</span><span class="tl-text">Led stress testing and gray-scale rollout under simulated peak concurrency. Defined audience scatter strategy to prevent server spikes at simultaneous interaction moments. Ran internal QA and stakeholder sign-off.</span></div>
+      <div class="tl-row"><span class="tl-label">Launch</span><span class="tl-text">On-site during broadcast. Full technical monitoring. All critical issues resolved within defined SLA. Post-broadcast social media reception was strongly positive — the mechanic was organically shared on external platforms.</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Outcomes</div>
+    <div class="data-box">
+      <div class="data-row"><span class="data-metric">+60%</span><span class="data-desc">Revenue year-over-year — driven by conversion rate lift, not price increase, confirming the low-price-high-volume thesis</span></div>
+      <div class="data-row"><span class="data-metric">+38%</span><span class="data-desc">Average watch time year-over-year — the ambient interaction mechanic successfully reduced drop-off during program lulls</span></div>
+      <div class="data-row"><span class="data-metric">Organic</span><span class="data-desc">Positive user-generated content about the experience on external social platforms — the product became a brand moment, not just a broadcast</span></div>
+      <div class="data-row"><span class="data-metric">Template</span><span class="data-desc">Established a repeatable product framework for all future broadcast live events on Youku</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What I learned</div>
+    <p class="section-text">The key insight from this project is that <strong>user motivation is context-specific, not product-specific</strong>. The same user who never tips a streamer will spend money on a festival gift — because the emotional driver is entirely different. Products that ignore this distinction and apply a one-size-fits-all monetization mechanic leave significant revenue on the table.</p>
+    <p class="section-text" style="margin-top: 10px;">On execution: in a 0-to-1 project with a hard deadline and no room for iteration, the most valuable skill is not creativity — it's the ability to scope aggressively. The "Cloud Party" mechanic worked precisely because I chose to reuse existing infrastructure rather than build something original. Speed-to-market mattered more than novelty.</p>
+    <p class="section-text" style="margin-top: 10px;">The long-term value extends beyond the numbers: this project created a reusable product architecture for broadcast live streaming at Bilibili — a context that previously had no dedicated product strategy.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pill-row">
+    <span class="pill">0-to-1 product</span>
+    <span class="pill">Live events</span>
+    <span class="pill">Monetization design</span>
+    <span class="pill">Cross-functional leadership</span>
+    <span class="pill">Consumer psychology</span>
+    <span class="pill">GMV optimization</span>
+    <span class="pill">Broadcast streaming</span>
+    <span class="pill">Go-to-market</span>
+  </div>
+
+  <div class="footer">
+    Levi Liu &nbsp;·&nbsp; Product Manager &nbsp;·&nbsp; levi.liuweijie@gmail.com
+  </div>
+
+</div>
+</body>
+</html>

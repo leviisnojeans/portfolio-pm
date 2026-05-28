@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Room Framework Rebuild — Levi Liu (Bilibili)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-teal: #4DB89A; --color-teal-light: #052E24; --color-teal-mid: #2A9078;
+    --color-amber: #F5A623; --color-amber-light: #3D2000; --color-amber-mid: #C07800;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.5rem; }
+  .cs { max-width: 720px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border); margin-bottom: 4px; }
+  .tag.teal { background: var(--color-teal-light); color: var(--color-teal); border-color: var(--color-teal-mid); }
+  .tag.amber { background: var(--color-amber-light); color: var(--color-amber); border-color: var(--color-amber-mid); }
+  h1 { font-size: 24px; font-weight: 600; color: var(--color-text-primary); margin: 12px 0 6px; line-height: 1.3; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--color-text-secondary); margin-bottom: 2.5rem; line-height: 1.65; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+  @media (max-width: 540px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 14px 12px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-value { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .metric-value.teal { color: var(--color-teal); }
+  .metric-value.amber { color: var(--color-amber); }
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); }
+  .section-text { font-size: 14.5px; color: var(--color-text-primary); line-height: 1.8; }
+  .insight-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; background: var(--color-bg); }
+  .insight-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 5px; }
+  .insight-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .stack { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .quote { border-left: 2px solid var(--color-teal-mid); padding-left: 14px; margin: 14px 0; font-size: 13.5px; color: var(--color-text-secondary); font-style: italic; line-height: 1.75; }
+  .workstream { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .ws-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+  .ws-num { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); margin-bottom: 3px; }
+  .ws-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+  .ws-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 12px; }
+  .ws-data { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (max-width: 480px) { .ws-data { grid-template-columns: 1fr; } }
+  .data-chip { background: var(--color-bg-secondary); border-radius: 6px; padding: 8px 12px; }
+  .data-val { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1px; }
+  .data-val.teal { color: var(--color-teal); }
+  .data-val.amber { color: var(--color-amber); }
+  .data-desc { font-size: 11px; color: var(--color-text-secondary); }
+  .divider { height: 0.5px; background: var(--color-border); margin: 2rem 0; }
+  .secondary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .secondary-grid { grid-template-columns: 1fr; } }
+  .secondary-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; }
+  .sc-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+  .sc-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 10px; }
+  .sc-result { font-size: 13px; font-weight: 600; }
+  .sc-result.teal { color: var(--color-teal); }
+  .sc-result.amber { color: var(--color-amber); }
+  /* Before/after comparison */
+  .comp { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin: 16px 0; cursor: pointer; background: var(--color-bg-secondary); aspect-ratio: 16 / 9; }
+  .comp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.35s ease; }
+  .comp .before { opacity: 0; }
+  @media (hover: hover) {
+    .comp:hover .before { opacity: 1; }
+    .comp:hover .after { opacity: 0; }
+  }
+  .comp-badge { position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; z-index: 2; pointer-events: none; }
+  .comp-badge.before { background: var(--color-amber-mid); color: #fff; opacity: 0; transition: opacity 0.35s ease; }
+  .comp-badge.after { background: var(--color-teal-mid); color: #fff; }
+  @media (hover: hover) {
+    .comp:hover .comp-badge.before { opacity: 1; }
+    .comp:hover .comp-badge.after { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="cs">
+
+  <span class="tag teal">Live streaming</span>
+  <span class="tag amber" style="margin-left:6px;">System design</span>
+
+  <h1>Rebuilding Bilibili's live room framework</h1>
+  <p class="subtitle">How I restructured the interaction zone, top information bar, and guidance system across the live room — driving simultaneous gains in engagement, watch time, and monetization</p>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-label">Organic rev. (interaction zone)</div>
+      <div class="metric-value teal">+2.58%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Organic rev. (top bar)</div>
+      <div class="metric-value teal">+3.18%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Game card CTR</div>
+      <div class="metric-value amber">+1pp</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Watch time</div>
+      <div class="metric-value">positive</div>
+    </div>
+  </div>
+
+  <!-- Context -->
+  <div class="section">
+    <div class="section-label">Context</div>
+    <p class="section-text">Bilibili's live room had grown through years of fast-paced feature addition, with different teams shipping independently and without shared standards. By 2023, the accumulated complexity had created three compounding problems: degraded user experience, high cost of integrating new features, and insufficient efficiency of commercial resource placements.</p>
+    <p class="section-text" style="margin-top:10px;">This project was a full structural intervention — not a visual refresh. The goal was to redesign the product architecture, establish functional governance standards, and remediate historical technical debt, with the explicit targets of reducing user cost, improving resource efficiency, and improving cross-team execution speed.</p>
+  </div>
+
+  <!-- Problem -->
+  <div class="section">
+    <div class="section-label">Problem framing</div>
+    <p class="section-text">Three structural failure modes drove the project scope:</p>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">Interaction zone: competing signals, no hierarchy</div>
+        <div class="insight-text">Gift effects, bullet comments, and engagement prompts occupied the same visual space with no clear priority order. Users couldn't establish stable reading or interaction patterns — each frame was unpredictable. The root cause wasn't the number of elements, but the absence of a Z-axis rule that defined which layer was authoritative at any moment.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Top bar: information density without structure</div>
+        <div class="insight-text">The top area of the live room had expanded organically over time. It held streamer info, room metadata, and engagement entry points — but without a structured expansion model, adding a third row was either impossible or required ad-hoc workarounds per feature team.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Guidance components: fragmented and redundant</div>
+        <div class="insight-text">Calls-to-action for following, sharing, liking, and commercial content had no unified placement logic. Multiple components competed for the same bottom-right zone, creating choice paralysis and undermining each other's conversion rate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approach -->
+  <div class="section">
+    <div class="section-label">Three workstreams</div>
+
+      <div class="comp">
+        <img class="after" src="../项目源材料/项目图片/直播间重构/直播间主框架重构后.png" alt="After rebuild">
+        <img class="before" src="../项目源材料/项目图片/直播间重构/直播间主框架重构前.png" alt="Before rebuild">
+        <span class="comp-badge after">After</span>
+        <span class="comp-badge before">Before</span>
+      </div>
+
+    <div class="workstream">
+      <div class="ws-header">
+        <div>
+          <div class="ws-num">01 · Interaction zone</div>
+          <div class="ws-title">XYZ-axis reconstruction</div>
+        </div>
+      </div>
+      <p class="ws-body">Established explicit layering rules for the interaction zone across X (horizontal), Y (vertical), and Z (depth/overlay) axes. Gift effects — the highest-value content — were anchored at the primary layer with a visual separator. Bullet comments occupied the secondary layer. Engagement prompts were demoted to the tertiary layer and made trigger-based rather than persistent. The result was a predictable visual environment where users could read and react without cognitive disruption.</p>
+      <div class="ws-data">
+        <div class="data-chip">
+          <div class="data-val teal">+1.55%</div>
+          <div class="data-desc">Avg. bullet comments per user</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+2.58%</div>
+          <div class="data-desc">Organic paid revenue</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workstream">
+      <div class="ws-header">
+        <div>
+          <div class="ws-num">02 · Top information bar</div>
+          <div class="ws-title">Structural expansion model</div>
+        </div>
+      </div>
+      <p class="ws-body">Designed a scalable three-row model for the top area of the live room — separating streamer identity, room context, and viewer engagement into distinct structural zones. This enabled a third row to be introduced cleanly without disrupting existing rows, and gave downstream teams a clear integration surface. The new row carried viewer-engagement entry points that had previously been buried or absent.</p>
+      <div class="ws-data">
+        <div class="data-chip">
+          <div class="data-val teal">+1.14%</div>
+          <div class="data-desc">Avg. bullet comments per user</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+3.77%</div>
+          <div class="data-desc">Avg. likes per user</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+0.16%</div>
+          <div class="data-desc">Avg. watch time per user</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+3.18%</div>
+          <div class="data-desc">Organic paid revenue</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workstream">
+      <div class="ws-header">
+        <div>
+          <div class="ws-num">03 · Guidance components</div>
+          <div class="ws-title">Zone governance and conversion design</div>
+        </div>
+      </div>
+      <p class="ws-body">Defined a governance model for the bottom interaction zone: one primary commercial unit, one primary engagement prompt, with explicit rules for priority and mutual exclusion. Eliminated the competing-component problem by establishing which content type owned the zone at any given moment. Applied to gaming content specifically, where the mismatch between content and commercial offer had been most severe.</p>
+      <div class="ws-data">
+        <div class="data-chip">
+          <div class="data-val amber">+1pp</div>
+          <div class="data-desc">Game card click-through rate</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val" style="color:var(--color-text-secondary);">positive</div>
+          <div class="data-desc">All other monitored metrics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Secondary projects -->
+  <div class="section">
+    <div class="section-label">Other work in this period</div>
+    <div class="secondary-grid">
+
+      <div class="secondary-card">
+        <div class="sc-title">Lottery widget redesign (天选福袋)</div>
+        <div class="sc-body">Redesigned the lottery overlay to reduce screen obstruction, strengthen brand identity, and lower participation friction — one-tap entry, auto-expand on launch, auto-complete task flow.</div>
+        <div class="sc-result teal">Active participation rate >40% · +5pp vs. prior version</div>
+      </div>
+
+      <div class="secondary-card">
+        <div class="sc-title">S15 bullet comment anti-occlusion</div>
+        <div class="sc-body">Ported the main-site bullet comment occlusion-prevention model to the esports live room for the S15 League of Legends World Championship — protecting streamer face from comment overlap under extreme concurrency.</div>
+        <div class="sc-result teal">Mobile penetration 22.6% · PC penetration 33%</div>
+      </div>
+
+      <div class="secondary-card">
+        <div class="sc-title">Bullet comment length expansion</div>
+        <div class="sc-body">Extended the character limit to 40 characters to explore the role of longer comments in live interaction. Hypothesis: deeper comments strengthen relational ties and have a monetization signal.</div>
+        <div class="sc-result amber">Followers +0.26% · Paid revenue +3.13%</div>
+      </div>
+
+      <div class="secondary-card">
+        <div class="sc-title">Mobile streaming tool (pre-live UX)</div>
+        <div class="sc-body">Optimized the pre-live configuration page for mobile: surfaced essential controls, restructured priority by usage patterns, added task/support/activity entry points, and reduced permission friction for new streamers.</div>
+        <div class="sc-result teal">New streamer start success rate +1.79pp · Widget UV CTR +2pp</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="section">
+    <div class="section-label">What this project taught me</div>
+    <p class="section-text">The central insight was that the live room's problems were <strong>structural, not cosmetic</strong>. Every feature had been added correctly in isolation — the failure was the absence of a shared architecture that told teams where things belonged. Establishing the XYZ-axis model and the zone governance rules didn't just fix existing problems; it gave every subsequent feature team a stable integration surface to work from.</p>
+    <p class="section-text" style="margin-top:10px;">The revenue results — +2.58% and +3.18% organic paid revenue from two separate experiments — were not caused by any change to monetization mechanics. They emerged entirely from reducing the cognitive friction that stood between a viewer's emotional response and the action of tipping. This reinforces a principle I've seen across every live streaming project: <strong>social experience and monetization are not separate systems</strong>. One is the precondition of the other.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>春晚专项 — Levi Liu (优酷 · 阿里巴巴)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-coral: #F0997B; --color-coral-light: #4A1B0C; --color-coral-mid: #D85A30;
+    --color-green: #97C459; --color-green-light: #173404; --color-green-mid: #639922;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.5rem; }
+  .cs { max-width: 720px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border); margin-bottom: 4px; }
+  .tag.coral { background: var(--color-coral-light); color: var(--color-coral); border-color: var(--color-coral-mid); }
+  .tag.green { background: var(--color-green-light); color: var(--color-green); border-color: var(--color-green-mid); }
+  h1 { font-size: 24px; font-weight: 600; color: var(--color-text-primary); margin: 12px 0 6px; line-height: 1.3; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--color-text-secondary); margin-bottom: 2.5rem; line-height: 1.65; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+  @media (max-width: 540px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 14px 12px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; }
+  .metric-value { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-text-primary); }
+  .metric-value.coral { color: var(--color-coral); }
+  .metric-value.green { color: var(--color-green); }
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); }
+  .section-text { font-size: 14.5px; color: var(--color-text-primary); line-height: 1.8; }
+  .insight-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; background: var(--color-bg); }
+  .insight-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 5px; }
+  .insight-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .stack { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .quote { border-left: 2px solid var(--color-coral-mid); padding-left: 14px; margin: 14px 0; font-size: 13.5px; color: var(--color-text-secondary); font-style: italic; line-height: 1.75; }
+  .gmv-box { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 14px 16px; margin-top: 12px; }
+  .gmv-title { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 10px; }
+  .gmv-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 7px 0; border-bottom: 0.5px solid var(--color-border); }
+  .gmv-row:last-child { border-bottom: none; }
+  .gmv-label { color: var(--color-text-secondary); }
+  .gmv-val { font-weight: 500; color: var(--color-text-primary); }
+  .gmv-val.highlight { color: var(--color-green); }
+  .timeline { margin-top: 12px; }
+  .tl-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border); align-items: flex-start; }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-label { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); min-width: 68px; padding-top: 2px; }
+  .tl-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.65; }
+  .data-box { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 12px; }
+  .data-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border); }
+  .data-row:last-child { border-bottom: none; }
+  .data-metric { font-size: 16px; font-weight: 600; min-width: 72px; color: var(--color-text-primary); }
+  .data-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border); color: var(--color-text-secondary); background: var(--color-bg-secondary); }
+  .divider { height: 0.5px; background: var(--color-border); margin: 2rem 0; }
+  .footer { margin-top: 3rem; font-size: 12px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="cs">
+
+  <span class="tag coral">0到1创新</span>
+  <span class="tag green" style="margin-left:6px;">跨团队协作</span>
+
+  <h1>优酷春晚直播体验从0到1</h1>
+  <p class="subtitle">在阿里优酷的电视直播场景中发现用户情感缺口，不到一个月创造全新互动玩法，实现营收同比增长60%——没有先例可循</p>
+
+  <div style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary);background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:4px 10px;margin-bottom:1.25rem;">
+    阿里巴巴 · 优酷（大文娱） · 2022–2023
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-label">春晚期间营收同比</div><div class="metric-value green">+60%</div></div>
+    <div class="metric"><div class="metric-label">春晚期间观时同比</div><div class="metric-value green">+38%</div></div>
+    <div class="metric"><div class="metric-label">跨团队协同</div><div class="metric-value coral">6+个</div></div>
+    <div class="metric"><div class="metric-label">项目周期</div><div class="metric-value">约4周</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">背景</div>
+    <p class="section-text">优酷作为阿里旗下的视频和直播平台，每年直播春晚内容——相当于中国的超级碗中场秀级别。这类直播吸引了巨大的同时在线观看量，也是品牌广告和用户拉新的关键场景。但电视直播面临一个完全不同于UGC直播的产品挑战：观众不是某个主播的粉丝，没有主播-观众关系，内容也完全不在平台控制范围内。</p>
+    <p class="section-text" style="margin-top:10px;">结果是：电视直播缺乏原生社交抓手，绝大多数观众处于被动状态。看完了就走。没有任何机制能把注意力转化为互动或营收。</p>
+    <p class="section-text" style="margin-top:10px;"><em>同比说明：</em>上述+60%营收和+38%观时数据对比的是2023年春晚 vs 2022年春晚（此时尚无专属互动产品），度量的是新产品体验带来的平台级增量提升。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">机会点</div>
+    <p class="section-text">我没有从产品问题出发，而是从一个用户情绪问题出发：<em>一个人在春晚直播中，到底想感受到什么？</em></p>
+    <div class="quote">
+      答案不是"我想和主播聊天"，而是"我想和周围所有人一起庆祝"。这是一种完全不同的社交需求——群体参与，而非拟社交关系。现有的直播间功能都是为后者设计的。前者没有任何现成方案。
+    </div>
+    <p class="section-text">这个框架有两个直接的产品含义：互动玩法必须是氛围化的、低门槛的（不需要思考就能参与），付费机制必须绑定节日氛围而非主播关系。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">我做了什么</div>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">一键氛围互动（"云蹦迪"）</div>
+        <div class="insight-text">受到站内另一场景AI视觉动效框架的启发，我发现底层技术只需少量研发投入即可复用到直播间。结果是一个一键触发的互动——点击后所有观众同步触发视觉动效，无需打字、无需导航，即刻实现集体参与感。在节目空白期，这成为主要的观时驱动力，推动人均观时同比增长38%。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">节日定制低价DIY礼物</div>
+        <div class="insight-text">UGC直播中的打赏由粉丝-主播关系驱动，这种关系在电视直播中不存在。我重新定义了送礼动机：不是"支持你喜欢的主播"，而是"参与这个节庆时刻"。一款节日限定礼物（兔年插画、可分享海报、个人化头像特效）定价刻意压低，目标是最大化的可付费用户池——那些不会打赏主播但愿意为节日氛围付费的普通观众。转化策略：走量不走ARPU。</div>
+      </div>
+    </div>
+    <div class="gmv-box">
+      <div class="gmv-title">营收逻辑（GMV拆解）</div>
+      <div class="gmv-row"><span class="gmv-label">GMV公式</span><span class="gmv-val">观众数 × 转化率 × 单价</span></div>
+      <div class="gmv-row"><span class="gmv-label">杠杆选择</span><span class="gmv-val">转化率（而非单价）</span></div>
+      <div class="gmv-row"><span class="gmv-label">逻辑</span><span class="gmv-val">电视直播观众付费习惯弱；低价策略扩大漏斗</span></div>
+      <div class="gmv-row"><span class="gmv-label">结果</span><span class="gmv-val highlight">营收同比增长+60%</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">执行过程</div>
+    <p class="section-text">整个项目在不到四周内完成，涉及优酷的产品、研发、商务、法务和设计团队。</p>
+    <div class="timeline">
+      <div class="tl-row"><span class="tl-label">第-4周</span><span class="tl-text">识别互动缺口，确定"云蹦迪"概念方向。通过评估优酷现有AI视觉框架的技术复用可行性，锁定创意方案。</span></div>
+      <div class="tl-row"><span class="tl-label">第-3周</span><span class="tl-text">协同商务、销售和法务团队设计DIY礼物产品。敲定定价模型、合规要求和上线计划。与设计确认视觉方案。</span></div>
+      <div class="tl-row"><span class="tl-label">第-2周</span><span class="tl-text">主导压力测试和灰度发布，在模拟峰值并发条件下验证。定义用户打散策略，防止同步互动时刻的服务器尖峰。完成内部QA和相关方验收。</span></div>
+      <div class="tl-row"><span class="tl-label">上线</span><span class="tl-text">直播期间现场保障，全程技术监控。所有严重问题在约定SLA内解决。播出后社交媒体反响强烈——玩法在外部平台被自发传播。</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">收益</div>
+    <div class="data-box">
+      <div class="data-row"><span class="data-metric">+60%</span><span class="data-desc">营收同比增长——由转化率提升驱动而非提价，验证了"低价走量"的假设</span></div>
+      <div class="data-row"><span class="data-metric">+38%</span><span class="data-desc">人均观时同比增长——氛围化互动玩法有效降低了节目空白期的用户流失</span></div>
+      <div class="data-row"><span class="data-metric">自发传播</span><span class="data-desc">用户在外部社交平台自发产生正面内容——产品本身成为品牌事件，而不仅仅是直播</span></div>
+      <div class="data-row"><span class="data-metric">可复用</span><span class="data-desc">为优酷所有后续电视直播活动搭建了可复用的产品框架</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">我学到了什么</div>
+    <p class="section-text">这个项目最大的启发是：<strong>用户动机是场景相关的，而非产品相关的</strong>。同一个从不打赏主播的用户，愿意为节日礼物花钱——因为情感驱动力完全不同。忽视这一区别、对所有场景用同一套商业化策略的产品，会错失大量营收。</p>
+    <p class="section-text" style="margin-top: 10px;">执行层面：在一个有硬deadline、没有迭代空间的0到1项目里，最有价值的不是创意能力，而是做减法的能力。"云蹦迪"玩法之所以成功，恰恰是因为我选择复用已有基础设施而不是造新的。速度比新颖更重要。</p>
+    <p class="section-text" style="margin-top: 10px;">这个项目的长期价值超越了数据——它为优酷的电视直播场景建立了一套可复用的产品架构，而此前这一场景完全没有专属的产品策略。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pill-row">
+    <span class="pill">0到1产品</span>
+    <span class="pill">直播活动</span>
+    <span class="pill">商业化设计</span>
+    <span class="pill">跨团队领导力</span>
+    <span class="pill">消费心理学</span>
+    <span class="pill">GMV优化</span>
+    <span class="pill">电视直播</span>
+  </div>
+
+  <div class="footer">
+    刘维杰 &nbsp;·&nbsp; 产品经理 &nbsp;·&nbsp; levi.liuweijie@gmail.com
+  </div>
+
+</div>
+</body>
+</html>

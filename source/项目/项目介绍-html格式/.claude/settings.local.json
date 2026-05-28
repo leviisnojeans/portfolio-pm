@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '{ print NR, length }' \"/Users/bzhanceo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Documents - Levi的MacBook Air/Make a living/项目/项目介绍-html格式/bilibili_streaming_tool_case_study.html\")",
+      "Bash(sort -t' ' -k2 -n -r)",
+      "Bash(sed s/src=\"\"data:image[^\"\"]*\"\"//g)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c \"import subprocess; import sys; sys.stdout.write\\(''ok''\\)\")",
+      "Bash(python3:*)",
+      "Bash(grep -E \"\\\\.html$\")"
+    ]
+  }
+}

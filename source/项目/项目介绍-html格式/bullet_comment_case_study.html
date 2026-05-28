@@ -1,0 +1,172 @@
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-amber: #E8A840; --color-amber-light: #2a1f0a; --color-amber-mid: #C08020;
+    --color-purple: #AFA9EC; --color-purple-light: #1a1530; --color-purple-mid: #7A70D0;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.25rem; }
+  .cs { max-width: 720px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border); margin-bottom: 4px; }
+  .tag.amber { background: var(--color-amber-light); color: var(--color-amber); border-color: var(--color-amber-mid); }
+  .tag.purple { background: var(--color-purple-light); color: var(--color-purple); border-color: var(--color-purple-mid); }
+  h1 { font-size: 24px; font-weight: 600; color: var(--color-text-primary); margin: 12px 0 6px; line-height: 1.3; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--color-text-secondary); margin-bottom: 2.5rem; line-height: 1.65; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+  @media (max-width: 540px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 14px 12px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-value { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-text-primary); }
+  .metric-value.amber { color: var(--color-amber); }
+  .metric-value.purple { color: var(--color-purple); }
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); }
+  .section-text { font-size: 14.5px; color: var(--color-text-primary); line-height: 1.8; }
+  .insight-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; background: var(--color-bg); }
+  .insight-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 5px; }
+  .insight-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .outcome-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 2rem; }
+  @media (max-width: 540px) { .outcome-row { grid-template-columns: 1fr; } }
+  .outcome { border-radius: var(--radius-md); padding: 14px 12px; border: 0.5px solid var(--color-border); }
+  .outcome-title { font-size: 12px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
+  .outcome-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border); color: var(--color-text-secondary); background: var(--color-bg-secondary); }
+  .copy-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 7px 14px; border-radius: var(--radius-md); border: 0.5px solid var(--color-border); background: transparent; color: var(--color-text-primary); cursor: pointer; }
+  .copy-btn:hover { background: var(--color-bg-secondary); }
+  .divider { height: 0.5px; background: var(--color-border); margin: 2rem 0; }
+  .quote { border-left: 2px solid var(--color-amber-mid); padding-left: 14px; margin: 14px 0; font-size: 13.5px; color: var(--color-text-secondary); font-style: italic; line-height: 1.75; }
+  .stack { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .data-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border); }
+  .data-row:last-child { border-bottom: none; }
+  .data-metric { font-size: 16px; font-weight: 600; min-width: 70px; color: var(--color-text-primary); }
+  .data-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .footer { margin-top: 3rem; font-size: 12px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border); padding-top: 1rem; }
+</style>
+
+<div class="cs">
+  <span class="tag amber">Interaction design</span>
+  <span class="tag purple" style="margin-left:6px;">Real-time systems</span>
+
+  <h1>Optimizing the bullet comment experience at Bilibili</h1>
+  <p class="subtitle">How I redesigned the send-read-interact loop for live streaming comments — turning a readability problem into a measurable driver of engagement, watch time, and revenue</p>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-label">Comment volume</div>
+      <div class="metric-value amber">+33%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Participation rate</div>
+      <div class="metric-value amber">+0.43pp</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Watch time</div>
+      <div class="metric-value purple">+3.6%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Avg. spend/paying user</div>
+      <div class="metric-value purple">+15%</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Context</div>
+    <p class="section-text">Bullet comments (danmaku) are Bilibili's core social layer — they are the primary way users interact with each other and with streamers in real time. Unlike video platforms where comments are asynchronous, live streaming makes the comment feed a live social signal: seeing others react creates a sense of shared presence that drives emotional connection and, ultimately, tipping behavior.</p>
+    <p class="section-text" style="margin-top:10px;">The business model of entertainment live streaming depends on this emotional connection. If users can't read or engage with comments, the core social loop breaks down.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">The problem</div>
+    <p class="section-text">At high concurrency — during peak hours or major events — the comment feed scrolled too fast for users to read. This created a paradox: the most active, high-energy streams were also the ones where the social experience felt most chaotic and least legible.</p>
+
+    <div class="quote">
+      The previous approach to growing engagement had been adding more interaction features — more formats, more prompts, more entry points. By the time I joined this project, the marginal return on that approach was clearly diminishing. I shifted the lens: instead of making it easier to send comments, I focused on making it more rewarding to read them.
+    </div>
+
+    <p class="section-text">The core tension was a real-time systems problem with a UX consequence:</p>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">Speed vs. legibility trade-off</div>
+        <div class="insight-text">Slowing scroll speed improves readability but increases the discard rate (how many comments never appear) and introduces latency (comments appear later than they were sent). Finding the right balance required quantitative modeling, not intuition.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Visual noise from layered effects</div>
+        <div class="insight-text">Gift animations, engagement banners, and comment text all occupied the same visual space. Users couldn't establish stable reading patterns because the display was unpredictable frame-to-frame.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Engagement prompts interrupting the experience</div>
+        <div class="insight-text">Prompts to follow, share, or like appeared at fixed intervals regardless of user behavior, breaking the immersive viewing state rather than supporting it.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">My approach</div>
+    <p class="section-text">I separated the problem into three independent workstreams, each targeting a different part of the send-read-interact loop.</p>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">1. Quantitative modeling of scroll speed</div>
+        <div class="insight-text">Rather than A/B testing arbitrary scroll speeds, I first built a model: at different QPS (queries per second) levels, how does reducing scroll speed affect discard rate and perceived latency? This let us identify a configuration where readability improved while both discard rate and delay remained within acceptable bounds — before running a single experiment.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">2. Readability-driven scroll fine-tuning</div>
+        <div class="insight-text">Beyond the global scroll speed model, I also optimized the feed-level display rules: grouping burst comments to reduce visual clutter, ensuring high-value comments (e.g., from power users) received slightly longer display time, and creating natural pauses in the scroll rhythm. These micro-optimizations made the feed feel paced and legible without requiring a full interaction zone restructuring.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">3. Content-type differentiation</div>
+        <div class="insight-text">I identified that different stream categories have different latency tolerances: beauty and performance streams prioritize visibility (users want to see comments now, even if some are dropped), while gaming streams prioritize real-time accuracy (a comment about a play that appears 2 seconds late is useless). I designed a per-category strategy to be rolled out after the core fix.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Outcomes</div>
+    <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 16px 18px; margin-bottom: 12px;">
+      <div class="data-row">
+        <span class="data-metric">+33%</span>
+        <span class="data-desc">Average bullet comments per user — the clearest signal that more people were actually reading and responding to the feed</span>
+      </div>
+      <div class="data-row">
+        <span class="data-metric">+0.43pp</span>
+        <span class="data-desc">Participation rate (share of viewers who sent at least one comment) — higher baseline engagement, not just more from existing commenters</span>
+      </div>
+      <div class="data-row">
+        <span class="data-metric">+3.6%</span>
+        <span class="data-desc">Average watch time per user — longer sessions suggest the experience felt more engaging, not just less annoying</span>
+      </div>
+      <div class="data-row">
+        <span class="data-metric">+15%</span>
+        <span class="data-desc">Average spend per paying user — consistent with the hypothesis that stronger social presence drives tipping behavior</span>
+      </div>
+    </div>
+    <p class="section-text">The results were validated across small, medium, and large-scale live events to ensure they held under extreme concurrency conditions.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What I learned</div>
+    <p class="section-text">The most important insight was about the relationship between social experience and revenue in entertainment platforms. The +15% lift in per-user spend was not caused by any monetization change — we didn't touch pricing, gift design, or promotional mechanics. It emerged entirely from improving social legibility. This is strong evidence that in live streaming, <strong>the comment feed is not a feature — it is the product</strong>. Its health directly determines whether the emotional conditions for tipping exist.</p>
+    <p class="section-text" style="margin-top: 10px;">Note: the quantified results above were driven by workstreams 1 and 2. The per-category scroll strategy (beauty vs. gaming) was not shipped during my tenure due to resource constraints, but the modeling work is complete. It represents a clear next step with predictable upside.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="pill-row">
+    <span class="pill">Real-time UX</span>
+    <span class="pill">A/B experimentation</span>
+    <span class="pill">Quantitative modeling</span>
+    <span class="pill">Social mechanics</span>
+    <span class="pill">Engagement loops</span>
+    <span class="pill">Live streaming</span>
+    <span class="pill">Monetization</span>
+  </div>
+
+  <div style="margin-top: 1.5rem;">
+    <button class="copy-btn" onclick="sendPrompt('请帮我把弹幕 case study 导出为纯文本格式')">Export as plain text ↗</button>
+    <button class="copy-btn" style="margin-left: 8px;" onclick="sendPrompt('帮我基于弹幕 case study 写一个适合 LinkedIn 的 Experience 条目，150 字以内')">Write LinkedIn version ↗</button>
+    <button class="copy-btn" style="margin-left: 8px;" onclick="sendPrompt('帮我把两个 case study 合并成一份完整的英文作品集介绍，适合发给海外招聘方')">Combine both cases ↗</button>
+  </div>
+</div>

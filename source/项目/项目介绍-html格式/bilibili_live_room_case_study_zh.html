@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直播间框架重构 — Levi Liu (Bilibili)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #0d0d0d; --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #e8e8e8; --color-text-secondary: #888888;
+    --color-border: rgba(255,255,255,0.10); --radius-md: 8px; --radius-lg: 12px;
+    --color-teal: #4DB89A; --color-teal-light: #052E24; --color-teal-mid: #2A9078;
+    --color-amber: #F5A623; --color-amber-light: #3D2000; --color-amber-mid: #C07800;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif; background: var(--color-bg); color: var(--color-text-primary); line-height: 1.6; padding: 3rem 1.5rem; }
+  .cs { max-width: 720px; margin: 0 auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--color-bg-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border); margin-bottom: 4px; }
+  .tag.teal { background: var(--color-teal-light); color: var(--color-teal); border-color: var(--color-teal-mid); }
+  .tag.amber { background: var(--color-amber-light); color: var(--color-amber); border-color: var(--color-amber-mid); }
+  h1 { font-size: 24px; font-weight: 600; color: var(--color-text-primary); margin: 12px 0 6px; line-height: 1.3; letter-spacing: -0.02em; }
+  .subtitle { font-size: 15px; color: var(--color-text-secondary); margin-bottom: 2.5rem; line-height: 1.65; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+  @media (max-width: 540px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 14px 12px; }
+  .metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 6px; }
+  .metric-value { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .metric-value.teal { color: var(--color-teal); }
+  .metric-value.amber { color: var(--color-amber); }
+  .section { margin-bottom: 2rem; }
+  .section-label { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border); }
+  .section-text { font-size: 14.5px; color: var(--color-text-primary); line-height: 1.8; }
+  .insight-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; background: var(--color-bg); }
+  .insight-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 5px; }
+  .insight-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .stack { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .quote { border-left: 2px solid var(--color-teal-mid); padding-left: 14px; margin: 14px 0; font-size: 13.5px; color: var(--color-text-secondary); font-style: italic; line-height: 1.75; }
+  .workstream { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px; }
+  .ws-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+  .ws-num { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 3px; }
+  .ws-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+  .ws-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 12px; }
+  .ws-data { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (max-width: 480px) { .ws-data { grid-template-columns: 1fr; } }
+  .data-chip { background: var(--color-bg-secondary); border-radius: 6px; padding: 8px 12px; }
+  .data-val { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1px; }
+  .data-val.teal { color: var(--color-teal); }
+  .data-val.amber { color: var(--color-amber); }
+  .data-desc { font-size: 11px; color: var(--color-text-secondary); }
+  .divider { height: 0.5px; background: var(--color-border); margin: 2rem 0; }
+  .secondary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .secondary-grid { grid-template-columns: 1fr; } }
+  .secondary-card { border: 0.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; }
+  .sc-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+  .sc-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 10px; }
+  .sc-result { font-size: 13px; font-weight: 600; }
+  .sc-result.teal { color: var(--color-teal); }
+  .sc-result.amber { color: var(--color-amber); }
+  /* Before/after comparison */
+  .comp { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin: 16px 0; cursor: pointer; background: var(--color-bg-secondary); aspect-ratio: 16 / 9; }
+  .comp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.35s ease; }
+  .comp .before { opacity: 0; }
+  @media (hover: hover) {
+    .comp:hover .before { opacity: 1; }
+    .comp:hover .after { opacity: 0; }
+  }
+  .comp-badge { position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; z-index: 2; pointer-events: none; }
+  .comp-badge.before { background: var(--color-amber-mid); color: #fff; opacity: 0; transition: opacity 0.35s ease; }
+  .comp-badge.after { background: var(--color-teal-mid); color: #fff; }
+  @media (hover: hover) {
+    .comp:hover .comp-badge.before { opacity: 1; }
+    .comp:hover .comp-badge.after { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="cs">
+
+  <span class="tag teal">直播</span>
+  <span class="tag amber" style="margin-left:6px;">系统设计</span>
+
+  <h1>B站直播间框架重构</h1>
+  <p class="subtitle">重构互动区、顶部信息区和引导组件体系，实现互动、观时、营收流水三项指标的同步正向增长</p>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-label">互动区自然实付流水</div>
+      <div class="metric-value teal">+2.58%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">顶部区自然实付流水</div>
+      <div class="metric-value teal">+3.18%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">游戏大卡转化率</div>
+      <div class="metric-value amber">+1pp</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">人均观时</div>
+      <div class="metric-value">正向</div>
+    </div>
+  </div>
+
+  <!-- 背景 -->
+  <div class="section">
+    <div class="section-label">背景</div>
+    <p class="section-text">B站直播间经过多年快速迭代，各业务线独立开发、缺乏统一规范。到2023年，累积的复杂度已引发三个连锁问题：用户体验下降、新功能接入成本高、商业资源位效率不足。</p>
+    <p class="section-text" style="margin-top:10px;">这不是一次视觉翻新，而是完整的结构性干预。目标是从产品架构层面重新设计，建立功能治理规范、解决历史技术债，最终降低用户使用成本、提高资源位效率、提升跨团队协作效率。</p>
+  </div>
+
+  <!-- 问题 -->
+  <div class="section">
+    <div class="section-label">问题定义</div>
+    <p class="section-text">项目范围由三个结构性失效问题驱动：</p>
+    <div class="stack">
+      <div class="insight-card">
+        <div class="insight-title">互动区：信号竞争，层级缺失</div>
+        <div class="insight-text">礼物特效、弹幕、互动提示在同一视觉空间内无序竞争，没有明确的优先级规则。用户无法建立稳定的阅读和互动模式——每一帧的内容都是不可预测的。根因不是元素太多，而是缺少一套Z轴规则来定义哪个层在什么时刻具有信息权威性。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">顶部信息区：信息密集但无结构</div>
+        <div class="insight-text">直播间顶部区域随功能堆叠而自然膨胀，承载了主播信息、房间元数据、互动入口等模块。但没有结构化的扩展模型，要新增一行时要么不可行，要么各业务团队各自绕过。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">引导组件：碎片化、冗余化</div>
+        <div class="insight-text">关注、分享、点赞和商业内容的行动号召按钮缺乏统一的放置逻辑。多个组件争夺同一右下角区域，造成用户选择瘫痪，互相拉低转化率。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 方案 -->
+  <div class="section">
+    <div class="section-label">三个工作流</div>
+
+      <div class="comp">
+        <img class="after" src="../项目源材料/项目图片/直播间重构/直播间主框架重构后.png" alt="重构后">
+        <img class="before" src="../项目源材料/项目图片/直播间重构/直播间主框架重构前.png" alt="重构前">
+        <span class="comp-badge after">重构后</span>
+        <span class="comp-badge before">重构前</span>
+      </div>
+
+    <div class="workstream">
+      <div class="ws-header">
+        <div>
+          <div class="ws-num">01 · 互动区</div>
+          <div class="ws-title">XYZ 轴重构</div>
+        </div>
+      </div>
+      <p class="ws-body">为互动区建立明确的X（横向）、Y（纵向）、Z（深度/叠层）分层规则。礼物特效——价值最高的内容——锚定在主层级并通过视觉分隔区隔离。弹幕居于次级层。互动提示降级到第三层，改为触发式而非常驻。最终形成可预测的视觉环境，用户无需认知负担即可阅读和响应。</p>
+      <div class="ws-data">
+        <div class="data-chip">
+          <div class="data-val teal">+1.55%</div>
+          <div class="data-desc">人均弹幕数</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+2.58%</div>
+          <div class="data-desc">自然实付流水</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workstream">
+      <div class="ws-header">
+        <div>
+          <div class="ws-num">02 · 顶部信息区</div>
+          <div class="ws-title">结构化扩展模型</div>
+        </div>
+      </div>
+      <p class="ws-body">为直播间顶部区域设计了可扩展的三行模型——将主播身份、房间上下文和观众互动分离为独立的结构化区域。第三行可以干净地引入而不影响已有行，下游团队也有了清晰的接入接口。新行承载了之前被埋没或缺失的观众互动入口。</p>
+      <div class="ws-data">
+        <div class="data-chip">
+          <div class="data-val teal">+1.14%</div>
+          <div class="data-desc">人均弹幕数</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+3.77%</div>
+          <div class="data-desc">人均点赞数</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+0.16%</div>
+          <div class="data-desc">人均观时</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val teal">+3.18%</div>
+          <div class="data-desc">自然实付流水</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workstream">
+      <div class="ws-header">
+        <div>
+          <div class="ws-num">03 · 引导组件</div>
+          <div class="ws-title">区域治理与转化设计</div>
+        </div>
+      </div>
+      <p class="ws-body">为底部互动区建立了治理模型：一个主要商业单元、一个主要互动提示，配合明确的优先级和互斥规则。通过明确哪个内容类型在什么时刻拥有该区域的所有权，从根本上消除了组件竞争问题。重点应用于游戏内容场景——此前内容和商业变现之间的错配最为严重。</p>
+      <div class="ws-data">
+        <div class="data-chip">
+          <div class="data-val amber">+1pp</div>
+          <div class="data-desc">游戏大卡转化率</div>
+        </div>
+        <div class="data-chip">
+          <div class="data-val" style="color:var(--color-text-secondary);">正向</div>
+          <div class="data-desc">所有其他监控指标</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 同期其他工作 -->
+  <div class="section">
+    <div class="section-label">同期其他工作</div>
+    <div class="secondary-grid">
+
+      <div class="secondary-card">
+        <div class="sc-title">天选福袋改版</div>
+        <div class="sc-body">重新设计了福袋浮层，减少画面遮挡、强化品牌感、降低参与门槛——一键参与、自动展开、任务流程自动完成。</div>
+        <div class="sc-result teal">活跃参与率>40% · 较旧版+5pp</div>
+      </div>
+
+      <div class="secondary-card">
+        <div class="sc-title">S15弹幕防遮挡</div>
+        <div class="sc-body">将主站弹幕防遮挡模型移植到S15英雄联盟世界赛电竞直播间——在高并发场景下保护主播面部不被弹幕覆盖。</div>
+        <div class="sc-result teal">移动端渗透率22.6% · PC端渗透率33%</div>
+      </div>
+
+      <div class="secondary-card">
+        <div class="sc-title">弹幕长度扩展</div>
+        <div class="sc-body">将弹幕字符上限扩展至40字，探索长弹幕在直播互动中的作用。假设：更深度的评论增强用户关系纽带，具有营收信号价值。</div>
+        <div class="sc-result amber">关注+0.26% · 打赏流水+3.13%</div>
+      </div>
+
+      <div class="secondary-card">
+        <div class="sc-title">移动端开播工具（直播前体验）</div>
+        <div class="sc-body">优化移动端开播配置页：突出核心控件、按使用频次重构优先级、新增任务/客服/活动入口、降低新主播的权限摩擦。</div>
+        <div class="sc-result teal">新主播开播成功率+1.79pp · 组件UV CTR+2pp</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 反思 -->
+  <div class="section">
+    <div class="section-label">项目收获</div>
+    <p class="section-text">核心认知是：直播间的问题是<strong>结构性的，而非表象性的</strong>。每个功能在独立开发时都是正确的——失败在于缺乏一个共享架构来告诉各个团队"东西该放哪"。建立XYZ轴模型和区域治理规则不只是解决了当下问题，更让后续每个功能团队都有了稳定的接入基础。</p>
+    <p class="section-text" style="margin-top:10px;">营收结果——两次独立实验分别实现+2.58%和+3.18%的自然实付流水增长——并非源于任何付费机制的改变。它们完全来自于降低了用户从情绪反应到打赏行为之间的认知摩擦。这印证了我在直播项目中反复验证的一个原则：<strong>社交体验和商业变现不是两套系统</strong>。前者是后者的前提条件。</p>
+  </div>
+
+</div>
+</body>
+</html>

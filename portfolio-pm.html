@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh" data-lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page-title">刘维杰 · 产品人</title>
+  <meta property="og:title" content="刘维杰 · 产品人">
+  <meta property="og:description" content="Product-minded. Content, global, and AI. 3+ yrs at Bilibili, Alibaba, ByteDance.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="levi-profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+  <link href="https://fonts.loli.net/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0C0B;
+      --bg-warm: #11100E;
+      --surface: rgba(25, 23, 21, 0.6);
+      --text: #F0EAE0;
+      --muted: #6E6860;
+      --faint: #3A3530;
+      --accent: #D4935A;
+      --line: rgba(240, 234, 224, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      cursor: none;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212, 147, 90, 0.05), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(212, 147, 90, 0.03), transparent 60%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .crosshair-h, .crosshair-v {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      background: rgba(212, 147, 90, 0.4);
+    }
+    .crosshair-h { height: 1px; width: 14px; transform: translate(-50%, -50%); }
+    .crosshair-v { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+    .ch-dot {
+      position: fixed;
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+    }
+    .ch-dot.hover { width: 8px; height: 8px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 26px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding 0.4s, background 0.4s, border-bottom 0.4s;
+    }
+    nav.scrolled {
+      padding: 18px 60px;
+      background: rgba(13, 12, 11, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: rise 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+      animation-delay: 0.15s;
+    }
+    .nav-mark::after { content: '·'; color: var(--accent); margin-left: 8px; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 44px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 44px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      opacity: 0;
+      animation: rise 0.6s ease forwards;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links li:nth-child(1) a { animation-delay: 0.28s; }
+    .nav-links li:nth-child(2) a { animation-delay: 0.36s; }
+    .nav-links li:nth-child(3) a { animation-delay: 0.44s; }
+    .nav-links li:nth-child(4) a { animation-delay: 0.52s; }
+    .nav-links li:nth-child(5) a { animation-delay: 0.60s; }
+    .nav-links li:nth-child(6) a { animation-delay: 0.68s; }
+    .lang-toggle { animation-delay: 0.76s; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .lang-toggle {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--faint);
+      border-radius: 2px;
+      padding: 5px 12px;
+      cursor: none;
+      transition: color 0.2s, border-color 0.2s;
+      opacity: 0;
+      animation: rise 0.6s ease 0.6s forwards;
+      white-space: nowrap;
+    }
+    .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── SIDE MARGINS ── */
+    .margin-left {
+      position: fixed;
+      left: 30px; top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 50;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s forwards;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .margin-left .dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
+    .margin-right {
+      position: fixed;
+      right: 30px; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 50;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s forwards;
+    }
+    .margin-right .accent { color: var(--accent); transition: color 0.4s; }
+
+    main { position: relative; z-index: 10; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 120px 140px;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      gap: 80px;
+    }
+    .hero-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .hero-photo-wrap {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16,1,0.3,1) 1.0s forwards;
+    }
+    .hero-photo {
+      width: 300px;
+      height: 50vh;
+      min-height: 360px;
+      max-height: 560px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 16px;
+      display: block;
+      filter: grayscale(12%) contrast(1.04);
+    }
+
+    .chapter-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: rise 0.7s ease 0.55s forwards;
+    }
+    .chapter-mark::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-hl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(46px, 5.8vw, 86px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      max-width: 12ch;
+      margin-bottom: 48px;
+    }
+    .hero-hl .l1, .hero-hl .l2 {
+      display: block;
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-hl .l1 { animation-delay: 0.7s; }
+    .hero-hl .l2 { animation-delay: 0.92s; padding-left: 0.8em; }
+    .accent-period { color: var(--accent); font-style: italic; }
+
+    .hero-foot {
+      display: flex;
+      align-items: flex-start;
+      gap: 60px;
+      width: 100%;
+      max-width: 700px;
+      opacity: 0;
+      animation: rise 0.8s ease 1.2s forwards;
+      margin-bottom: 44px;
+    }
+    .hero-byline {
+      flex: 0 0 auto;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding-top: 4px;
+      position: relative;
+      padding-left: 14px;
+    }
+    .hero-byline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px;
+      width: 6px; height: 1px;
+      background: var(--accent);
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.8;
+      line-height: 1.55;
+      max-width: 480px;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      animation: rise 0.7s ease 1.45s forwards;
+    }
+    .btn-primary {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      border: none;
+      padding: 12px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: none;
+      border: 1px solid var(--faint);
+      padding: 12px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 40px; left: 120px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease 1.7s forwards;
+    }
+    .scroll-cue .label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .scroll-cue .arrow {
+      width: 30px; height: 1px;
+      background: var(--muted);
+      animation: drawTick 2.4s ease-in-out infinite;
+      transform-origin: left;
+    }
+
+    /* ── SECTIONS ── */
+    section.body-section {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 140px 120px;
+      position: relative;
+    }
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 80px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sec-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      flex: 1;
+    }
+    .sec-meta {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── WORK ── */
+    .work-list { display: flex; flex-direction: column; }
+    .work-row {
+      display: grid;
+      grid-template-columns: 80px 1.3fr 2fr 1fr;
+      align-items: start;
+      gap: 40px;
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+      transition: background 0.4s, padding 0.4s ease;
+    }
+    .work-row:last-child { border-bottom: 1px solid var(--line); }
+    .work-row:hover { background: var(--surface); padding-left: 16px; padding-right: 16px; }
+    .work-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .work-co {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+    .work-co .role {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+    .work-detail { display: flex; flex-direction: column; gap: 8px; }
+    .work-detail .pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .work-detail .body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .case-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: none;
+      border: none;
+      margin-top: 10px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      cursor: none;
+      padding: 0;
+    }
+    .case-toggle:hover { opacity: 1; }
+    .case-toggle::after { content: '→'; font-size: 12px; }
+
+    .work-metrics { display: flex; flex-direction: column; gap: 8px; padding-top: 2px; }
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .metric-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+    }
+    .metric-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .metric-divider {
+      width: 20px; height: 1px;
+      background: var(--faint);
+      margin: 6px 0;
+    }
+
+    /* ── CAPABILITIES ── */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 28px 30px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease, background 0.3s;
+    }
+    .skill-card:hover { background: rgba(35, 32, 29, 0.7); }
+    .skill-card.visible { opacity: 1; transform: translateY(0); }
+    .skill-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .skill-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .skill-card-body {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--faint);
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+    .about-pull .accent { color: var(--accent); }
+    .about-text { display: flex; flex-direction: column; gap: 24px; }
+    .about-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+    .about-text em { color: var(--text); opacity: 1; font-style: italic; }
+
+    /* ── PLAYGROUND ── */
+    .pg-list { display: flex; flex-direction: column; gap: 2px; }
+    .pg-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 40px 44px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease, background 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .pg-card:hover { background: rgba(35, 32, 29, 0.7); }
+    .pg-card.visible { opacity: 1; transform: translateY(0); }
+    .pg-info { flex: 1; }
+    .pg-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .pg-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .pg-actions {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      padding-top: 6px;
+    }
+    .pg-btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid var(--faint);
+      color: var(--muted);
+      padding: 8px 18px;
+      border-radius: 2px;
+      cursor: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pg-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .pg-btn.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .pg-btn.primary:hover { opacity: 0.85; }
+
+    /* ── WRITING ── */
+    .wr-list { display: flex; flex-direction: column; }
+    .wr-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .wr-row:last-child { border-bottom: 1px solid var(--line); }
+    .wr-row.visible { opacity: 1; transform: translateY(0); }
+    .wr-tag {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      text-transform: uppercase;
+      flex-shrink: 0;
+      width: 100px;
+      opacity: 0.7;
+    }
+    .wr-title {
+      flex: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .wr-read-btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: none;
+      border: 1px solid var(--faint);
+      padding: 8px 18px;
+      border-radius: 2px;
+      cursor: none;
+      transition: border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .wr-read-btn:hover { border-color: var(--accent); }
+    .wr-lang-label {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--faint);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    /* ── OVERLAY MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      position: relative;
+      width: 90vw;
+      max-width: 800px;
+      height: 85vh;
+      max-height: 90vh;
+      background: #0d0d0d;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-overlay.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text);
+    }
+    .modal-close {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: none;
+      transition: color 0.2s;
+      width: 32px; height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-body {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .modal-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .modal-loader .spinner {
+      width: 20px; height: 20px;
+      border: 1px solid var(--faint);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 12px;
+    }
+    .modal-desc-area {
+      padding: 18px 20px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-height: 30vh;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 100px 120px 70px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 70px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .ornament .line { flex: 1; height: 1px; background: var(--line); }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-block label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .footer-block .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text);
+    }
+    .footer-block .value a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-block .value a:hover { color: var(--accent); }
+    .footer-center { text-align: center; }
+    .footer-right { text-align: right; }
+
+    .resume-download {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── PULSE DOT ── */
+    .pulse-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2.2s ease-in-out infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes drawTick {
+      0%, 100% { transform: scaleX(0.6); opacity: 0.4; }
+      50% { transform: scaleX(1); opacity: 0.9; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      nav, nav.scrolled { padding: 22px 40px; }
+      #hero { padding: 0 80px; gap: 50px; }
+      .hero-photo { width: 240px; }
+      section.body-section { padding: 100px 80px; }
+      .scroll-cue { left: 80px; }
+      footer { padding: 80px 80px 60px; }
+      .work-row { grid-template-columns: 70px 1.2fr 2fr 0.9fr; gap: 28px; }
+      .margin-left, .margin-right { display: none; }
+      .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pg-card { flex-direction: column; gap: 20px; }
+    }
+    @media (max-width: 760px) {
+      nav, nav.scrolled { padding: 18px 24px; }
+      .nav-links { gap: 24px; }
+      #hero { padding: 0 24px; min-height: 90vh; flex-direction: column; justify-content: center; gap: 36px; padding-top: 100px; }
+      .hero-photo { width: 180px; height: 36vh; min-height: 220px; }
+      .hero-photo-wrap { order: -1; }
+      section.body-section { padding: 70px 24px; }
+      .scroll-cue { left: 24px; bottom: 24px; }
+      .work-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+      .skill-grid { grid-template-columns: 1fr; gap: 12px; }
+      .skill-card { padding: 22px 20px; min-height: auto; }
+      .about-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; text-align: left; }
+      .footer-center, .footer-right { text-align: left; }
+      .hero-foot { flex-direction: column; gap: 20px; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+      footer { padding: 60px 24px 50px; }
+      .hero-hl .l2 { padding-left: 0.6em; }
+      body { cursor: auto; }
+      .crosshair-h, .crosshair-v, .ch-dot { display: none; }
+      .lang-toggle { padding: 4px 10px; }
+      .wr-row { flex-wrap: wrap; gap: 12px; }
+      .wr-tag { width: auto; }
+      .pg-card { padding: 28px 24px; }
+      .pg-actions { flex-wrap: wrap; }
+      .modal-box { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="crosshair-h" id="chH"></div>
+  <div class="crosshair-v" id="chV"></div>
+  <div class="ch-dot" id="chD"></div>
+
+  <nav id="nav">
+    <a href="#" class="nav-mark">刘维杰 Levi Liu</a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#work" data-i18n="nav-work">经历</a></li>
+        <li><a href="#capabilities" data-i18n="nav-skills">能力</a></li>
+        <li><a href="#playground" data-i18n="nav-playground">作品</a></li>
+        <li><a href="#writing" data-i18n="nav-writing">写作</a></li>
+        <li><a href="#about" data-i18n="nav-about">关于</a></li>
+        <li><a href="#contact" data-i18n="nav-contact">联系</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
+    </div>
+  </nav>
+
+  <div class="margin-left">
+    <span class="dot"></span>
+    <span>Shanghai &middot; <span id="liveTime">—</span></span>
+  </div>
+  <div class="margin-right">
+    <span class="accent" id="secMark">§ 0</span>
+  </div>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <div id="hero">
+      <div class="hero-content">
+        <div class="chapter-mark" data-i18n="hero-mark">产品经理 · 互联网 · 2022 — 至今</div>
+        <h1 class="hero-hl">
+          <span class="l1" data-i18n="hero-l1">产品人，</span>
+          <span class="l2" data-i18n="hero-l2">关注内容、出海与 AI<span class="accent-period">.</span></span>
+        </h1>
+        <div class="hero-foot">
+          <p class="hero-sub" data-i18n="hero-sub">B站 · 阿里 · 字节｜3年+内容平台与商业化经验</p>
+        </div>
+        <div class="hero-cta">
+          <a href="#work" class="btn-primary" data-i18n="hero-cta-work">查看项目经历</a>
+          <a href="source/简历/刘维杰-PM-3年经验-上海.html" target="_blank" class="btn-outline" id="resumeBtnHero" data-i18n="hero-cta-resume">查看简历</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="levi-profile.jpg" alt="Levi Liu">
+      </div>
+      <div class="scroll-cue">
+        <span class="label" data-i18n="scroll-label">向下滚动</span>
+        <span class="arrow"></span>
+      </div>
+    </div>
+
+    <!-- § I 项目经历 -->
+    <section class="body-section" id="work" data-mark="§ I">
+      <div class="sec-head">
+        <span class="sec-num">§ I</span>
+        <h2 class="sec-title" data-i18n="sec1-title">项目经历</h2>
+        <span class="sec-meta" data-i18n="sec1-meta">精选 · 2021 — 至今</span>
+      </div>
+      <div class="work-list" id="workList"></div>
+    </section>
+
+    <!-- § II 核心能力 -->
+    <section class="body-section" id="capabilities" data-mark="§ II">
+      <div class="sec-head">
+        <span class="sec-num">§ II</span>
+        <h2 class="sec-title" data-i18n="sec2-title">核心能力</h2>
+        <span class="sec-meta" data-i18n="sec2-meta">四个维度</span>
+      </div>
+      <div class="skill-grid" id="skillGrid"></div>
+    </section>
+
+    <!-- § III 小作品 -->
+    <section class="body-section" id="playground" data-mark="§ III">
+      <div class="sec-head">
+        <span class="sec-num">§ III</span>
+        <h2 class="sec-title" data-i18n="sec4-title">小作品</h2>
+        <span class="sec-meta" data-i18n="sec4-meta">动手做</span>
+      </div>
+      <div class="pg-list" id="pgList"></div>
+    </section>
+
+    <!-- § IV 写作 -->
+    <section class="body-section" id="writing" data-mark="§ IV">
+      <div class="sec-head">
+        <span class="sec-num">§ IV</span>
+        <h2 class="sec-title" data-i18n="sec5-title">写作</h2>
+        <span class="sec-meta" data-i18n="sec5-meta">思考记录</span>
+      </div>
+      <div class="wr-list" id="wrList"></div>
+    </section>
+
+    <!-- § V 关于 -->
+    <section class="body-section" id="about" data-mark="§ V">
+      <div class="sec-head">
+        <span class="sec-num">§ V</span>
+        <h2 class="sec-title" data-i18n="sec3-title">关于我</h2>
+        <span class="sec-meta" data-i18n="sec3-meta">简介</span>
+      </div>
+      <div class="about-grid">
+        <div class="about-pull" data-i18n="about-pull">系统之内<span class="accent">，</span><br>问题之前<span class="accent">，</span><br>框架之上<span class="accent">。</span></div>
+        <div class="about-text" id="aboutText">
+          <p data-i18n="about-p1">过去三年，我在中国头部内容平台的产品核心层工作。<em>哔哩哔哩、优酷、字节跳动</em>——这些平台在承载内容的同时，也在塑造文化。</p>
+          <p data-i18n="about-p2">我的产品方法论始于重构问题本身：弹幕可读性问题是营收问题；春晚互动问题是情感问题；直播间UI问题是交易成本问题。找到正确的框架，解法往往比预期简单。</p>
+          <p data-i18n="about-p3">英语专业出身，具备中英双语工作能力。对AI、平台治理与科技对社会的影响有持续的深度关注。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="ornament">
+      <span class="line"></span>
+      <span data-i18n="footer-end">联系</span>
+      <span class="line"></span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-block">
+        <label data-i18n="footer-who-label">姓名</label>
+        <div class="value" data-i18n="footer-who-val">刘维杰（Levi）</div>
+      </div>
+      <div class="footer-block footer-center">
+        <label data-i18n="footer-where-label">坐标</label>
+        <div class="value" data-i18n="footer-where-val">上海，可北京 / 远程</div>
+      </div>
+      <div class="footer-block footer-right">
+        <label data-i18n="footer-how-label">联系方式</label>
+        <div class="value"><a href="mailto:levi.liuweijie@gmail.com">levi.liuweijie@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="resume-download">
+      <a href="" target="_blank" class="btn-outline" id="resumeBtnFooter" data-i18n="resume-download">查看简历</a>
+    </div>
+  </footer>
+
+  <!-- ═══ OVERLAY MODAL ═══ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modalTitle"></span>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div class="modal-loader" id="modalLoader">
+          <span class="spinner"></span>
+          <span>加载中</span>
+        </div>
+        <iframe id="modalIframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="display:none;"></iframe>
+        <div class="modal-content-area" id="modalContent" style="display:none;width:100%;height:100%;overflow-y:auto;background:#0d0d0d;"></div>
+      </div>
+      <div class="modal-desc-area" id="modalDesc" style="display:none;"></div>
+    </div>
+  </div>
+
+  <script src="portfolio-data.js"></script>
+  <script src="content.js"></script>
+  <script src="content-auto.js"></script>
+  <script>
+    const D = PORTFOLIO_DATA;
+    let currentLang = 'zh';
+
+    // Merge auto-generated data (writings, smallWorks) into PORTFOLIO_DATA
+    if (typeof PORTFOLIO_AUTO_DATA !== 'undefined') {
+      for (const lang of ['zh', 'en']) {
+        if (PORTFOLIO_AUTO_DATA.translations[lang]) {
+          Object.assign(D.translations[lang], PORTFOLIO_AUTO_DATA.translations[lang]);
+        }
+      }
+      if (PORTFOLIO_AUTO_DATA.writings) D.writings = PORTFOLIO_AUTO_DATA.writings;
+      if (PORTFOLIO_AUTO_DATA.smallWorks) D.smallWorks = PORTFOLIO_AUTO_DATA.smallWorks;
+    }
+
+    /* ── I18N ── */
+    function t(key) {
+      return D.translations[currentLang] && D.translations[currentLang][key] !== undefined
+        ? D.translations[currentLang][key] : (D.translations.zh[key] || key);
+    }
+
+    function applyLang(lang) {
+      currentLang = lang;
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
+      document.title = t('page-title');
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (D.translations[lang][key] !== undefined) el.innerHTML = D.translations[lang][key];
+      });
+      document.getElementById('langToggle').textContent = lang === 'zh' ? 'EN' : '中文';
+      const href = D.resume[lang];
+      document.getElementById('resumeBtnHero').href = href;
+      document.getElementById('resumeBtnFooter').href = href;
+      // Refresh dynamic content
+      renderProjects();
+      renderSkills();
+      renderPlayground();
+      renderWriting();
+    }
+
+    /* ── RENDER PROJECTS ── */
+    function renderProjects() {
+      const list = document.getElementById('workList');
+      list.innerHTML = D.projects.map((p, i) => {
+        const metricsHtml = p.metrics.map(m =>
+          `<div class="metric-item">
+            <span class="metric-val"${m.customStyle ? ' style="' + m.customStyle + '"' : ''}>${m.value}</span>
+            <span class="metric-label">${t(m.labelKey)}</span>
+          </div>`
+        ).join('<div class="metric-divider"></div>');
+
+        const hasCase = p.caseFiles !== null;
+        const caseBtn = hasCase
+          ? `<button class="case-toggle" onclick="openCaseStudy('${p.id}')">${t('case-link')}</button>`
+          : '';
+
+        return `<div class="work-row" data-index="${i}">
+          <div class="work-year">${p.year}</div>
+          <div class="work-co">
+            <span>${t(p.coKey)}</span>
+            <span class="role">${t(p.roleKey)}</span>
+          </div>
+          <div class="work-detail">
+            <span class="pull">${t(p.pullKey)}</span>
+            <span class="body">${t(p.bodyKey)}</span>
+            ${caseBtn}
+          </div>
+          <div class="work-metrics">${metricsHtml}</div>
+        </div>`;
+      }).join('');
+
+      // Re-bind scroll reveal
+      bindScrollReveal('.work-row');
+    }
+
+    /* ── OPEN CASE STUDY MODAL ── */
+    function openCaseStudy(id) {
+      var project = D.projects.find(function(p) { return p.id === id; });
+      if (!project) return;
+
+      // Set title: company + project name
+      var title = t(project.coKey) + ' · ' + t(project.pullKey).replace(/<[^>]*>/g, '').substring(0, 60);
+      modalTitle.textContent = title;
+      modalLoader.style.display = 'flex';
+      modalLoader.innerHTML = '<span class="spinner"></span><span>Loading...</span>';
+      modalIframe.style.display = 'none';
+      modalDesc.style.display = 'none';
+      document.getElementById('modalContent').style.display = 'none';
+      overlay.classList.add('open');
+
+      // Try pre-built data first
+      if (typeof CASE_DATA !== 'undefined' && CASE_DATA[id] && CASE_DATA[id][currentLang]) {
+        var cd = CASE_DATA[id][currentLang];
+        var wrapped = '<div class="cs-inline" style="padding:2rem;">'
+          + '<style>' + cd.css + '</style>'
+          + cd.body + '</div>';
+        modalLoader.style.display = 'none';
+        var mc = document.getElementById('modalContent');
+        mc.innerHTML = wrapped;
+        mc.style.display = 'block';
+        return;
+      }
+
+      // Fallback: fetch from source
+      var file = project.caseFiles && project.caseFiles[currentLang];
+      if (!file) {
+        modalLoader.innerHTML = 'No case study available.';
+        return;
+      }
+      fetch(file)
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          var sm = html.match(/<style>([\s\S]*?)<\/style>/);
+          var bm = html.match(/<body>([\s\S]*?)<\/body>/);
+          var css = sm ? sm[1] : '';
+          var bodyHtml = bm ? bm[1] : html;
+          var w = '<div class="cs-inline" style="padding:2rem;">'
+            + '<style>' + css + '</style>'
+            + bodyHtml + '</div>';
+          modalLoader.style.display = 'none';
+          var mc = document.getElementById('modalContent');
+          mc.innerHTML = w;
+          mc.style.display = 'block';
+        })
+        .catch(function() {
+          modalLoader.innerHTML = 'Failed to load case study.';
+        });
+    }
+
+    /* ── RENDER SKILLS ── */
+    function renderSkills() {
+      const grid = document.getElementById('skillGrid');
+      grid.innerHTML = D.skills.map((s, i) =>
+        `<div class="skill-card" data-index="${i}">
+          <div class="skill-card-num">${s.num} ·</div>
+          <div class="skill-card-title">${t(s.titleKey)}</div>
+          <p class="skill-card-body">${t(s.bodyKey)}</p>
+          <div class="skill-tags">
+            ${s.tagKeys.map(k => `<span class="skill-tag">${t(k)}</span>`).join('')}
+          </div>
+        </div>`
+      ).join('');
+      bindScrollReveal('.skill-card');
+    }
+
+    /* ── RENDER PLAYGROUND ── */
+    function renderPlayground() {
+      const list = document.getElementById('pgList');
+      list.innerHTML = D.smallWorks.map((sw, i) =>
+        `<div class="pg-card" data-index="${i}">
+          <div class="pg-info">
+            <div class="pg-name">${t(sw.nameKey)}</div>
+            <div class="pg-desc">${t(sw.descKey)}</div>
+          </div>
+          <div class="pg-actions">
+            <button class="pg-btn primary" onclick="openSmallWork('${sw.id}')">${t('sw-btn-try')}</button>
+          </div>
+        </div>`
+      ).join('');
+      bindScrollReveal('.pg-card');
+    }
+
+    /* ── RENDER WRITING ── */
+    function renderWriting() {
+      const list = document.getElementById('wrList');
+      const items = D.writings.filter(w => w.langs[currentLang] !== null);
+      list.innerHTML = items.map((w, i) => {
+        const langInfo = w.langs[currentLang];
+        return `<div class="wr-row" data-index="${i}">
+          <span class="wr-tag">${t(w.tagKey)}</span>
+          <span class="wr-title">${t(w.titleKey)}</span>
+          <span class="wr-lang-label">${currentLang === 'zh' ? '中文' : 'EN'}</span>
+          <button class="wr-read-btn" onclick="openWriting('${w.id}')">${t('wr-btn-read')}</button>
+        </div>`;
+      }).join('');
+      bindScrollReveal('.wr-row');
+    }
+
+    /* ── MODAL SYSTEM ── */
+    const overlay = document.getElementById('modalOverlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalIframe = document.getElementById('modalIframe');
+    const modalLoader = document.getElementById('modalLoader');
+    const modalDesc = document.getElementById('modalDesc');
+
+    function openModal(title, src, desc) {
+      modalTitle.textContent = title;
+      modalLoader.style.display = 'flex';
+      modalIframe.style.display = 'none';
+      modalDesc.style.display = 'none';
+      modalDesc.innerHTML = '';
+      modalIframe.src = '';
+      overlay.classList.add('open');
+      if (desc) {
+        modalDesc.style.display = 'block';
+        modalDesc.innerHTML = '<div style="white-space:pre-wrap;">' + desc + '</div>';
+      }
+      // Slight delay so the loader shows
+      setTimeout(() => {
+        modalIframe.src = src;
+        modalIframe.style.display = 'block';
+      }, 300);
+    }
+
+    modalIframe.onload = function() {
+      modalLoader.style.display = 'none';
+    };
+    modalIframe.onerror = function() {
+      modalLoader.innerHTML = 'Failed to load content.';
+    };
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      modalIframe.src = '';
+      modalDesc.style.display = 'none';
+      document.getElementById('modalContent').style.display = 'none';
+    }
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    /* ── PRODUCT DESC (loads md and renders) ── */
+    function openProductDesc(id) {
+      const sw = D.smallWorks.find(s => s.id === id);
+      if (!sw || !sw.productDesc) return;
+      modalTitle.textContent = t(sw.nameKey);
+      modalLoader.style.display = 'flex';
+      modalLoader.innerHTML = '<span class="spinner"></span><span>' + t('scroll-label') + '...</span>';
+      modalIframe.style.display = 'none';
+      modalDesc.style.display = 'none';
+      overlay.classList.add('open');
+
+      function renderDesc(text) {
+        modalLoader.style.display = 'none';
+        const parts = text.split('## ');
+        let content = '';
+        if (currentLang === 'zh') {
+          const zhPart = parts.find(p => p.startsWith('中文'));
+          content = zhPart ? zhPart.replace(/^中文产品说明\s*\n/, '') : text;
+        } else {
+          const enPart = parts.find(p => p.startsWith('English'));
+          content = enPart ? enPart.replace(/^English Product Description\s*\n/, '') : text;
+        }
+        modalDesc.style.display = 'block';
+        modalDesc.innerHTML = '<div style="white-space:pre-wrap;font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;line-height:1.7;">' + content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</div>';
+      }
+
+      fetch(sw.productDesc)
+        .then(r => r.text())
+        .then(renderDesc)
+        .catch(() => {
+          // Fallback to inline content
+          if (sw.productDescInline && sw.productDescInline[currentLang]) {
+            renderDesc('## ' + (currentLang === 'zh' ? '中文产品说明' : 'English Product Description') + '\n' + sw.productDescInline[currentLang]);
+          } else {
+            modalLoader.style.display = 'none';
+            modalDesc.style.display = 'block';
+            modalDesc.innerHTML = 'Failed to load product description.';
+          }
+        });
+    }
+
+    /* ── OPEN SMALL WORK ── */
+    function openSmallWork(id) {
+      const sw = D.smallWorks.find(s => s.id === id);
+      if (!sw) return;
+      modalDesc.style.display = 'none';
+      modalDesc.innerHTML = '';
+
+      openModal(t(sw.nameKey), sw.file);
+
+      function renderDescInline(text) {
+        const parts = text.split('## ');
+        let content = '';
+        if (currentLang === 'zh') {
+          const zhPart = parts.find(p => p.startsWith('中文'));
+          content = zhPart ? zhPart.replace(/^中文产品说明\s*\n/, '') : text;
+        } else {
+          const enPart = parts.find(p => p.startsWith('English'));
+          content = enPart ? enPart.replace(/^English Product Description\s*\n/, '') : text;
+        }
+        modalDesc.style.display = 'block';
+        modalDesc.innerHTML = '<div style="white-space:pre-wrap;font-family:\'Cormorant Garamond\',serif;font-size:14px;font-style:italic;line-height:1.7;color:var(--muted);">' + content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</div>';
+      }
+
+      if (sw.productDescInline && sw.productDescInline[currentLang]) {
+        renderDescInline('## ' + (currentLang === 'zh' ? '中文产品说明' : 'English Product Description') + '\n' + sw.productDescInline[currentLang]);
+      } else if (sw.productDesc) {
+        fetch(sw.productDesc)
+          .then(r => r.text())
+          .then(renderDescInline)
+          .catch(function() {});
+      }
+    }
+
+    /* ── OPEN WRITING ── */
+    function openWriting(id) {
+      const w = D.writings.find(wr => wr.id === id);
+      if (!w || !w.langs[currentLang]) return;
+      openModal(t(w.titleKey), w.langs[currentLang].file);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    function bindScrollReveal(selector) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const d = +e.target.dataset.index * 110;
+            setTimeout(() => e.target.classList.add('visible'), d);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(selector).forEach(el => obs.observe(el));
+    }
+
+    /* ── CURSOR ── */
+    const chH = document.getElementById('chH');
+    const chV = document.getElementById('chV');
+    const chD = document.getElementById('chD');
+    const nav = document.getElementById('nav');
+    let mx = 0, my = 0, hx = 0, hy = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      chD.style.left = mx + 'px';
+      chD.style.top = my + 'px';
+    });
+    (function tick() {
+      hx += (mx - hx) * 0.15;
+      hy += (my - hy) * 0.15;
+      chH.style.left = hx + 'px'; chH.style.top = hy + 'px';
+      chV.style.left = hx + 'px'; chV.style.top = hy + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a, button, .work-row, .skill-card').forEach(el => {
+      el.addEventListener('mouseenter', () => chD.classList.add('hover'));
+      el.addEventListener('mouseleave', () => chD.classList.remove('hover'));
+    });
+
+    /* ── CLOCK ── */
+    function updateClock() {
+      const sh = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+      const el = document.getElementById('liveTime');
+      if (el) el.textContent = String(sh.getHours()).padStart(2,'0') + ':' + String(sh.getMinutes()).padStart(2,'0');
+    }
+    updateClock(); setInterval(updateClock, 30000);
+
+    /* ── NAV SCROLL ── */
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ── SECTION MARK ── */
+    const sectionMark = document.getElementById('secMark');
+    const marks = { 'work': '§ I', 'capabilities': '§ II', 'playground': '§ III', 'writing': '§ IV', 'about': '§ V', 'contact': '§ VI' };
+    const markObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const m = marks[e.target.id] || '§ 0';
+          if (sectionMark) sectionMark.textContent = m;
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+    document.querySelectorAll('section.body-section, footer').forEach(s => markObs.observe(s));
+
+    /* ── COPY WECHAT ── */
+    function copyWechat() {
+      const text = 'LeviLiu85';
+      navigator.clipboard.writeText(text).then(() => {
+        const el = document.querySelector('.copy-wechat');
+        if (el) { el.textContent = '✓ 已复制'; el.style.borderColor = 'var(--accent)'; el.style.color = 'var(--accent)'; }
+        setTimeout(() => {
+          if (el) { el.innerHTML = '微信 LeviLiu85'; el.style.borderColor = ''; el.style.color = ''; }
+        }, 2000);
+      }).catch(() => {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      });
+    }
+
+    /* ── INIT ── */
+    applyLang(currentLang);
+    setTimeout(() => bindScrollReveal('.work-row'), 100);
+    setTimeout(() => bindScrollReveal('.skill-card'), 200);
+    setTimeout(() => bindScrollReveal('.pg-card'), 300);
+    setTimeout(() => bindScrollReveal('.wr-row'), 400);
+
+    // Lang toggle
+    document.getElementById('langToggle').addEventListener('click', () => {
+      applyLang(currentLang === 'zh' ? 'en' : 'zh');
+    });
+  </script>
+</body>
+</html>

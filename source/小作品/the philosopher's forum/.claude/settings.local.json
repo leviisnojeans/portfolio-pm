@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mdls -name kMDItemTextContent \"/Users/bzhanceo/Documents/B站直播互动工具/inputs/【产品需求】idea 播端-天选时刻 实物天选未履约处置方案-直播业务-TAPD平台.pdf\")",
+      "Bash(python3 -c \":*)",
+      "Bash(python3:*)"
+    ]
+  }
+}
