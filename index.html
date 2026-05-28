@@ -877,6 +877,31 @@
       justify-content: center;
     }
 
+    /* ── LOADING BANNER ── */
+    .loading-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: rgba(212, 147, 90, 0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 147, 90, 0.25);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 12px;
+      color: var(--accent);
+      text-align: center;
+      max-width: 420px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      line-height: 1.6;
+    }
+    .loading-banner.show { opacity: 1; }
+    .loading-banner.error { color: #f0997b; border-color: rgba(240,153,123,0.3); background: rgba(240,153,123,0.08); }
+
     /* ── PULSE DOT ── */
     .pulse-dot {
       display: inline-block;
@@ -1091,6 +1116,9 @@
     </div>
   </footer>
 
+  <!-- ═══ LOADING BANNER ═══ -->
+  <div class="loading-banner" id="loadingBanner"></div>
+
   <!-- ═══ OVERLAY MODAL ═══ -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-box">
@@ -1152,6 +1180,9 @@
       renderSkills();
       renderPlayground();
       renderWriting();
+      // Update loading banner text if visible
+      var lb = document.getElementById('loadingBanner');
+      if (lb && lb.classList.contains('show')) lb.textContent = t('loading-tip');
     }
 
     /* ── RENDER PROJECTS ── */
@@ -1198,7 +1229,7 @@
       var title = t(project.coKey) + ' · ' + t(project.pullKey).replace(/<[^>]*>/g, '').substring(0, 60);
       modalTitle.textContent = title;
       modalLoader.style.display = 'flex';
-      modalLoader.innerHTML = '<span class="spinner"></span><span>Loading...</span>';
+      modalLoader.innerHTML = '<span class="spinner"></span><span>' + t('scroll-label') + '...</span>';
       modalIframe.style.display = 'none';
       modalDesc.style.display = 'none';
       document.getElementById('modalContent').style.display = 'none';
@@ -1220,7 +1251,7 @@
       // Fallback: fetch from source
       var file = project.caseFiles && project.caseFiles[currentLang];
       if (!file) {
-        modalLoader.innerHTML = 'No case study available.';
+        modalLoader.innerHTML = t('loading-error');
         return;
       }
       fetch(file)
@@ -1239,7 +1270,7 @@
           mc.style.display = 'block';
         })
         .catch(function() {
-          modalLoader.innerHTML = 'Failed to load case study.';
+          modalLoader.innerHTML = t('loading-error');
         });
     }
 
@@ -1323,7 +1354,9 @@
       modalLoader.style.display = 'none';
     };
     modalIframe.onerror = function() {
-      modalLoader.innerHTML = 'Failed to load content.';
+      modalLoader.innerHTML = t('loading-error');
+      // Retry button
+      modalLoader.innerHTML += '<br><button onclick="modalIframe.src = modalIframe.src" style="margin-top:10px;padding:6px 16px;background:var(--accent);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-size:12px;">' + (currentLang === 'zh' ? '重试' : 'Retry') + '</button>';
     };
 
     function closeModal() {
@@ -1372,7 +1405,7 @@
           } else {
             modalLoader.style.display = 'none';
             modalDesc.style.display = 'block';
-            modalDesc.innerHTML = 'Failed to load product description.';
+            modalDesc.innerHTML = t('loading-error');
           }
         });
     }
@@ -1499,6 +1532,19 @@
 
     /* ── INIT ── */
     applyLang(currentLang);
+
+    // Loading banner: show tip on slow connections
+    const loadingBanner = document.getElementById('loadingBanner');
+    let bannerTimer = setTimeout(() => {
+      loadingBanner.textContent = t('loading-tip');
+      loadingBanner.classList.add('show');
+    }, 3000);
+    // Hide banner once everything is loaded
+    window.addEventListener('load', () => {
+      clearTimeout(bannerTimer);
+      loadingBanner.classList.remove('show');
+    });
+
     setTimeout(() => bindScrollReveal('.work-row'), 100);
     setTimeout(() => bindScrollReveal('.skill-card'), 200);
     setTimeout(() => bindScrollReveal('.pg-card'), 300);

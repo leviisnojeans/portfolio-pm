@@ -118,6 +118,8 @@ const PORTFOLIO_DATA = {
       'sw2-desc':     '沉浸式思想圆桌应用。把真实问题交给历史上的哲学家，看他们如何回应、辩论、碰撞。',
       'sw-btn-try':   '体验',
       'sw-btn-desc':  '产品说明书',
+      'loading-tip':  '首次加载可能较慢，请稍等或先查看其他内容',
+      'loading-error':'加载失败，请刷新重试',
 
       'sec5-title':   '写作',
       'sec5-meta':    '思考记录',
@@ -241,6 +243,8 @@ const PORTFOLIO_DATA = {
       'sw2-desc':     'An immersive roundtable experience. Bring your questions to history\'s greatest thinkers and watch them respond, debate, and collide.',
       'sw-btn-try':   'Try it',
       'sw-btn-desc':  'Product Details',
+      'loading-tip':  'First load may be slow. Please wait or browse other content.',
+      'loading-error':'Load failed. Please refresh and try again.',
 
       'sec5-title':   'Writing',
       'sec5-meta':    'Thoughts & analysis',
