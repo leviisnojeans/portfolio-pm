@@ -147,3 +147,101 @@ Footer: 联系信息 + 简历下载
 | 7 | 案例需新标签页打开 | 改为页面内 accordion 展开 |
 | 8 | 字节跳动项目无案例、指标弱 | **保持现状**，不补充 |
 | 9 | 无 OG meta 标签 | 补充 og:title/description/image |
+
+---
+
+## 9. 自动构建与部署工作流
+
+### 9.1 核心原则
+
+用户只需将新作品/文章放入 `source/` 对应目录，其余环节（数据生成、代码提交、部署上线）由构建系统和 CI/CD 自动完成。
+
+### 9.2 新增一篇写作文章
+
+```
+步骤 1 写 HTML 文件 → 放入 source/写作/
+步骤 2 在 <title> 后插入 metadata 块（见下方格式）
+步骤 3 git add . && git commit -m "新文章: xxx"
+```
+
+metadata 格式（放在 `source/写作/*.html` 的 `<title>` 标签之后）：
+
+```html
+<script type="x-metadata">
+{
+  "title": {"zh": "中文标题", "en": "English Title"},
+  "tag": {"zh": "产品分析", "en": "Product Analysis"},
+  "langs": {"en": true}    // ← 可选，覆盖语言检测。纯英文文章加这个
+}
+</script>
+```
+
+**语言文件命名约定：**
+| 文件名 | 作用 |
+|--------|------|
+| `xxx_zh.html` | 中文版 |
+| `xxx_en.html` | 英文版 |
+| `xxx.html`（无后缀） | 默认视为中文版 |
+
+**配对规则：** `xxx_zh.html` + `xxx_en.html` 自动视为同一篇文章的双语版本。
+`langs` 字段可覆盖此规则（例如纯英文文章只显示 EN）。
+
+### 9.3 新增一个小作品
+
+```
+步骤 1 新建文件夹 → source/小作品/你的作品名/
+步骤 2 放入 HTML 文件 + product-description.md（可选）
+步骤 3 在 HTML 的 <title> 后插入 metadata 块
+步骤 4 git add . && git commit -m "新作品: xxx"
+```
+
+metadata 格式（放在 `source/小作品/*/index.html` 的 `<title>` 标签之后）：
+
+```html
+<script type="x-metadata">
+{
+  "id": "your-work-id",
+  "name": {"zh": "作品名称", "en": "Work Name"},
+  "desc": {"zh": "中文简介", "en": "English description"}
+}
+</script>
+```
+
+`product-description.md` 格式（产品说明书，在 modal 中展示）：
+
+```markdown
+## 中文产品说明
+[详细中文描述]
+
+## English Product Description
+[detailed English description]
+```
+
+### 9.4 构建系统
+
+| 文件 | 作用 |
+|------|------|
+| `build.py` | 自动扫描源文件 + 提取元数据 + 生成 `content-auto.js` |
+| `content-auto.js` | 自动生成的数据文件（**不要手动编辑**） |
+| `portfolio-data.js` | 自动生成的案例数据（**不要手动编辑**） |
+| `content.js` | 手动数据层（项目列表、核心能力、翻译等） |
+
+**手动触发构建：** `python3 build.py`
+
+**自动触发构建：** Git commit 时 pre-commit hook 自动运行 build.py，确保 `content-auto.js` 和 `portfolio-data.js` 始终最新。
+
+### 9.5 部署（Cloudflare Pages）
+
+1. 在 GitHub 创建仓库，推送代码
+2. Cloudflare Dashboard → Workers & Pages → Pages → 连接 Git 仓库
+3. 构建设置：Framework Preset = **None**，Build command = 留空，Publish directory = `/`
+4. 之后 `git push` 即触发自动部署
+
+### 9.6 日常操作命令速查
+
+| 场景 | 命令 |
+|------|------|
+| 写完后提交 | `git add . && git commit -m "描述" && git push` |
+| 手动构建 | `python3 build.py` |
+| 查看当前改动 | `git status` |
+
