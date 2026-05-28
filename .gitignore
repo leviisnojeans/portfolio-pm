@@ -2,3 +2,8 @@ portfolio-review/
 node_modules/
 .DS_Store
 *.log
+
+# 超出 Cloudflare Pages 25MB 限制的大文件
+*.docx
+source/项目/项目源材料/刘维杰-用户产品经理-三年经验-上海.pdf
+source/项目/项目介绍-html格式/参考文件/*.pdf
