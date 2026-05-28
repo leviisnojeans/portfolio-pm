@@ -168,6 +168,82 @@
     }
     .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: none;
+      padding: 6px;
+      z-index: 300;
+      position: relative;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── MOBILE NAV OVERLAY ── */
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(13, 12, 11, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .mobile-nav.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      padding: 0;
+    }
+    .mobile-nav-links a {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .mobile-nav-links a:active { color: var(--accent); }
+    .mobile-nav .lang-toggle {
+      font-size: 12px;
+      padding: 10px 24px;
+    }
+
     /* ── SIDE MARGINS ── */
     .margin-left {
       position: fixed;
@@ -822,6 +898,7 @@
       overflow-y: auto;
       flex-shrink: 0;
     }
+    .cs-inline { padding: 2rem; }
 
     /* ── FOOTER ── */
     footer {
@@ -948,31 +1025,125 @@
       .pg-card { flex-direction: column; gap: 20px; }
     }
     @media (max-width: 760px) {
-      nav, nav.scrolled { padding: 18px 24px; }
-      .nav-links { gap: 24px; }
-      #hero { padding: 0 24px; min-height: 90vh; flex-direction: column; justify-content: center; gap: 36px; padding-top: 100px; }
-      .hero-photo { width: 180px; height: 36vh; min-height: 220px; }
+      nav, nav.scrolled { padding: 18px 28px; }
+      .nav-links { gap: 20px; }
+      .nav-links a { font-size: 10px; letter-spacing: 0.14em; }
+      #hero { padding: 0 28px; min-height: 90vh; flex-direction: column; justify-content: center; gap: 28px; padding-top: 80px; }
+      .hero-photo { width: 160px; height: auto; aspect-ratio: 2/3; min-height: 0; }
       .hero-photo-wrap { order: -1; }
-      section.body-section { padding: 70px 24px; }
-      .scroll-cue { left: 24px; bottom: 24px; }
-      .work-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
-      .skill-grid { grid-template-columns: 1fr; gap: 12px; }
+      .hero-hl { font-size: clamp(36px, 10vw, 52px); margin-bottom: 32px; }
+      .hero-foot { flex-direction: column; gap: 16px; margin-bottom: 32px; }
+      .hero-sub { font-size: 16px; max-width: 100%; }
+      .hero-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+      section.body-section { padding: 60px 28px; }
+      .sec-head { margin-bottom: 50px; gap: 16px; flex-wrap: wrap; }
+      .sec-title { font-size: clamp(28px, 8vw, 40px); }
+      .scroll-cue { left: 28px; bottom: 24px; }
+      .work-row { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; }
+      .work-year { font-size: 22px; }
+      .work-co { font-size: 12px; }
+      .work-co .role { font-size: 9px; margin-top: 4px; }
+      .work-detail .pull { font-size: 16px; }
+      .work-detail .body { font-size: 12px; }
+      .work-metrics { flex-direction: row; flex-wrap: wrap; gap: 12px 24px; padding-top: 6px; }
+      .metric-divider { display: none; }
+      .metric-item { flex-direction: row; align-items: baseline; gap: 6px; }
+      .metric-val { font-size: 18px; }
+      .metric-label { font-size: 9px; margin-top: 0; }
+      .skill-grid { grid-template-columns: 1fr; gap: 10px; }
       .skill-card { padding: 22px 20px; min-height: auto; }
-      .about-grid { grid-template-columns: 1fr; gap: 28px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; text-align: left; }
+      .skill-card-title { font-size: 20px; }
+      .skill-card-body { font-size: 12px; }
+      .about-grid { grid-template-columns: 1fr; gap: 24px; }
+      .about-pull { font-size: clamp(24px, 6vw, 32px); }
+      .about-text p { font-size: 17px; }
+      .about-text { gap: 18px; }
+      .pg-card { padding: 28px 24px; gap: 20px; flex-direction: column; }
+      .pg-name { font-size: 20px; }
+      .pg-desc { font-size: 12px; }
+      .pg-actions { flex-wrap: wrap; gap: 8px; }
+      .wr-row { flex-wrap: wrap; gap: 10px; padding: 22px 0; }
+      .wr-tag { width: auto; font-size: 9px; }
+      .wr-title { font-size: 16px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; text-align: left; }
       .footer-center, .footer-right { text-align: left; }
-      .hero-foot { flex-direction: column; gap: 20px; }
-      .hero-cta { flex-direction: column; align-items: flex-start; }
-      footer { padding: 60px 24px 50px; }
-      .hero-hl .l2 { padding-left: 0.6em; }
+      footer { padding: 50px 28px 40px; }
+      .ornament { margin-bottom: 40px; }
+      .footer-block .value { font-size: 18px; }
+      .hero-hl .l2 { padding-left: 0.4em; }
       body { cursor: auto; }
       .crosshair-h, .crosshair-v, .ch-dot { display: none; }
       .lang-toggle { padding: 4px 10px; }
-      .wr-row { flex-wrap: wrap; gap: 12px; }
-      .wr-tag { width: auto; }
-      .pg-card { padding: 28px 24px; }
-      .pg-actions { flex-wrap: wrap; }
       .modal-box { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; }
+    }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-right { display: none; }
+
+      /* Touch targets */
+      .btn-primary, .btn-outline { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+      .pg-btn { min-height: 44px; padding: 10px 22px; display: inline-flex; align-items: center; justify-content: center; }
+      .wr-read-btn { min-height: 44px; padding: 10px 22px; }
+      .case-toggle { min-height: 44px; padding: 8px 0; }
+      .lang-toggle { min-height: 44px; padding: 10px 20px; }
+      .modal-close { width: 44px; height: 44px; font-size: 18px; }
+
+      /* Hover → active on touch */
+      .work-row:hover { background: none; padding-left: 0; padding-right: 0; }
+      .work-row:active { background: var(--surface); padding-left: 16px; padding-right: 16px; }
+      .skill-card:hover { background: var(--surface); }
+      .skill-card:active { background: rgba(35, 32, 29, 0.7); }
+      .pg-card:hover { background: var(--surface); }
+      .pg-card:active { background: rgba(35, 32, 29, 0.7); }
+      .nav-links a:hover { color: var(--muted); }
+      .lang-toggle:hover { color: var(--muted); border-color: var(--faint); }
+      .btn-outline:hover { border-color: var(--faint); color: var(--text); }
+      .pg-btn:hover { border-color: var(--faint); color: var(--muted); }
+      .wr-read-btn:hover { border-color: var(--faint); }
+
+      /* Tighter spacing for smaller phones */
+      #hero { gap: 22px; padding-top: 70px; }
+      .hero-hl { font-size: clamp(30px, 9vw, 44px); margin-bottom: 24px; }
+      section.body-section { padding: 48px 28px; }
+      .sec-head { margin-bottom: 36px; }
+      .work-row { padding: 20px 0; gap: 8px; }
+      .work-metrics { gap: 8px 18px; }
+      .metric-val { font-size: 16px; }
+      .pg-card { padding: 22px 20px; }
+      footer { padding: 40px 28px 32px; }
+      .ornament { margin-bottom: 28px; }
+
+      /* Disable scroll reveal animations on mobile */
+      .skill-card, .pg-card, .wr-row { opacity: 1; transform: none; }
+    }
+    @media (max-width: 400px) {
+      nav, nav.scrolled { padding: 14px 20px; }
+      .hero-photo { width: 130px; }
+      #hero { gap: 18px; padding-top: 60px; padding-left: 20px; padding-right: 20px; }
+      .hero-hl { font-size: clamp(26px, 8vw, 34px); margin-bottom: 18px; }
+      .hero-hl .l2 { padding-left: 0; }
+      .chapter-mark { font-size: 12px; margin-bottom: 24px; }
+      .hero-sub { font-size: 14px; }
+      .btn-primary, .btn-outline { font-size: 10px; padding: 10px 20px; }
+      section.body-section { padding: 36px 20px; }
+      .sec-head { margin-bottom: 28px; }
+      .sec-title { font-size: clamp(24px, 7vw, 32px); }
+      .work-row { padding: 16px 0; }
+      .work-year { font-size: 20px; }
+      .work-detail .pull { font-size: 14px; }
+      .work-detail .body { font-size: 11px; }
+      .metric-val { font-size: 15px; }
+      .skill-card { padding: 18px 16px; }
+      .skill-card-title { font-size: 18px; }
+      .about-text p { font-size: 15px; }
+      .pg-card { padding: 18px 16px; gap: 14px; }
+      .pg-name { font-size: 18px; }
+      .wr-title { font-size: 14px; }
+      footer { padding: 30px 20px 24px; }
+      .footer-block .value { font-size: 16px; }
+      .modal-header { padding: 10px 14px; }
+      .modal-title { font-size: 14px; }
+      .cs-inline { padding: 1rem; }
     }
   </style>
 </head>
@@ -984,6 +1155,9 @@
 
   <nav id="nav">
     <a href="#" class="nav-mark">刘维杰 Levi Liu</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-right">
       <ul class="nav-links" id="navLinks">
         <li><a href="#work" data-i18n="nav-work">经历</a></li>
@@ -996,6 +1170,19 @@
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
     </div>
   </nav>
+
+  <!-- ═══ MOBILE NAV OVERLAY ═══ -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-links">
+      <li><a href="#work" data-i18n="nav-work">经历</a></li>
+      <li><a href="#capabilities" data-i18n="nav-skills">能力</a></li>
+      <li><a href="#playground" data-i18n="nav-playground">作品</a></li>
+      <li><a href="#writing" data-i18n="nav-writing">写作</a></li>
+      <li><a href="#about" data-i18n="nav-about">关于</a></li>
+      <li><a href="#contact" data-i18n="nav-contact">联系</a></li>
+    </ul>
+    <button class="lang-toggle mobile" id="langToggleMobile" aria-label="Switch language">EN</button>
+  </div>
 
   <div class="margin-left">
     <span class="dot"></span>
@@ -1156,6 +1343,30 @@
       if (PORTFOLIO_AUTO_DATA.smallWorks) D.smallWorks = PORTFOLIO_AUTO_DATA.smallWorks;
     }
 
+    /* ── HAMBURGER MENU ── */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavLinks = mobileNav.querySelectorAll('a');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+    });
+
+    mobileNavLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    mobileNav.addEventListener('click', function(e) {
+      if (e.target === mobileNav) {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('open');
+      }
+    });
+
     /* ── I18N ── */
     function t(key) {
       return D.translations[currentLang] && D.translations[currentLang][key] !== undefined
@@ -1172,6 +1383,7 @@
         if (D.translations[lang][key] !== undefined) el.innerHTML = D.translations[lang][key];
       });
       document.getElementById('langToggle').textContent = lang === 'zh' ? 'EN' : '中文';
+      document.getElementById('langToggleMobile').textContent = lang === 'zh' ? 'EN' : '中文';
       const href = D.resume[lang];
       document.getElementById('resumeBtnHero').href = href;
       document.getElementById('resumeBtnFooter').href = href;
@@ -1238,7 +1450,7 @@
       // Try pre-built data first
       if (typeof CASE_DATA !== 'undefined' && CASE_DATA[id] && CASE_DATA[id][currentLang]) {
         var cd = CASE_DATA[id][currentLang];
-        var wrapped = '<div class="cs-inline" style="padding:2rem;">'
+        var wrapped = '<div class="cs-inline">'
           + '<style>' + cd.css + '</style>'
           + cd.body + '</div>';
         modalLoader.style.display = 'none';
@@ -1261,7 +1473,7 @@
           var bm = html.match(/<body>([\s\S]*?)<\/body>/);
           var css = sm ? sm[1] : '';
           var bodyHtml = bm ? bm[1] : html;
-          var w = '<div class="cs-inline" style="padding:2rem;">'
+          var w = '<div class="cs-inline">'
             + '<style>' + css + '</style>'
             + bodyHtml + '</div>';
           modalLoader.style.display = 'none';
@@ -1367,7 +1579,7 @@
     }
     document.getElementById('modalClose').addEventListener('click', closeModal);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); hamburger.classList.remove('active'); mobileNav.classList.remove('open'); } });
 
     /* ── PRODUCT DESC (loads md and renders) ── */
     function openProductDesc(id) {
@@ -1553,6 +1765,11 @@
     // Lang toggle
     document.getElementById('langToggle').addEventListener('click', () => {
       applyLang(currentLang === 'zh' ? 'en' : 'zh');
+    });
+    document.getElementById('langToggleMobile').addEventListener('click', () => {
+      applyLang(currentLang === 'zh' ? 'en' : 'zh');
+      hamburger.classList.remove('active');
+      mobileNav.classList.remove('open');
     });
   </script>
 </body>
