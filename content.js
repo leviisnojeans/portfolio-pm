@@ -30,9 +30,30 @@ const PORTFOLIO_DATA = {
       'hero-l2':         '关注内容、出海与 AI<span class="accent-period">.</span>',
       'hero-byline':     '在寻找新机会 · 上海',
       'hero-sub':        'B站 · 阿里 · 字节｜3年+内容平台与商业化经验',
+      'hero-value-prop': '擅长从复杂场景中定义问题，用结构化方法驱动增长与体验提升',
+      'hero-stat-1-val': '3年+',
+      'hero-stat-1-lbl': '内容平台经验',
+      'hero-stat-2-val': '千万级',
+      'hero-stat-2-lbl': '直播用户覆盖',
+      'hero-stat-3-val': '千万级',
+      'hero-stat-3-lbl': '营收增量贡献',
       'hero-cta-work':   '查看项目经历',
       'hero-cta-resume': '查看简历',
       'scroll-label':    '向下滚动',
+
+      'tag-interaction': '互动设计',
+      'tag-realtime':    '实时系统',
+      'tag-modeling':    '量化建模',
+      'tag-system':      '系统设计',
+      'tag-ux-arch':     'UX架构',
+      'tag-monetize':    '商业化',
+      'tag-tool':        '工具设计',
+      'tag-governance':  '产品治理',
+      'tag-zero-one':    '0→1创新',
+      'tag-cross-team':  '跨团队协作',
+      'tag-supply':      '供给侧',
+      'tag-creator':     '创作者生态',
+      'tag-data':        '数据驱动',
 
       'sec1-title':      '项目经历',
       'sec1-meta':       '精选 · 2021 — 至今',
@@ -130,6 +151,8 @@ const PORTFOLIO_DATA = {
       'wr2-tag':      '产品分析',
       'wr3-title':    'SONGKRAN: Field Notes on Legitimacy, Joy, and Who Gets to Take Up Space',
       'wr3-tag':      '文化观察',
+      'wr4-title':    'C端AI产品的冷启动悖论',
+      'wr4-tag':      '产品分析',
       'wr-btn-read':  '阅读',
 
       'footer-end':        '联系',
@@ -155,9 +178,30 @@ const PORTFOLIO_DATA = {
       'hero-l2':         '',
       'hero-byline':     'Open to opportunities · Shanghai',
       'hero-sub':        'Bilibili · Alibaba · ByteDance｜3+ Years in Content Platforms & Monetization',
+      'hero-value-prop': 'I define problems from complex scenarios and use structured methods to drive growth and experience improvements.',
+      'hero-stat-1-val': '3+',
+      'hero-stat-1-lbl': 'Years in content',
+      'hero-stat-2-val': '10M+',
+      'hero-stat-2-lbl': 'Live users reached',
+      'hero-stat-3-val': '9-figure',
+      'hero-stat-3-lbl': 'Revenue impact',
       'hero-cta-work':   'View Work',
       'hero-cta-resume': 'View Resume',
       'scroll-label':    'Scroll',
+
+      'tag-interaction': 'Interaction Design',
+      'tag-realtime':    'Real-time Systems',
+      'tag-modeling':    'Quantitative Modeling',
+      'tag-system':      'System Design',
+      'tag-ux-arch':     'UX Architecture',
+      'tag-monetize':    'Monetization',
+      'tag-tool':        'Tool Design',
+      'tag-governance':  'Product Governance',
+      'tag-zero-one':    '0→1 Innovation',
+      'tag-cross-team':  'Cross-team Leadership',
+      'tag-supply':      'Supply-side',
+      'tag-creator':     'Creator Ecosystem',
+      'tag-data':        'Data-driven',
 
       'sec1-title':      'Experience',
       'sec1-meta':       'Selected · 2021 — Present',
@@ -255,6 +299,8 @@ const PORTFOLIO_DATA = {
       'wr2-tag':      'Product Analysis',
       'wr3-title':    'SONGKRAN: Field Notes on Legitimacy, Joy, and Who Gets to Take Up Space',
       'wr3-tag':      'Cultural Observation',
+      'wr4-title':    'The Cold Start Paradox of Consumer AI Products',
+      'wr4-tag':      'Product Analysis',
       'wr-btn-read':  'Read',
 
       'footer-end':        'Contact',
@@ -267,6 +313,13 @@ const PORTFOLIO_DATA = {
     },
   },
 
+  // ── Hero 数据锚点 ──
+  heroStats: [
+    { valKey: 'hero-stat-1-val', lblKey: 'hero-stat-1-lbl' },
+    { valKey: 'hero-stat-2-val', lblKey: 'hero-stat-2-lbl' },
+    { valKey: 'hero-stat-3-val', lblKey: 'hero-stat-3-lbl' },
+  ],
+
   // ── 项目列表 ──
   // 按显示顺序排列（最新的在前）
   projects: [
@@ -277,6 +330,7 @@ const PORTFOLIO_DATA = {
       roleKey: 'w2-role',
       pullKey: 'w2-pull',
       bodyKey: 'w2-body',
+      tags: ['tag-interaction', 'tag-realtime', 'tag-modeling'],
       metrics: [
         { value: '+33%', labelKey: 'm-comment-vol' },
         { value: '+3.6%', labelKey: 'm-watchtime' },
@@ -294,6 +348,7 @@ const PORTFOLIO_DATA = {
       roleKey: 'w1-role',
       pullKey: 'w1-pull',
       bodyKey: 'w1-body',
+      tags: ['tag-system', 'tag-ux-arch', 'tag-monetize'],
       metrics: [
         { value: '+3.18%', labelKey: 'm-paid-rev' },
         { value: '+3.77%', labelKey: 'm-likes' },
@@ -311,6 +366,7 @@ const PORTFOLIO_DATA = {
       roleKey: 'w5-role',
       pullKey: 'w5-pull',
       bodyKey: 'w5-body',
+      tags: ['tag-tool', 'tag-governance'],
       metrics: [
         { value: '+2.4pp', labelKey: 'm-start-conv' },
         { value: '+17pp', labelKey: 'm-feature-pen' },
@@ -328,6 +384,7 @@ const PORTFOLIO_DATA = {
       roleKey: 'w3-role',
       pullKey: 'w3-pull',
       bodyKey: 'w3-body',
+      tags: ['tag-zero-one', 'tag-cross-team', 'tag-monetize'],
       metrics: [
         { value: '+60%', labelKey: 'm-revenue' },
         { value: '+38%', labelKey: 'm-wt-yoy' },
@@ -345,6 +402,7 @@ const PORTFOLIO_DATA = {
       roleKey: 'w4-role',
       pullKey: 'w4-pull',
       bodyKey: 'w4-body',
+      tags: ['tag-supply', 'tag-creator', 'tag-data'],
       metrics: [
         { value: '+60%', labelKey: 'm-match-vol' },
         { value: '+4pp', labelKey: 'm-retention' },
@@ -421,8 +479,8 @@ const PORTFOLIO_DATA = {
       titleKey: 'wr1-title',
       tagKey: 'wr1-tag',
       langs: {
-        zh: { file: 'source/写作/decluttering_retention_conversion_zh.html' },
-        en: { file: 'source/写作/decluttering_retention_conversion_en.html' },
+        zh: { file: 'source/文章/decluttering_retention_conversion_zh.html' },
+        en: { file: 'source/文章/decluttering_retention_conversion_en.html' },
       },
     },
     {
@@ -430,8 +488,8 @@ const PORTFOLIO_DATA = {
       titleKey: 'wr2-title',
       tagKey: 'wr2-tag',
       langs: {
-        zh: { file: 'source/写作/parasocial_analysis.html' },
-        en: { file: 'source/写作/parasocial_analysis_en.html' },
+        zh: { file: 'source/文章/parasocial_analysis.html' },
+        en: { file: 'source/文章/parasocial_analysis_en.html' },
       },
     },
     {
@@ -440,7 +498,16 @@ const PORTFOLIO_DATA = {
       tagKey: 'wr3-tag',
       langs: {
         zh: null, // 中文版不展示
-        en: { file: 'source/写作/Songkran_Final_2026.html' },
+        en: { file: 'source/文章/Songkran_Final_2026.html' },
+      },
+    },
+    {
+      id: 'cold-start',
+      titleKey: 'wr4-title',
+      tagKey: 'wr4-tag',
+      langs: {
+        zh: { file: 'source/文章/01-cold-start-paradox_zh.html' },
+        en: { file: 'source/文章/01-cold-start-paradox_en.html' },
       },
     },
   ],

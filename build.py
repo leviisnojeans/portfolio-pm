@@ -4,7 +4,7 @@
 
 功能：
 1. 预处理项目案例 HTML（提取 base64 图片、复制项目图片、生成案例数据）
-2. 自动扫描 source/写作/ 下的文章 HTML，读取元数据生成条目
+2. 自动扫描 source/文章/ 下的文章 HTML，读取元数据生成条目
 3. 自动扫描 source/小作品/ 下的子目录，读取元数据生成条目
 4. 生成 content-auto.js（运行时与 content.js 合并）
 
@@ -18,7 +18,8 @@ CASE_DIR = os.path.join(BASE_DIR, 'source/项目/项目介绍-html格式')
 IMG_DIR = 'assets/case-images'
 PROJ_IMG_SRC = os.path.join(BASE_DIR, 'source/项目/项目源材料/项目图片')
 PROJ_IMG_DST = 'assets/project-images'
-WRITING_DIR = os.path.join(BASE_DIR, 'source/写作')
+WRITING_DIR = os.path.join(BASE_DIR, 'source/文章')
+WRITING_REL = 'source/文章'
 SMALL_WORK_DIR = os.path.join(BASE_DIR, 'source/小作品')
 OUTPUT_FILE = 'content-auto.js'
 
@@ -139,7 +140,7 @@ def extract_metadata(filepath):
 
 def scan_writings():
     """
-    扫描 source/写作/ 下的 HTML 文件，按 base name 分组语言版本。
+    扫描 source/文章/ 下的 HTML 文件，按 base name 分组语言版本。
     文件名约定：name_zh.html / name_en.html / name.html(默认zh)
     """
     files = []
@@ -196,7 +197,7 @@ def scan_writings():
         langs = {}
         for lang_code in ['zh', 'en']:
             if lang_code in info['langs']:
-                langs[lang_code] = {'file': f'source/写作/{info["langs"][lang_code]}'}
+                langs[lang_code] = {'file': f'{WRITING_REL}/{info["langs"][lang_code]}'}
             else:
                 langs[lang_code] = None
 
@@ -208,9 +209,9 @@ def scan_writings():
             for lang_code in ['zh', 'en']:
                 if lang_code in meta_langs and meta_langs[lang_code]:
                     if lang_code in info['langs']:
-                        langs[lang_code] = {'file': f'source/写作/{info["langs"][lang_code]}'}
+                        langs[lang_code] = {'file': f'{WRITING_REL}/{info["langs"][lang_code]}'}
                     elif available_files:
-                        langs[lang_code] = {'file': f'source/写作/{available_files[0]}'}
+                        langs[lang_code] = {'file': f'{WRITING_REL}/{available_files[0]}'}
                 else:
                     langs[lang_code] = None
 
@@ -242,13 +243,21 @@ def scan_small_works():
         if not os.path.isdir(subdir):
             continue
 
-        # Find the HTML file in this directory
-        html_files = glob.glob(os.path.join(subdir, '*.html'))
+        # Find the HTML file in this directory.
+        # 多个 HTML 时：优先取元数据含 "entry": true 的文件，
+        # 其次取含元数据的文件，最后按文件名排序兜底。
+        html_files = sorted(glob.glob(os.path.join(subdir, '*.html')))
         if not html_files:
             continue
 
-        html_path = html_files[0]
-        meta = extract_metadata(html_path)
+        html_path, meta = html_files[0], extract_metadata(html_files[0])
+        for hp in html_files:
+            m = extract_metadata(hp)
+            if m.get('entry'):
+                html_path, meta = hp, m
+                break
+            if m and not meta:
+                html_path, meta = hp, m
         sw_id = meta.get('id', entry.lower().replace("'", '').replace(' ', '_'))
         name = meta.get('name', {})
         desc = meta.get('desc', {})

@@ -4,6 +4,10 @@
 var PORTFOLIO_AUTO_DATA = {
   translations: {
     zh: {
+      "auto-wr-01-cold-start-paradox-tag": `产品分析`,
+      "auto-wr-01-cold-start-paradox-title": `C端AI产品的冷启动悖论`,
+      "auto-wr-02-companionship-wall-tag": `产品分析`,
+      "auto-wr-02-companionship-wall-title": `陪伴之墙：AI 时代的孤独与情感机制演进`,
       "auto-wr-Songkran_Final_2026-tag": `文化观察`,
       "auto-wr-Songkran_Final_2026-title": `SONGKRAN: Field Notes on Legitimacy, Joy, and Who Gets to Take Up Space`,
       "auto-wr-decluttering_retention_conversion-tag": `产品分析`,
@@ -16,6 +20,10 @@ var PORTFOLIO_AUTO_DATA = {
       "auto-sw-travelmap-name": `Levi's Travel Map`,
     },
     en: {
+      "auto-wr-01-cold-start-paradox-tag": `Product Analysis`,
+      "auto-wr-01-cold-start-paradox-title": `The Cold Start Paradox of Consumer AI Products`,
+      "auto-wr-02-companionship-wall-tag": `Product Analysis`,
+      "auto-wr-02-companionship-wall-title": `The Companionship Wall`,
       "auto-wr-Songkran_Final_2026-tag": `Cultural Observation`,
       "auto-wr-Songkran_Final_2026-title": `SONGKRAN: Field Notes on Legitimacy, Joy, and Who Gets to Take Up Space`,
       "auto-wr-decluttering_retention_conversion-tag": `Product Analysis`,
@@ -30,22 +38,34 @@ var PORTFOLIO_AUTO_DATA = {
   },
   writings: [
     {
+      id: "01-cold-start-paradox",
+      titleKey: "auto-wr-01-cold-start-paradox-title",
+      tagKey: "auto-wr-01-cold-start-paradox-tag",
+      langs: {"zh": {"file": "source/文章/01-cold-start-paradox_zh.html"}, "en": {"file": "source/文章/01-cold-start-paradox_en.html"}},
+    },
+    {
+      id: "02-companionship-wall",
+      titleKey: "auto-wr-02-companionship-wall-title",
+      tagKey: "auto-wr-02-companionship-wall-tag",
+      langs: {"zh": {"file": "source/文章/02-companionship-wall_zh.html"}, "en": {"file": "source/文章/02-companionship-wall_en.html"}},
+    },
+    {
       id: "Songkran_Final_2026",
       titleKey: "auto-wr-Songkran_Final_2026-title",
       tagKey: "auto-wr-Songkran_Final_2026-tag",
-      langs: {"zh": null, "en": {"file": "source/写作/Songkran_Final_2026.html"}},
+      langs: {"zh": null, "en": {"file": "source/文章/Songkran_Final_2026.html"}},
     },
     {
       id: "decluttering_retention_conversion",
       titleKey: "auto-wr-decluttering_retention_conversion-title",
       tagKey: "auto-wr-decluttering_retention_conversion-tag",
-      langs: {"zh": {"file": "source/写作/decluttering_retention_conversion_zh.html"}, "en": {"file": "source/写作/decluttering_retention_conversion_en.html"}},
+      langs: {"zh": {"file": "source/文章/decluttering_retention_conversion_zh.html"}, "en": {"file": "source/文章/decluttering_retention_conversion_en.html"}},
     },
     {
       id: "parasocial_analysis",
       titleKey: "auto-wr-parasocial_analysis-title",
       tagKey: "auto-wr-parasocial_analysis-tag",
-      langs: {"zh": {"file": "source/写作/parasocial_analysis.html"}, "en": {"file": "source/写作/parasocial_analysis_en.html"}},
+      langs: {"zh": {"file": "source/文章/parasocial_analysis.html"}, "en": {"file": "source/文章/parasocial_analysis_en.html"}},
     },
   ],
   smallWorks: [
@@ -53,9 +73,9 @@ var PORTFOLIO_AUTO_DATA = {
       id: "travelmap",
       nameKey: "auto-sw-travelmap-name",
       descKey: "auto-sw-travelmap-desc",
-      file: "source/\u5c0f\u4f5c\u54c1/levi's travel map/levi's travel map.html",
+      file: "source/\u5c0f\u4f5c\u54c1/levi's travel map/levi's travel map v4.html",
       productDesc: "source/\u5c0f\u4f5c\u54c1/levi's travel map/product-description.md",
-      productDescInline: {"zh": "Levi's Travel Map 是一款旅行时机决策工具，帮助用户根据气候偏好和个人约束条件，找到全球目的地的最佳出行窗口。用户选择目的地后，工具会整合历史气候数据（温度、降水、日照），结合用户对拥挤度、预算和假期的偏好，可视化呈现每月的综合适宜度评分。界面采用沉浸式全屏欢迎页 + 横向滚动时间线 + 动态评分卡片，让抽象的\"什么时候去最好\"变成可交互、可比较的直观体验。它适合旅行规划、灵感探索和行程决策。", "en": "Levi's Travel Map is a travel timing decision tool that helps users find the best window to visit destinations worldwide based on climate preferences and personal constraints. After selecting a destination, the tool integrates historical climate data (temperature, precipitation, sunshine) with user preferences on crowding, budget, and vacation availability to visualize a monthly composite suitability score. The interface features an immersive full-screen welcome, horizontal-scrolling timeline, and dynamic scoring cards — turning the abstract question of \"when should I go\" into an interactive, comparable, and intuitive experience. Ideal for trip planning, travel inspiration, and itinerary decisions."},
+      productDescInline: {},
     },
     {
       id: "philforum",
