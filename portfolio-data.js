@@ -128,13 +128,6 @@ var CASE_DATA = {
   </div>
 
   <div class="section">
-    <div class="section-label">关键取舍</div>
-    <div class="insight-card">
-      <div class="insight-text">否决了「加更多互动功能」的传统路径，选择先建量化模型再实验。核心取舍：弹幕可见性（颜值/才艺直播）vs 实时性（游戏直播）——不同品类需要差异化策略。品类差异化策略因资源限制未在任职期间上线，但建模工作已完成，为后续团队铺好了路。</div>
-    </div>
-  </div>
-
-  <div class="section">
     <div class="section-label">收益</div>
     <div style="background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 12px;">
       <div class="data-row">
@@ -603,13 +596,6 @@ var CASE_DATA = {
           <div class="data-desc">所有其他监控指标</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-label">关键取舍</div>
-    <div class="insight-card">
-      <div class="insight-text">XYZ轴分层规则是核心决策：礼物特效锚定在最高层级（商业价值最高），弹幕居于次级层，互动提示降级到触发式。为顶部区设计的可扩展三行模型，让后续团队有了清晰的接入接口而非各自绕过。取舍：牺牲了各功能自由接入的灵活性，换取了统一的用户认知框架。营收结果完全来自于降低认知摩擦，而非改变任何付费机制。</div>
     </div>
   </div>
 
@@ -1111,13 +1097,6 @@ var CASE_DATA = {
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-label">关键取舍</div>
-    <div class="insight-card">
-      <div class="insight-text">核心决策：将项目定义为治理干预而非一次改版——先审230+页面建立规则，再修表面。取舍：短期投入成本高（全量审计+设计系统建立），但避免了「修完即乱」的循环。玩法渗透+17pp完全来自于降低发现和反馈的摩擦，而非改变玩法本身——功能没问题，主播只是感知不到。</div>
-    </div>
-  </div>
-
   <!-- Before / After -->
 
   <!-- Results -->
@@ -1502,13 +1481,6 @@ var CASE_DATA = {
       <div class="gmv-row"><span class="gmv-label">杠杆选择</span><span class="gmv-val">转化率（而非单价）</span></div>
       <div class="gmv-row"><span class="gmv-label">逻辑</span><span class="gmv-val">电视直播观众付费习惯弱；低价策略扩大漏斗</span></div>
       <div class="gmv-row"><span class="gmv-label">结果</span><span class="gmv-val highlight">营收同比增长+60%</span></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-label">关键取舍</div>
-    <div class="insight-card">
-      <div class="insight-text">核心选择：复用已有AI视觉框架而非自研新互动格式，在4周内完成从0到1交付。定价策略选转化率而非单价（走量不走ARPU），有意压低价格以最大化可付费用户池。取舍：放弃新颖度换取交付速度，放弃高ARPU换取更宽的付费漏斗。在有硬deadline、没有迭代空间的0到1项目里，做减法的能力比创意能力更有价值。</div>
     </div>
   </div>
 
