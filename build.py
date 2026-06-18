@@ -48,6 +48,15 @@ IMAGE_INJECTIONS = {}
 # 内嵌图片替换规则
 EMBED_REPLACEMENTS = {}
 
+# 小作品入口覆盖：id → 部署路径。
+# 用于有独立生产构建的小作品（如旅行地图的多文件优化版部署在 /travel-map/），
+# 让线上入口指向构建产物而非源目录中的单文件 HTML。
+SMALL_WORK_FILE_OVERRIDES = {
+    # 用目录 URL（带尾斜杠）而非 index.html，确保多文件构建的相对资源路径
+    # 在本地 serve 与 Cloudflare Pages 上都能正确解析。
+    'travelmap': 'travel-map/',
+}
+
 
 # ── Case Study Processing (unchanged) ──
 
@@ -283,8 +292,10 @@ def scan_small_works():
             if en_match:
                 product_desc_inline['en'] = en_match.group(1).strip()
 
-        # Relative path from BASE_DIR for the HTML file
-        rel_path = os.path.relpath(html_path, BASE_DIR)
+        # Relative path from BASE_DIR for the HTML file.
+        # 若该小作品有独立部署的生产构建，用 SMALL_WORK_FILE_OVERRIDES 覆盖入口，
+        # name/desc/productDesc 仍取自源目录的 HTML。
+        rel_path = SMALL_WORK_FILE_OVERRIDES.get(sw_id, os.path.relpath(html_path, BASE_DIR))
         product_desc_rel = os.path.relpath(product_desc_path, BASE_DIR) if os.path.exists(product_desc_path) else None
 
         small_works.append({
