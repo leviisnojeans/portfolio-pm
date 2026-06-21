@@ -1742,8 +1742,69 @@
       });
     }
 
+    /* ── LANGUAGE DETECTION ──
+       规则：仅「IP 在中国 且 系统语言为中文」默认中文，其余默认英文。
+       IP 国别经 Cloudflare 同源接口 /cdn-cgi/trace 解析（境内可达、无第三方依赖）。*/
+    const LANG_STORAGE_KEY = 'levi-portfolio-lang';
+
+    function systemPrefersZh() {
+      // 只看主语言（手机系统语言），不取整个 accept-languages 列表
+      const primary = (navigator.languages && navigator.languages.length)
+        ? navigator.languages[0] : navigator.language;
+      return (primary || '').toLowerCase().startsWith('zh');
+    }
+
+    function timezoneInChina() {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        return ['Asia/Shanghai', 'Asia/Urumqi', 'Asia/Chongqing', 'Asia/Harbin', 'PRC'].includes(tz);
+      } catch (e) { return false; }
+    }
+
+    // 同步临时默认，避免异步判定前的语言闪烁（绝大多数情况即为最终结果）
+    function provisionalLang() {
+      return (timezoneInChina() && systemPrefersZh()) ? 'zh' : 'en';
+    }
+
+    // 经 Cloudflare /cdn-cgi/trace 判断访客 IP 是否在中国；超时/失败返回 null
+    function fetchIpInChina(timeoutMs) {
+      return new Promise(resolve => {
+        let done = false;
+        const finish = v => { if (!done) { done = true; resolve(v); } };
+        const timer = setTimeout(() => finish(null), timeoutMs);
+        fetch('/cdn-cgi/trace', { cache: 'no-store' })
+          .then(r => r.ok ? r.text() : Promise.reject())
+          .then(text => {
+            clearTimeout(timer);
+            const m = text.match(/(?:^|\n)loc=([A-Z]{2})/);
+            finish(m ? m[1] === 'CN' : null);
+          })
+          .catch(() => { clearTimeout(timer); finish(null); });
+      });
+    }
+
+    async function detectDefaultLang() {
+      // 系统非中文 → 必为英文，无需再查 IP
+      if (!systemPrefersZh()) return 'en';
+      const ipCN = await fetchIpInChina(1500);
+      if (ipCN === null) return timezoneInChina() ? 'zh' : 'en'; // 兜底：时区近似 IP
+      return ipCN ? 'zh' : 'en';
+    }
+
     /* ── INIT ── */
-    applyLang(currentLang);
+    const storedLang = (function () {
+      try { return localStorage.getItem(LANG_STORAGE_KEY); } catch (e) { return null; }
+    })();
+    if (storedLang === 'zh' || storedLang === 'en') {
+      // 用户曾手动选择 → 直接采用，跳过自动判定
+      applyLang(storedLang);
+    } else {
+      // 先用同步临时默认渲染，再按完整规则异步纠正
+      applyLang(provisionalLang());
+      detectDefaultLang().then(lang => {
+        if (lang !== currentLang) applyLang(lang);
+      });
+    }
 
     // Loading banner: show tip on slow connections
     const loadingBanner = document.getElementById('loadingBanner');
@@ -1762,12 +1823,16 @@
     setTimeout(() => bindScrollReveal('.pg-card'), 300);
     setTimeout(() => bindScrollReveal('.wr-row'), 400);
 
-    // Lang toggle
+    // Lang toggle —— 手动切换并记住选择
+    function setLangManual(lang) {
+      applyLang(lang);
+      try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (e) {}
+    }
     document.getElementById('langToggle').addEventListener('click', () => {
-      applyLang(currentLang === 'zh' ? 'en' : 'zh');
+      setLangManual(currentLang === 'zh' ? 'en' : 'zh');
     });
     document.getElementById('langToggleMobile').addEventListener('click', () => {
-      applyLang(currentLang === 'zh' ? 'en' : 'zh');
+      setLangManual(currentLang === 'zh' ? 'en' : 'zh');
       hamburger.classList.remove('active');
       mobileNav.classList.remove('open');
     });
