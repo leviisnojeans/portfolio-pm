@@ -343,7 +343,7 @@ const PORTFOLIO_DATA = {
     },
     {
       id: 'liveroom',
-      year: "'23–'24",
+      year: "'24–'25",
       coKey: 'w1-co',
       roleKey: 'w1-role',
       pullKey: 'w1-pull',
