@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <pattern id="benday" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#FFE800"/><circle cx="14" cy="14" r="7" fill="#E5004C"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="#FFE800"/>
+  <!-- Ben-Day 网点区 -->
+  <rect x="0" y="0" width="800" height="500" fill="url(#benday)"/>
+  <!-- 爆炸星形 -->
+  <g transform="translate(400 500)">
+    <path d="M0 -150 L34 -52 L140 -52 L54 14 L86 116 L0 54 L-86 116 L-54 14 L-140 -52 L-34 -52 Z" fill="#0066CC" stroke="#111" stroke-width="8"/>
+    <text x="0" y="22" font-family="Arial Black, Arial, sans-serif" font-size="84" font-weight="900" fill="#FFE800" text-anchor="middle">!</text>
+  </g>
+  <!-- 对话气泡 -->
+  <g transform="translate(560 730)">
+    <ellipse cx="0" cy="0" rx="150" ry="90" fill="#fff" stroke="#111" stroke-width="8"/>
+    <path d="M-60 70 L-30 120 L-10 75 Z" fill="#fff" stroke="#111" stroke-width="8"/>
+    <text x="0" y="14" font-family="Arial Black, Arial, sans-serif" font-size="40" font-weight="900" fill="#E5004C" text-anchor="middle">POW!</text>
+  </g>
+  <!-- 粗黑边框 -->
+  <rect x="14" y="14" width="772" height="972" fill="none" stroke="#111" stroke-width="16"/>
+</svg>

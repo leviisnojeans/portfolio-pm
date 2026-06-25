@@ -1,0 +1,1529 @@
+{
+  "_meta": {
+    "title": "设计语言博物馆 — 种子数据",
+    "generated": "2026-06-22",
+    "source": "Levi 艺术风格研究系列 (Day 1–12，全部收齐)",
+    "comparisonEnums": {
+      "orderStance": [
+        "建构秩序",
+        "自然秩序",
+        "嘲讽秩序",
+        "暴露秩序",
+        "崩溃秩序"
+      ],
+      "decorationStance": [
+        "装饰即目的",
+        "装饰是罪恶",
+        "装饰是武器",
+        "无需装饰",
+        "装饰即信息过载",
+        "装饰即奢华",
+        "装饰即结构"
+      ],
+      "uiDifficulty": [
+        "直接可用",
+        "需要转译",
+        "哲学层面"
+      ]
+    },
+    "schemaNote": "新增流派 = 往 styles[] 追加一条同结构对象 + 放图到 /public/artworks/<id>/ + status 设 published。无需改任何组件。",
+    "statusSummary": "12/12 内容完整 (published)；图片版权审计已完成，合规图片已填充",
+    "imagePolicy": "已对 12 个流派完成版权审计与取图。公有领域/CC 授权流派已填充合规图片直链；版权敏感流派（赛博朋克/波普艺术/瑞士国际主义）保持封面图为空，以 themeColor 色块占位。"
+  },
+  "styles": [
+    {
+      "id": "brutalism",
+      "name": "Brutalism",
+      "nameZh": "粗野主义",
+      "day": 1,
+      "status": "published",
+      "coreLine": "裸露结构即是装饰，诚实材料即是美学。",
+      "period": {
+        "start": 1950,
+        "end": 1975,
+        "label": "二战后"
+      },
+      "region": "战后欧洲 / 苏联影响圈",
+      "themeColor": "#8C8A86",
+      "origin": {
+        "thesis": "诚实的材料、零装饰、以重量传达力量；结构本身即是美学。",
+        "keyFigures": [
+          "Barbican Estate (London)",
+          "Habitat 67 (Montreal, Moshe Safdie)",
+          "National Theatre (London, Lasdun)"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "粗重边框、不对齐网格、暴露的脚手架与结构",
+        "color": "灰、原始混凝土色，无修饰",
+        "typography": "无装饰、功能优先",
+        "space": "厚重、纪念碑式体量"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-wall",
+          "label": "裸露混凝土"
+        },
+        {
+          "icon": "ti-square-off",
+          "label": "粗重边框"
+        },
+        {
+          "icon": "ti-grid-dots",
+          "label": "不对齐网格"
+        },
+        {
+          "icon": "ti-building-bridge",
+          "label": "结构即美学"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "Digital Brutalism：蓄意拒绝‘精良’UI 惯例，硬边、可见结构",
+        "components": "纯文本、无圆角、无阴影、信息密度即美学",
+        "interaction": "最小化反馈，反对装饰性动效",
+        "useCases": [
+          "Craigslist（无意的数字野兽派先驱）",
+          "Bloomberg",
+          "实验性 / 作品集站点"
+        ]
+      },
+      "eastWest": {
+        "west": "诞生于战后欧洲，是一种意识形态姿态——诚实、反虚饰。",
+        "east": "上海有一层野兽派遗存：1933 老场坊、上海图书馆旧馆、同济建筑楼（苏联现代主义影响），正被城市更新吞噬。"
+      },
+      "comparison": {
+        "orderStance": "暴露秩序",
+        "decorationStance": "装饰是罪恶",
+        "uiDifficulty": "需要转译",
+        "coreEmotion": "压迫、诚实",
+        "palette": [
+          "#9B9894",
+          "#6E6B66",
+          "#3D3B38",
+          "#C7C4BE"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "constructivism",
+            "note": "都把结构当主角，反装饰"
+          },
+          {
+            "id": "swiss-style",
+            "note": "共享反装饰、结构优先"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "art-nouveau",
+            "note": "诚实重量 vs 有机优雅"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "constructivism",
+        "swiss-style",
+        "bauhaus"
+      ],
+      "coverArtwork": {
+        "title": "Barbican Estate",
+        "artist": "Chamberlin, Powell and Bon",
+        "year": 1976,
+        "image": "public/artworks/brutalism/brutalism-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "CC BY-SA 3.0，作者 Dirk Ingo Franke"
+      },
+      "masterworks": [
+        {
+          "title": "Habitat 67",
+          "artist": "Moshe Safdie",
+          "year": 1967,
+          "image": "public/artworks/brutalism/brutalism-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC BY-SA 3.0 / GFDL，作者 Cricu"
+        },
+        {
+          "title": "National Theatre",
+          "artist": "Denys Lasdun",
+          "year": 1976,
+          "image": "public/artworks/brutalism/brutalism-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC BY-SA 3.0 / GFDL，作者 Cricu"
+        }
+      ]
+    },
+    {
+      "id": "art-nouveau",
+      "name": "Art Nouveau",
+      "nameZh": "新艺术运动",
+      "day": 2,
+      "status": "published",
+      "coreLine": "用自然曲线对抗工业冷漠，美即是目的本身。",
+      "period": {
+        "start": 1890,
+        "end": 1910,
+        "label": "1890s"
+      },
+      "region": "欧洲",
+      "themeColor": "#E9E2CF",
+      "origin": {
+        "thesis": "以自然作为对工业化的反叛；彻底拒绝直线，外立面、家具、字体都模拟生长。",
+        "keyFigures": [
+          "Alphonse Mucha",
+          "Antoni Gaudí (Casa Batlló)",
+          "Victor Horta"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "有机曲线、不对称、零直角；总体设计统一",
+        "color": "金色、深绿、米色",
+        "typography": "笔画末端如植物般卷曲延伸",
+        "space": "大量留白，细线描边"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-plant",
+          "label": "有机曲线"
+        },
+        {
+          "icon": "ti-flower",
+          "label": "植物纹样"
+        },
+        {
+          "icon": "ti-line-height",
+          "label": "金色细线"
+        },
+        {
+          "icon": "ti-layout-distribute-horizontal",
+          "label": "留白"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "公式：留白 + 细线描边 + 有机形状",
+        "components": "装饰性卡片/弹窗边框替代直角矩形；花卉 icon 组",
+        "interaction": "奢侈品牌式的‘沉默的高级感’",
+        "useCases": [
+          "奢侈品官网 (Dior, Cartier)",
+          "香氛 / 美妆 App",
+          "珠宝 / 婚礼品牌"
+        ]
+      },
+      "eastWest": {
+        "west": "Mucha 用流动女性人物 + 蔓藤金线，为一个时代定义了‘美’。",
+        "east": "新艺术的有机曲线、花卉纹样与摩登女性形象，1920–30 年代经上海月份牌广告画被本土吸收：杭穉英、谢之光、金梅生等画师把『蔓藤金线＋摩登女郎』用于香烟与化妆品招贴。在欧洲它是反工业化的艺术先锋姿态，到了上海，同一套装饰语言却被收编进消费广告与殖民现代性——同样的『美』，一处是宣言，一处是橱窗。"
+      },
+      "comparison": {
+        "orderStance": "自然秩序",
+        "decorationStance": "装饰即目的",
+        "uiDifficulty": "需要转译",
+        "coreEmotion": "优雅、丰盛",
+        "palette": [
+          "#C9A24B",
+          "#2E5D4B",
+          "#EFE7D2",
+          "#8A6B2F"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "wabi-sabi",
+            "note": "都向自然取法，但一个繁盛一个简素"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "art-deco",
+            "note": "Art Deco 是它的几何化接班人：曲线变直线"
+          },
+          {
+            "id": "bauhaus",
+            "note": "装饰即目的 vs 装饰是罪恶"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "art-deco",
+        "wabi-sabi",
+        "bauhaus"
+      ],
+      "coverArtwork": {
+        "title": "Gismonda",
+        "artist": "Alphonse Mucha",
+        "year": 1894,
+        "image": "public/artworks/art-nouveau/art-nouveau-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "公有领域（Mucha 1939 年逝世）"
+      },
+      "masterworks": [
+        {
+          "title": "Casa Batlló",
+          "artist": "Antoni Gaudí",
+          "year": 1906,
+          "image": "public/artworks/art-nouveau/art-nouveau-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC BY-SA 2.5，作者 tato grasso"
+        },
+        {
+          "title": "The Flowers: Lily",
+          "artist": "Alphonse Mucha",
+          "year": 1898,
+          "image": "public/artworks/art-nouveau/art-nouveau-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域"
+        },
+        {
+          "title": "Woman with Poppies",
+          "artist": "Alphonse Mucha",
+          "year": 1898,
+          "image": "public/artworks/art-nouveau/art-nouveau-mw3.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域"
+        }
+      ]
+    },
+    {
+      "id": "memphis-design",
+      "name": "Memphis Design",
+      "nameZh": "孟菲斯",
+      "day": 3,
+      "status": "published",
+      "coreLine": "好看不需要理由，功能不是唯一目的。",
+      "period": {
+        "start": 1981,
+        "end": 1987,
+        "label": "1980s"
+      },
+      "region": "米兰",
+      "themeColor": "#F4ECDF",
+      "origin": {
+        "thesis": "反功能主义宣言；设计可以是纯粹的乐趣；宣言本身就是作品。",
+        "keyFigures": [
+          "Ettore Sottsass",
+          "Carlton 书架 (1981)"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "之字形 + 波点 + 条纹叠加；几何混沌、图案叠图案",
+        "color": "荧光粉 + 柠檬黄 + 钴蓝；永远在‘喊叫’",
+        "typography": "粗体无衬线",
+        "space": "不对称、撞色、高密度"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-zigzag",
+          "label": "之字形"
+        },
+        {
+          "icon": "ti-circle",
+          "label": "波点撞色"
+        },
+        {
+          "icon": "ti-color-swatch",
+          "label": "荧光撞色"
+        },
+        {
+          "icon": "ti-stack-2",
+          "label": "图案叠加"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "高饱和撞色 + 粗体无衬线 + 几何色块构图",
+        "components": "色块卡片、粗边框、反常规构图",
+        "interaction": "年轻、外向、社交分享驱动",
+        "useCases": [
+          "Spotify Wrapped",
+          "Apple Music campaign",
+          "潮牌电商 (Supreme, Palace)"
+        ]
+      },
+      "eastWest": {
+        "west": "与同年诞生的后现代主义建筑（Graves, Venturi）血脉相通，以戏谑对抗现代主义的严肃。",
+        "east": "孟菲斯并非纯西方产物：日本设计大师仓俣史朗 1981 年受 Sottsass 之邀成为创始成员，把日式空灵（钢网椅《How High the Moon》、嵌花瓣的 Miss Blanche 椅）注入孟菲斯的撞色几何。而当代中国把孟菲斯的荧光撞色、波点与之字形大量挪用进国潮品牌与社交媒体视觉——从『反功能主义宣言』退化为去政治化的『年轻感』符号：同一套躁动语言，一次是观念反叛，一次是流量包装。"
+      },
+      "comparison": {
+        "orderStance": "嘲讽秩序",
+        "decorationStance": "装饰是武器",
+        "uiDifficulty": "直接可用",
+        "coreEmotion": "躁动、反叛",
+        "palette": [
+          "#FF4FA3",
+          "#FFE14D",
+          "#2B6CF0",
+          "#1BC7B4"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "pop-art",
+            "note": "都用大胆色彩对抗‘好品味’"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "swiss-style",
+            "note": "Memphis 是对瑞士风格严肃性的直接反叛"
+          },
+          {
+            "id": "constructivism",
+            "note": "去政治的玩闹 vs 高度政治的严肃"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "pop-art",
+        "swiss-style",
+        "constructivism"
+      ],
+      "coverArtwork": {
+        "title": "孟菲斯 · 原创视觉示意",
+        "artist": "—",
+        "year": 1981,
+        "image": "public/artworks/memphis-design/memphis-design-cover.svg",
+        "source": "原创示意图（避开版权期原作）",
+        "rights": "CC0 · 本项目自制 SVG · 之字形/波点/荧光撞色几何"
+      },
+      "masterworks": [
+        {
+          "title": "Memphis-Milano Collection",
+          "artist": "Memphis Group",
+          "year": 1985,
+          "image": "",
+          "source": "Wikimedia Commons",
+          "rights": "⚠ 设计仍在版权期，建议用风格化示意替代"
+        }
+      ]
+    },
+    {
+      "id": "wabi-sabi",
+      "name": "Wabi-Sabi",
+      "nameZh": "侘寂",
+      "day": 4,
+      "status": "published",
+      "coreLine": "残缺即完整，消逝本身就是美。",
+      "period": {
+        "start": 1300,
+        "end": 1600,
+        "label": "14 世纪起"
+      },
+      "region": "日本",
+      "themeColor": "#E6DECF",
+      "origin": {
+        "thesis": "根植禅宗与茶道；wabi = 简朴质拙，sabi = 岁月磨损之美；时间的痕迹即装饰。",
+        "keyFigures": [
+          "Kintsugi 金缮",
+          "雪舟等楊 破墨山水",
+          "龙安寺枯山水"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "不均齐、刻意偏离对称；省略与留白",
+        "color": "燕麦、米白、大地色、低饱和",
+        "typography": "手写体、克制",
+        "space": "有意的空，纸张肌理"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-bowl",
+          "label": "金缮裂纹"
+        },
+        {
+          "icon": "ti-leaf-off",
+          "label": "无常 / 消逝"
+        },
+        {
+          "icon": "ti-circle-dashed",
+          "label": "不均齐"
+        },
+        {
+          "icon": "ti-square-rounded",
+          "label": "留白与肌理"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "公式：燕麦/米色 + 手写字体 + 纸张肌理 + 不规则边框 + 有意的空",
+        "components": "减法界面，每个像素存在皆有意义（简 Kanso）",
+        "interaction": "克制（渋 Shibui）——让用户自己发现深度",
+        "useCases": [
+          "小红书博主美学",
+          "独立香氛 / 美妆 App",
+          "冥想 / 慢生活产品"
+        ]
+      },
+      "eastWest": {
+        "west": "当下最热的 UI 趋势之一，被西方独立设计圈广泛挪用为‘高级简约’。",
+        "east": "源自禅宗与茶道，是东方对‘完美’的根本性质疑：有无相生，余白即山峦。"
+      },
+      "comparison": {
+        "orderStance": "自然秩序",
+        "decorationStance": "无需装饰",
+        "uiDifficulty": "哲学层面",
+        "coreEmotion": "静默、接受",
+        "palette": [
+          "#D9CBB3",
+          "#B9A684",
+          "#8A7B63",
+          "#EFE9DD"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "ukiyo-e",
+            "note": "同源日本美学，留白与省略"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "constructivism",
+            "note": "接受消逝 vs 建造未来；残缺 vs 钢铁张力"
+          },
+          {
+            "id": "art-deco",
+            "note": "极简朴 vs 极繁盛；无常 vs 永恒"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "ukiyo-e",
+        "art-nouveau",
+        "constructivism"
+      ],
+      "coverArtwork": {
+        "title": "龙安寺枯山水庭园",
+        "artist": "—",
+        "year": 1500,
+        "image": "public/artworks/wabi-sabi/wabi-sabi-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "CC BY-SA 2.0，作者 BMR & MAM"
+      },
+      "masterworks": [
+        {
+          "title": "破墨山水 Haboku-Sansui",
+          "artist": "雪舟等楊",
+          "year": 1495,
+          "image": "public/artworks/wabi-sabi/wabi-sabi-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域"
+        },
+        {
+          "title": "宫岛茶室",
+          "artist": "—",
+          "year": null,
+          "image": "public/artworks/wabi-sabi/wabi-sabi-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域（古籍插图）"
+        }
+      ]
+    },
+    {
+      "id": "bauhaus",
+      "name": "Bauhaus",
+      "nameZh": "包豪斯",
+      "day": 5,
+      "status": "published",
+      "coreLine": "形式服从功能，设计是让所有人都能用的艺术。",
+      "period": {
+        "start": 1919,
+        "end": 1933,
+        "label": "1919–1933"
+      },
+      "region": "德国（魏玛→德绍→柏林）",
+      "themeColor": "#ECE7DB",
+      "origin": {
+        "thesis": "艺术与手工业统一；用工业化生产美好设计；装饰是罪恶（Form follows function）。",
+        "keyFigures": [
+          "Walter Gropius（创始人；德绍校舍1926）",
+          "Herbert Bayer（Universal 字体）",
+          "Marcel Breuer（瓦西里椅）",
+          "László Moholy-Nagy"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "严格网格；水平/垂直轴线主导；模块化；绝对对称或有意义的不对称",
+        "color": "红黄蓝三原色 + 黑白灰；颜色作为功能信号而非装饰",
+        "typography": "无衬线字体（去除一切多余笔画）；Universal 字体；大小写混用传达层级",
+        "space": "开阔、理性；留白是呼吸节奏的一部分；无多余元素"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-square",
+          "label": "几何原形"
+        },
+        {
+          "icon": "ti-palette",
+          "label": "三原色"
+        },
+        {
+          "icon": "ti-typography",
+          "label": "无衬线"
+        },
+        {
+          "icon": "ti-grid-dots",
+          "label": "网格秩序"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "清晰层级，每层有明确视觉信号；网格对齐是基本法则",
+        "components": "无装饰；功能决定形状；颜色传递状态信息；图标几何化",
+        "interaction": "直接反馈；动效服务于功能理解，不为视觉娱乐",
+        "useCases": [
+          "Google Material Design（最大规模的包豪斯传承）",
+          "Apple HIG 底层逻辑",
+          "企业级 B 端产品",
+          "开发工具界面"
+        ]
+      },
+      "eastWest": {
+        "west": "强烈的社会民主理想——让好设计不再是贵族特权，工业化生产使普通人也能用上‘美的物品’。被纳粹关闭后师生流亡美国，直接塑造了美国现代主义设计体系。",
+        "east": "中国 1950s 的‘实用美术’运动与之有平行逻辑（功能先行）。当代国内互联网产品的 UI 体系（字节、腾讯设计规范）骨子里是包豪斯网格 + Material Design 的变体。"
+      },
+      "comparison": {
+        "orderStance": "建构秩序",
+        "decorationStance": "装饰是罪恶",
+        "uiDifficulty": "直接可用",
+        "coreEmotion": "理性、民主",
+        "palette": [
+          "#E2231A",
+          "#1A4FB0",
+          "#F2C200",
+          "#111111"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "brutalism",
+            "note": "共同的反装饰立场；都把结构当主角"
+          },
+          {
+            "id": "swiss-style",
+            "note": "包豪斯的直接后代"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "art-nouveau",
+            "note": "直接对立：装饰是目的 vs 装饰是罪恶"
+          },
+          {
+            "id": "memphis-design",
+            "note": "Memphis 是对包豪斯的反叛宣言"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "swiss-style",
+        "brutalism",
+        "art-nouveau",
+        "memphis-design",
+        "constructivism"
+      ],
+      "coverArtwork": {
+        "title": "德绍包豪斯校舍",
+        "artist": "Walter Gropius",
+        "year": 1926,
+        "image": "public/artworks/bauhaus/bauhaus-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "公有领域（作者 Mewes 放弃版权）"
+      },
+      "masterworks": [
+        {
+          "title": "瓦西里椅 (Wassily Chair)",
+          "artist": "Marcel Breuer",
+          "year": 1926,
+          "image": "public/artworks/bauhaus/bauhaus-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC BY 2.0，作者 Lorkan"
+        },
+        {
+          "title": "Außenansichten des Bauhaus-Gebäudes in D",
+          "artist": "JensKunstfreund",
+          "year": null,
+          "image": "public/artworks/bauhaus/bauhaus-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC BY-SA 4.0，作者 JensKunstfreund"
+        }
+      ],
+      "imageTodo": "补代表作图（德绍校舍 / 瓦西里椅 / Universal 字体样张）；字体与早期平面多为公有领域"
+    },
+    {
+      "id": "cyberpunk",
+      "name": "Cyberpunk",
+      "nameZh": "赛博朋克",
+      "day": 6,
+      "status": "published",
+      "coreLine": "技术吞噬人类，霓虹还在亮着——这就是现在的极端版本。",
+      "period": {
+        "start": 1980,
+        "end": null,
+        "label": "1980s–今"
+      },
+      "region": "美国科幻文学起源；视觉成型于 1990s–2000s 影视/游戏",
+      "themeColor": "#0A0A12",
+      "isDark": true,
+      "origin": {
+        "thesis": "High tech, low life（技术越发达，底层越悲惨）；身体是可改造的硬件；企业权力取代国家权力。",
+        "keyFigures": [
+          "William Gibson（《神经漫游者》1984）",
+          "Ridley Scott（《银翼杀手》1982）",
+          "《攻壳机动队》1995",
+          "Cyberpunk 2077（2020）"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "垂直压缩的城市密度；广告牌与建筑争夺空间；仰视或俯瞰视角",
+        "color": "纯黑底；霓虹青(#00FFFF)、洋红(#FF00FF)、警告橙、暗紫；色彩只来自人造光源",
+        "typography": "故障字体（Glitch）；等宽终端字体；日文片假名作视觉符号；扫描线纹理",
+        "space": "极度压缩；无自然空间；每一处都被信息/广告覆盖；永恒黑夜"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-bulb",
+          "label": "霓虹光"
+        },
+        {
+          "icon": "ti-building-skyscraper",
+          "label": "垂直都市"
+        },
+        {
+          "icon": "ti-code",
+          "label": "故障/终端"
+        },
+        {
+          "icon": "ti-scan",
+          "label": "扫描线"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "HUD 式信息覆盖层；数据可视化感强；层级通过发光强度区分",
+        "components": "纯黑底 + 霓虹描边；故障动效；扫描线/噪点纹理；数字雨装饰",
+        "interaction": "终端输入感；hover 霓虹扫光；加载用进度条 + 代码流",
+        "useCases": [
+          "电竞品牌/游戏 UI",
+          "加密货币/Web3 平台",
+          "黑客工具界面",
+          "科技感活动页"
+        ]
+      },
+      "eastWest": {
+        "west": "原型城市是 1980s 的东京——西方眼中的‘未来亚洲’。高密度、汉字霓虹、精英技术与底层混乱并存，全来自对东亚城市的想象投射。",
+        "east": "国内语境中更多是去政治化的视觉消费品（游戏、B站特效、蒸汽波）。但部分创作者开始反向阅读——用赛博朋克框架审视平台数据权力、骑手算法困境，与 Zuboff《监控资本主义》的批判逻辑高度重合。"
+      },
+      "comparison": {
+        "orderStance": "崩溃秩序",
+        "decorationStance": "装饰即信息过载",
+        "uiDifficulty": "需要转译",
+        "coreEmotion": "绝望、躁动抵抗",
+        "palette": [
+          "#0A0A12",
+          "#FF2A6D",
+          "#05D9E8",
+          "#7A04EB"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "deconstructivism",
+            "note": "都表现系统性的不稳定与崩溃"
+          },
+          {
+            "id": "memphis-design",
+            "note": "同样反叛，但 Memphis 是欢乐的反叛，赛博朋克是绝望的反叛"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "wabi-sabi",
+            "note": "自然 vs 人造；静默接受 vs 躁动抵抗"
+          },
+          {
+            "id": "bauhaus",
+            "note": "Bauhaus 相信技术解放人，赛博朋克描述技术异化人"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "deconstructivism",
+        "memphis-design",
+        "wabi-sabi",
+        "bauhaus"
+      ],
+      "coverArtwork": {
+        "title": "赛博朋克 · 原创视觉示意",
+        "artist": "—",
+        "year": null,
+        "image": "public/artworks/cyberpunk/cyberpunk-cover.svg",
+        "source": "原创示意图（避开版权期原作）",
+        "rights": "CC0 · 本项目自制 SVG · 霓虹垂直都市 + 扫描线"
+      },
+      "masterworks": [],
+      "imageTodo": "深色主题：ambient 切到此风格时整站转暗，需单独配色对；图大概率需 AI 生成或自摄霓虹街景"
+    },
+    {
+      "id": "ukiyo-e",
+      "name": "Ukiyo-e",
+      "nameZh": "浮世绘",
+      "day": 7,
+      "status": "published",
+      "coreLine": "轮廓比真实更真实，线条即是世界本身。",
+      "period": {
+        "start": 1600,
+        "end": 1900,
+        "label": "17–19 世纪（江户）"
+      },
+      "region": "日本江户",
+      "themeColor": "#E8DEC6",
+      "origin": {
+        "thesis": "描绘‘浮世’（流动无常的尘世）；平民审美的自我表达；木版印刷使艺术大众化。",
+        "keyFigures": [
+          "葛饰北斋（《神奈川冲浪里》《富岳三十六景》）",
+          "歌川广重（《东海道五十三次》）",
+          "喜多川歌麿（美人画）"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "非对称；大胆裁切（主体可被画框截断）；前景与背景的平面压缩",
+        "color": "平涂（无渐变无阴影）；靛蓝(Prussian Blue)、朱红、墨黑为核心；色块边界清晰",
+        "typography": "毛笔书法与画面融为一体；文字是构图元素",
+        "space": "二维平面化；无透视景深；以重叠和位置高低表达远近"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-line",
+          "label": "轮廓线"
+        },
+        {
+          "icon": "ti-ripple",
+          "label": "传统纹样"
+        },
+        {
+          "icon": "ti-color-swatch",
+          "label": "平涂色块"
+        },
+        {
+          "icon": "ti-crop",
+          "label": "大胆裁切"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "线条界定区域而非色块；以‘留白切割’代替边框",
+        "components": "粗轮廓线 + 平涂填色；icon 扁平无阴影；传统纹样（青海波、麻叶）作背景",
+        "interaction": "纸张翻动感的页面切换；墨水晕开的加载动画；强调手工质感",
+        "useCases": [
+          "日系/东方题材游戏 UI",
+          "文化旅游类 App",
+          "和食/日本文化品牌官网",
+          "Nintendo 视觉系统的底层基因"
+        ]
+      },
+      "eastWest": {
+        "east": "日本平民文化的自我记录，江户时期一张版画约值一碗荞麦面——从未是精英艺术。与中国传统版画（徽派木刻）有工艺共鸣，但中国版画重叙事，浮世绘重瞬间的‘型’。",
+        "west": "1860s 后大量传入欧洲，引发 Japonisme 浪潮——梵高临摹广重、莫奈建日式花园、劳特累克借用其构图。它教会西方：平面化与轮廓线是比透视更有力的视觉语言。这是非西方艺术影响西方现代主义的关键事件。"
+      },
+      "comparison": {
+        "orderStance": "自然秩序",
+        "decorationStance": "装饰即目的",
+        "uiDifficulty": "哲学层面",
+        "coreEmotion": "瞬间、轻盈",
+        "palette": [
+          "#1C3F5F",
+          "#C0392B",
+          "#1A1A1A",
+          "#E8D9B0"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "wabi-sabi",
+            "note": "同源日本美学；共享非对称与留白"
+          },
+          {
+            "id": "pop-art",
+            "note": "都用‘印刷复制’实现大众化；都偏好平涂与粗轮廓"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "art-nouveau",
+            "note": "都有有机线条，但浮世绘极度平面，Art Nouveau 追求装饰体量"
+          },
+          {
+            "id": "brutalism",
+            "note": "轻盈二维 vs 沉重三维"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "wabi-sabi",
+        "pop-art",
+        "art-nouveau"
+      ],
+      "coverArtwork": {
+        "title": "神奈川冲浪里",
+        "artist": "葛饰北斋",
+        "year": 1831,
+        "image": "public/artworks/ukiyo-e/ukiyo-e-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "公有领域（葛饰北斋 1849 年逝世）"
+      },
+      "masterworks": [
+        {
+          "title": "凯风快晴（赤富士）",
+          "artist": "葛饰北斋",
+          "year": 1831,
+          "image": "public/artworks/ukiyo-e/ukiyo-e-mw1.jpg",
+          "source": "Google Art Project / Wikimedia Commons",
+          "rights": "公有领域"
+        },
+        {
+          "title": "蒲原（夜之雪）",
+          "artist": "歌川广重",
+          "year": 1833,
+          "image": "public/artworks/ukiyo-e/ukiyo-e-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域（歌川广重 1858 年逝世）"
+        }
+      ],
+      "imageTodo": "Met Open Access 搜 Hokusai Great Wave / Hiroshige Tokaido 取 CC0 高清图（公有领域，最省心）"
+    },
+    {
+      "id": "pop-art",
+      "name": "Pop Art",
+      "nameZh": "波普艺术",
+      "day": 8,
+      "status": "published",
+      "coreLine": "把你视而不见的东西放大，直到你不得不问它为何存在。",
+      "period": {
+        "start": 1955,
+        "end": 1970,
+        "label": "1950s 英国 → 1960s 美国"
+      },
+      "region": "英国 Independent Group → 美国纽约",
+      "themeColor": "#F2ECDD",
+      "origin": {
+        "thesis": "高雅艺术与大众文化的边界是人造的；消费品与名画同等有效；艺术应该批量生产。",
+        "keyFigures": [
+          "Andy Warhol（Campbell 汤罐头、玛丽莲·梦露丝网印刷）",
+          "Roy Lichtenstein（Ben-Day 网点）",
+          "Richard Hamilton（英国先驱）"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "重复网格（Warhol）；单一主体放大至极限（Lichtenstein）；对话气泡框",
+        "color": "高饱和平涂；撞色；印刷四色(CMYK)感；Ben-Day 网点叠色",
+        "typography": "漫画字体；粗黑描边；对话框手写体；字体本身是图形元素",
+        "space": "绝对平面；无阴影无景深；重复制造视觉节奏"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-grid-dots",
+          "label": "Ben-Day 网点"
+        },
+        {
+          "icon": "ti-copy",
+          "label": "重复/复制"
+        },
+        {
+          "icon": "ti-message",
+          "label": "对话气泡"
+        },
+        {
+          "icon": "ti-color-swatch",
+          "label": "高饱和撞色"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "网格化内容排布（Instagram 九宫格本质是 Warhol 式重复）；对话气泡是最直接的 UI 遗产",
+        "components": "半调网点纹理背景；粗描边卡片；高饱和 CTA 按钮；漫画感插画",
+        "interaction": "弹出气泡反馈；动效模拟印刷叠色；点赞动画借用 Pop Art 的‘爆炸’图形",
+        "useCases": [
+          "NFT/数字藏品平台",
+          "音乐/演出品牌视觉",
+          "Duolingo/Mailchimp 的卡通插画系统",
+          "节日活动 H5"
+        ]
+      },
+      "eastWest": {
+        "west": "美国消费社会的自我凝视——Warhol 的汤罐头同时是礼赞与批判。它是‘作者之死’的前奏：大规模复制使原作光晕（aura）消失，沃霍尔把这个本雅明式悲剧变成了商业模式。",
+        "east": "中国波普（岳敏君笑脸、王广义大批判）是对西方语言的主动改写——用毛时代视觉符号替换可口可乐，批判靶心从消费主义转向政治图像。这是 Pop Art 在中国语境最有价值的变异。"
+      },
+      "comparison": {
+        "orderStance": "嘲讽秩序",
+        "decorationStance": "装饰是武器",
+        "uiDifficulty": "直接可用",
+        "coreEmotion": "喧嚣、反讽",
+        "palette": [
+          "#FFE800",
+          "#E5004C",
+          "#0066CC",
+          "#111111"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "memphis-design",
+            "note": "高饱和、反精英、几何平涂；Memphis 受 Pop Art 直接影响"
+          },
+          {
+            "id": "ukiyo-e",
+            "note": "平涂+粗轮廓+大众化印刷的历史呼应"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "wabi-sabi",
+            "note": "一个喧嚣重复，一个静默唯一"
+          },
+          {
+            "id": "bauhaus",
+            "note": "Pop Art 嘲讽了包豪斯相信的‘设计改善生活’理想"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "memphis-design",
+        "ukiyo-e",
+        "wabi-sabi",
+        "constructivism"
+      ],
+      "coverArtwork": {
+        "title": "波普艺术 · 原创视觉示意",
+        "artist": "—",
+        "year": null,
+        "image": "public/artworks/pop-art/pop-art-cover.svg",
+        "source": "原创示意图（避开版权期原作）",
+        "rights": "CC0 · 本项目自制 SVG · Ben-Day 网点 + 爆炸星形 + 对话气泡"
+      },
+      "masterworks": [],
+      "imageTodo": "版权敏感：避免原作，用风格化网点/撞色示意图"
+    },
+    {
+      "id": "deconstructivism",
+      "name": "Deconstructivism",
+      "nameZh": "解构主义",
+      "day": 9,
+      "status": "published",
+      "coreLine": "秩序从未真正存在过——建筑只是让这件事可见。",
+      "period": {
+        "start": 1980,
+        "end": null,
+        "label": "1980s–今"
+      },
+      "region": "欧美；1988 MoMA‘Deconstructivist Architecture’展为标志",
+      "themeColor": "#E4E1DA",
+      "origin": {
+        "thesis": "任何结构都包含自我瓦解的逻辑（源自 Derrida）；建筑应质疑而非确认稳定性；形式可以冲突、碎裂、叠加。",
+        "keyFigures": [
+          "Zaha Hadid（广州大剧院、罗马 MAXXI）",
+          "Frank Gehry（毕尔巴鄂古根海姆）",
+          "Bernard Tschumi（拉维莱特公园）",
+          "Peter Eisenman",
+          "Wolfgang Weingart（解构排版）"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "无中心；多轴线冲突；碎片叠加；刻意的视觉不稳定感",
+        "color": "建筑多金属银/钛反光；平面则任意——色彩服从‘冲突’逻辑而非‘和谐’逻辑",
+        "typography": "字母拆散重组；多层级文字叠压；阅读路径被故意打断；质疑‘可读性’的必要性",
+        "space": "动态、方向不明；如进入一个悬而未决的状态；永远有‘即将崩塌’的张力"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-arrows-shuffle",
+          "label": "碎裂错位"
+        },
+        {
+          "icon": "ti-typography-off",
+          "label": "反网格排版"
+        },
+        {
+          "icon": "ti-triangle-inverted",
+          "label": "失稳空间"
+        },
+        {
+          "icon": "ti-layers-difference",
+          "label": "冲突叠加"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "破格布局（Broken Grid）；元素溢出容器；导航非线性；用户需‘探索’而非‘按流程走’",
+        "components": "元素刻意重叠；文字与图像交叉；边框不闭合；不对称到极致",
+        "interaction": "非标准滚动方向；鼠标移动触发位移；加载过程本身是视觉体验",
+        "useCases": [
+          "创意代理公司官网",
+          "艺术机构/博物馆数字展览",
+          "先锋音乐人个人站",
+          "奢侈品牌概念落地页"
+        ]
+      },
+      "eastWest": {
+        "west": "直接来自 Derrida 文字学——‘延异’(différance) 认为意义永远在差异与延迟中产生，从不固定。Tschumi 将其译为空间语言：没有任何概念能在不被其对立面污染的情况下存在。这是后结构主义最彻底的空间实践。",
+        "east": "Zaha 的中国作品常被读解为‘未来感/国际地标’，哲学批判维度被大量消费化。但近年随建筑理论讨论深化，Tschumi 式‘建筑作为事件’开始进入学院话语，与中国古典‘破’与‘立’的辩证法有潜在共鸣。"
+      },
+      "comparison": {
+        "orderStance": "崩溃秩序",
+        "decorationStance": "装饰是武器",
+        "uiDifficulty": "哲学层面",
+        "coreEmotion": "失稳、质疑",
+        "palette": [
+          "#C7C9CC",
+          "#8A8D91",
+          "#2A2A2A",
+          "#C24A3A"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "brutalism",
+            "note": "都拒绝掩盖；都让建筑‘说话’"
+          },
+          {
+            "id": "cyberpunk",
+            "note": "都呈现系统性不稳定与秩序崩溃"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "bauhaus",
+            "note": "包豪斯相信秩序可构建，解构主义认为秩序是幻觉"
+          },
+          {
+            "id": "wabi-sabi",
+            "note": "都接受不完整，但侘寂是平静接受，解构主义是激烈质疑"
+          }
+        ],
+        "tension": "破格的同时仍是高度智性的‘建构’行为——质疑秩序本身成了一种新秩序。"
+      },
+      "relatedStyles": [
+        "brutalism",
+        "cyberpunk",
+        "swiss-style",
+        "bauhaus"
+      ],
+      "coverArtwork": {
+        "title": "Guggenheim Bilbao. Exterior",
+        "artist": "José Luis Filpo Cabana",
+        "year": 1997,
+        "image": "public/artworks/deconstructivism/deconstructivism-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "CC BY 3.0，作者 José Luis Filpo Cabana"
+      },
+      "masterworks": [
+        {
+          "title": "广州大剧院",
+          "artist": "Zaha Hadid",
+          "year": 2010,
+          "image": "public/artworks/deconstructivism/deconstructivism-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC BY 3.0，作者 Mr a"
+        }
+      ],
+      "imageTodo": "找 CC 授权建筑摄影；广州大剧院可自摄/找授权"
+    },
+    {
+      "id": "art-deco",
+      "name": "Art Deco",
+      "nameZh": "装饰艺术",
+      "day": 10,
+      "status": "published",
+      "coreLine": "机器时代的奢华宣言：几何即高贵，对称即权力。",
+      "period": {
+        "start": 1920,
+        "end": 1939,
+        "label": "1920s–1930s"
+      },
+      "region": "巴黎起源；蔓延至纽约、上海、迈阿密",
+      "themeColor": "#15140F",
+      "isDark": true,
+      "origin": {
+        "thesis": "现代机器美学与古典装饰传统的融合；用几何语言表达富足与进步；一战后‘我们活下来了，要享乐’的集体心理。",
+        "keyFigures": [
+          "William Van Alen（克莱斯勒大厦, 1930）",
+          "Tamara de Lempicka",
+          "Cassandre（海报）",
+          "上海外滩建筑群"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "严格左右对称；竖向线条强调高耸与速度；放射状扇形与阶梯轮廓为核心母题",
+        "color": "黑金为核心；孔雀蓝、象牙白、深红为辅；金属光泽是材质语言",
+        "typography": "几何等线宽无衬线大写字母；字间距宽松均匀",
+        "space": "满而有序；装饰密度高但受几何逻辑约束；竖向延伸与纪念碑感"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-triangle",
+          "label": "放射扇形"
+        },
+        {
+          "icon": "ti-stairs",
+          "label": "阶梯轮廓"
+        },
+        {
+          "icon": "ti-diamond",
+          "label": "黑金菱形"
+        },
+        {
+          "icon": "ti-letter-case-upper",
+          "label": "等距大写"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "黑底金线水平分割；字母全大写等间距；静止无 hover——沉默本身是气场",
+        "components": "双线 + 菱形节点分割线（最识别的细节）；放射纹/锯齿纹替代圆角；几何衬线标题",
+        "interaction": "慢速金色扫光动效；垂直滑动强调纵深；最小化反馈——高端来自克制",
+        "useCases": [
+          "高端酒店预订 App",
+          "威士忌/雪茄/奢侈品官网",
+          "婚礼/宴会平台",
+          "博物馆数字展览"
+        ]
+      },
+      "eastWest": {
+        "west": "服务于白人精英阶层的自我想象。",
+        "east": "上海是全球 Art Deco 遗存最密集的城市之一（和平饭店/原沙逊大厦、汇丰旧址、上海总会）——它不是舶来品，而是 1920s–30s 经济鼎盛期的历史 DNA，与殖民现代性深度绑定。同一套语言，不同的权力结构。"
+      },
+      "comparison": {
+        "orderStance": "建构秩序",
+        "decorationStance": "装饰即奢华",
+        "uiDifficulty": "需要转译",
+        "coreEmotion": "奢华、权力",
+        "palette": [
+          "#C9A24B",
+          "#0E0E0C",
+          "#1C6E72",
+          "#7A1F2B"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "bauhaus",
+            "note": "同为 1920s、都拥抱机器美学，但立场相反"
+          },
+          {
+            "id": "art-nouveau",
+            "note": "Art Deco 是其几何化接班人：曲线变直线"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "bauhaus",
+            "note": "精英 vs 民主；装饰 vs 功能——同时代最直接的价值对立"
+          },
+          {
+            "id": "wabi-sabi",
+            "note": "极繁盛 vs 极简朴；永恒 vs 无常"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "bauhaus",
+        "art-nouveau",
+        "wabi-sabi"
+      ],
+      "coverArtwork": {
+        "title": "克莱斯勒大厦",
+        "artist": "William Van Alen",
+        "year": 1930,
+        "image": "public/artworks/art-deco/art-deco-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "CC BY-SA 4.0，作者 Reinhold Möller"
+      },
+      "masterworks": [
+        {
+          "title": "Empire State Building (aerial view)",
+          "artist": "Sam Valadi",
+          "year": null,
+          "image": "public/artworks/art-deco/art-deco-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "Public domain，作者 Sam Valadi"
+        },
+        {
+          "title": "2014.11.15.192101 Dome HSBC Building Bun",
+          "artist": "Hermann Luyken",
+          "year": null,
+          "image": "public/artworks/art-deco/art-deco-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "CC0，作者 Hermann Luyken"
+        }
+      ],
+      "_todo": [
+        "补代表作图片（克莱斯勒大厦 / 外滩 / Cassandre 海报）",
+        "Cassandre 海报版权需核"
+      ]
+    },
+    {
+      "id": "swiss-style",
+      "name": "Swiss Style",
+      "nameZh": "瑞士国际主义",
+      "day": 11,
+      "status": "published",
+      "coreLine": "网格是真理，信息传达是唯一目的，设计师的情感不重要。",
+      "period": {
+        "start": 1950,
+        "end": 1970,
+        "label": "1950s"
+      },
+      "region": "瑞士苏黎世与巴塞尔",
+      "themeColor": "#F2F2F0",
+      "origin": {
+        "thesis": "设计的任务是客观传递信息；数学网格是构图的道德基础；个人风格是噪音。",
+        "keyFigures": [
+          "Josef Müller-Brockmann（《Grid Systems》1961）",
+          "Armin Hofmann",
+          "Max Miedinger（Helvetica, 1957）"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "严格数学网格；每个元素位置有可计算的理由；不对齐即错误",
+        "color": "黑白为主；最多一个强调色（红）；绝不超过三色；颜色传递信息而非情绪",
+        "typography": "Helvetica / Akzidenz-Grotesk；绝对无衬线；字号遵循数学比例",
+        "space": "大量留白是数学计算的结果；负空间与正空间地位相等"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-grid-dots",
+          "label": "数学网格"
+        },
+        {
+          "icon": "ti-typography",
+          "label": "Helvetica"
+        },
+        {
+          "icon": "ti-layout-align-left",
+          "label": "客观层级"
+        },
+        {
+          "icon": "ti-square-rounded-number-3",
+          "label": "三色铁律"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "左对齐 logo + 右对齐菜单；水平线分割；层级靠字号差异而非颜色",
+        "components": "8px/4px 基础网格严格对齐；内容决定容器大小；无装饰元素；正文/标题/标注三级即够",
+        "interaction": "直接反馈；无多余动效；过渡服务于理解而非娱乐",
+        "useCases": [
+          "企业官网（Apple 早期、Swiss Air）",
+          "新闻资讯 App",
+          "政府/公共服务界面",
+          "Figma 自身 UI"
+        ]
+      },
+      "eastWest": {
+        "west": "包豪斯理想的工程化落地版——包豪斯给哲学，瑞士人给操作手册；经 Helvetica 全球扩散，成为‘现代性’的视觉代名词。",
+        "east": "直接传承于互联网大厂设计规范（字节 / 腾讯 / 阿里的 MDS、TDesign、Ant Design 骨子里都是网格+层级的瑞士逻辑）。但中文等宽特性对网格提出独特挑战，催生‘汉字网格’本土化探索。"
+      },
+      "comparison": {
+        "orderStance": "建构秩序",
+        "decorationStance": "装饰是罪恶",
+        "uiDifficulty": "直接可用",
+        "coreEmotion": "客观、秩序",
+        "palette": [
+          "#E2231A",
+          "#000000",
+          "#FFFFFF"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "bauhaus",
+            "note": "直接传承：Bauhaus 是哲学，Swiss Style 是方法论"
+          },
+          {
+            "id": "brutalism",
+            "note": "都反装饰、都把结构作为主角"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "art-deco",
+            "note": "同样几何，但服务信息传达 vs 服务奢华表达"
+          },
+          {
+            "id": "memphis-design",
+            "note": "Memphis 是对其严肃性的直接反叛"
+          },
+          {
+            "id": "deconstructivism",
+            "note": "Weingart 用解构排版挑战其网格权威"
+          }
+        ],
+        "tension": null
+      },
+      "relatedStyles": [
+        "bauhaus",
+        "brutalism",
+        "art-deco",
+        "memphis-design",
+        "deconstructivism"
+      ],
+      "coverArtwork": {
+        "title": "瑞士国际主义 · 原创视觉示意",
+        "artist": "—",
+        "year": 1955,
+        "image": "public/artworks/swiss-style/swiss-style-cover.svg",
+        "source": "原创示意图（避开版权期原作）",
+        "rights": "CC0 · 本项目自制 SVG · 数学网格 + 构成几何 + Helvetica 层级"
+      },
+      "masterworks": [],
+      "_todo": [
+        "补代表作图片（Müller-Brockmann 海报版权敏感）",
+        "可用 Helvetica 字体样张作安全替代"
+      ]
+    },
+    {
+      "id": "constructivism",
+      "name": "Constructivism",
+      "nameZh": "构成主义",
+      "day": 12,
+      "status": "published",
+      "coreLine": "设计不是装饰世界，而是建造世界——艺术家是工程师，海报是机器，几何是革命的语言。",
+      "period": {
+        "start": 1915,
+        "end": 1935,
+        "label": "1915–1930s"
+      },
+      "region": "革命后的俄国 / 苏联",
+      "themeColor": "#E8E4DC",
+      "origin": {
+        "thesis": "拒绝‘为艺术而艺术’，艺术必须有社会用途；艺术家是‘建造者’而非创作者；形式来自材料与功能。",
+        "keyFigures": [
+          "Vladimir Tatlin（第三国际纪念塔, 1919）",
+          "El Lissitzky（用红色楔子敲打白军, 1919）",
+          "Alexander Rodchenko",
+          "Liubov Popova / Varvara Stepanova"
+        ]
+      },
+      "visualLanguage": {
+        "composition": "强对角线动势（斜 45° 是核心母题）；非对称但有力学平衡；元素像被‘建造’上去",
+        "color": "红黑白三色铁律（红=革命/能量，黑=力量，白=空间）；色块是结构件",
+        "typography": "粗壮无衬线几何西里尔字母；文字旋转、堆叠、当图形块用；排版即构图",
+        "space": "动态张力优先；摄影蒙太奇制造空间断裂；几何形体作为‘零件’组装"
+      },
+      "visualDNA": [
+        {
+          "icon": "ti-line-dashed",
+          "label": "对角线动势"
+        },
+        {
+          "icon": "ti-square-number-3",
+          "label": "红黑白三色"
+        },
+        {
+          "icon": "ti-photo",
+          "label": "摄影蒙太奇"
+        },
+        {
+          "icon": "ti-typography",
+          "label": "排版即构图"
+        }
+      ],
+      "uiTranslation": {
+        "structure": "用对角线/斜切色块打破网格静止；红作为唯一 CTA 色；层级靠体量对比",
+        "components": "大色块卡片、硬边、零圆角；文字可放大旋转作视觉主体；蒙太奇拼贴用于 Banner",
+        "interaction": "动效服务于‘动势’叙事（滑入、斜切转场）；强烈、果断、无柔和过渡",
+        "useCases": [
+          "运动/潮牌电商",
+          "音乐节/活动页",
+          "激进风格 landing",
+          "Spotify Wrapped 类年度总结"
+        ]
+      },
+      "eastWest": {
+        "west": "20 世纪平面设计的政治源头；经 El Lissitzky 影响 Bauhaus，再传 Swiss Style。深刻反讽：为集体革命服务的语言，最终被资本主义广告业完整继承（Rodchenko 本人就做香烟广告）——工具中性，意图可替换。",
+        "east": "中国的吸收是双重的：一条是 1950s 苏联援助期，宣传画红黑构图直接来自这套语言，是国人对‘革命美学’的视觉记忆；另一条是近十年潮流圈的‘复古挪用’，把斜排粗黑字、红黑撞色当酷感符号。同一套语言，一次是信仰，一次是风格。"
+      },
+      "comparison": {
+        "orderStance": "建构秩序",
+        "decorationStance": "装饰是罪恶",
+        "uiDifficulty": "需要转译",
+        "coreEmotion": "号召、张力",
+        "palette": [
+          "#D81E20",
+          "#0A0A0A",
+          "#F2F0EA"
+        ]
+      },
+      "relations": {
+        "similar": [
+          {
+            "id": "bauhaus",
+            "note": "直接上游：构成主义提供政治几何，包豪斯将其学院化"
+          },
+          {
+            "id": "swiss-style",
+            "note": "共享无衬线+几何+客观，但抽掉了革命激情只留秩序"
+          }
+        ],
+        "contrast": [
+          {
+            "id": "memphis-design",
+            "note": "去政治玩闹 vs 高度政治严肃"
+          },
+          {
+            "id": "wabi-sabi",
+            "note": "建造未来/钢铁张力 vs 接受消逝/残缺自然"
+          },
+          {
+            "id": "art-deco",
+            "note": "同代崇拜机器几何，但服务革命 vs 服务奢华"
+          }
+        ],
+        "tension": "‘嘲讽’还是‘建构’秩序？它建构新秩序的同时用对角线打破旧秩序的静止——系列中少有的‘破立同体’。"
+      },
+      "relatedStyles": [
+        "bauhaus",
+        "swiss-style",
+        "art-deco",
+        "memphis-design"
+      ],
+      "coverArtwork": {
+        "title": "用红色楔子敲打白军",
+        "artist": "El Lissitzky",
+        "year": 1919,
+        "image": "public/artworks/constructivism/constructivism-cover.jpg",
+        "source": "Wikimedia Commons",
+        "rights": "公有领域（El Lissitzky 1941 年逝世）"
+      },
+      "masterworks": [
+        {
+          "title": "第三国际纪念塔（模型）",
+          "artist": "Vladimir Tatlin",
+          "year": 1920,
+          "image": "public/artworks/constructivism/constructivism-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域（佚名摄影，1920 年拍摄）"
+        },
+        {
+          "title": "Proun²",
+          "artist": "El Lissitzky",
+          "year": 1923,
+          "image": "public/artworks/constructivism/constructivism-mw2.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域（El Lissitzky 1941 年逝世）"
+        }
+      ],
+      "_todo": [
+        "补图片：El Lissitzky / Rodchenko 多为公有领域，Wikimedia 可取"
+      ]
+    }
+  ]
+}

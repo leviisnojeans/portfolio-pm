@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>设计语言博物馆 · AI 导览</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.18/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.css" />
+<style>
+  :root {
+    --ivory: #F5F2EC;
+    --near-black: #2A2622;
+    --gold: #B08D4F;
+    --gold-light: #D4BA7A;
+    --gray-light: #E8E4DC;
+    --gray-mid: #9B9894;
+    --error: #C0392B;
+    --success: #2E7D5B;
+  }
+  body {
+    background: var(--ivory);
+    color: var(--near-black);
+    font-family: 'Inter', system-ui, -apple-system, 'PingFang SC', sans-serif;
+  }
+  .font-serif-cn {
+    font-family: 'Songti SC', 'Noto Serif CJK SC', 'Source Han Serif SC', Georgia, serif;
+  }
+  .text-gold { color: var(--gold); }
+  .border-gold { border-color: var(--gold); }
+  .bg-gold { background-color: var(--gold); }
+  .bg-ivory { background-color: var(--ivory); }
+  .bg-near-black { background-color: var(--near-black); }
+  .hover-gold:hover { color: var(--gold); }
+  .card-hover { transition: all 0.3s ease; }
+  .card-hover:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(42,38,34,0.08); }
+  .card-hover:active { transform: translateY(-1px); }
+  .tab-btn { transition: all 0.2s ease; cursor: pointer; }
+  .tab-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+  .tab-btn:not(.active) { color: var(--gray-mid); border-bottom: 2px solid transparent; }
+  .tab-btn:not(.active):hover { color: var(--near-black); }
+  .option-btn { transition: all 0.2s ease; cursor: pointer; }
+  .option-btn:hover:not(.disabled) { background: var(--gold); color: white; border-color: var(--gold); }
+  .option-btn.selected { background: var(--gold); color: white; border-color: var(--gold); }
+  .option-btn.correct { background: var(--success); color: white; border-color: var(--success); }
+  .option-btn.wrong { background: var(--error); color: white; border-color: var(--error); }
+  .option-btn.disabled { cursor: default; opacity: 0.6; }
+  .fade-in { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--gray-light); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .style-card { transition: all 0.3s ease; cursor: pointer; }
+  .style-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42,38,34,0.1); }
+  .style-card.active { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .key-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 2px rgba(176,141,79,0.2); }
+  ::selection { background: var(--gold-light); color: var(--near-black); }
+  @media (max-width: 640px) {
+    .guide-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="pt-12 pb-8 px-4 sm:px-8 max-w-5xl mx-auto text-center">
+  <h1 class="font-serif-cn text-3xl sm:text-4xl font-bold tracking-wide">
+    <span class="text-gold">◆</span> 设计语言博物馆
+  </h1>
+  <p class="text-sm text-gray-500 mt-2 tracking-widest uppercase">Design Language Museum · AI Guide</p>
+  <p class="text-sm text-[var(--gray-mid)] mt-3 max-w-md mx-auto leading-relaxed">
+    探索 12 个设计流派的视觉语言。让 AI 为你导览，或者猜猜看——你对风格有多敏感？
+  </p>
+</header>
+
+<!-- API Key -->
+<section class="px-4 sm:px-8 max-w-2xl mx-auto mb-8">
+  <div class="bg-white bg-opacity-60 border border-[var(--gray-light)] rounded-lg px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+    <label class="text-xs font-medium uppercase tracking-wider text-[var(--gray-mid)] shrink-0" for="apiKey">
+      <i class="fa fa-key mr-1"></i>API Key
+    </label>
+    <div class="flex-1 w-full sm:w-auto flex gap-2">
+      <input id="apiKey" type="password" class="key-input flex-1 px-3 py-1.5 text-sm border border-[var(--gray-light)] rounded bg-white bg-opacity-80 w-full" placeholder="粘贴你的 Anthropic API Key..." autocomplete="off" />
+      <button id="saveKeyBtn" class="px-4 py-1.5 text-sm bg-[var(--near-black)] text-white rounded hover:opacity-80 transition-opacity shrink-0">保存</button>
+    </div>
+    <p class="text-xs text-[var(--gray-mid)] w-full sm:w-auto">仅存于本地浏览器，<span class="text-gold">不会上传</span></p>
+  </div>
+  <p id="keyStatus" class="text-xs mt-1.5 text-[var(--gray-mid)]"></p>
+</section>
+
+<!-- Tabs -->
+<section class="px-4 sm:px-8 max-w-5xl mx-auto mb-6">
+  <div class="flex border-b border-[var(--gray-light)] gap-8">
+    <button class="tab-btn active pb-3 text-sm font-medium" data-tab="guide">
+      <i class="fa fa-compass mr-1.5"></i>AI 导览
+    </button>
+    <button class="tab-btn pb-3 text-sm font-medium" data-tab="quiz">
+      <i class="fa fa-gamepad mr-1.5"></i>猜流派
+    </button>
+  </div>
+</section>
+
+<!-- ==================== TAB: AI 导览 ==================== -->
+<section id="tab-guide" class="tab-content px-4 sm:px-8 max-w-5xl mx-auto pb-16">
+  <p class="text-xs text-[var(--gray-mid)] mb-5 tracking-wide">选择一个设计流派，AI 将用简单的话为你讲解</p>
+  <div id="styleGrid" class="guide-grid grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4"></div>
+  <div id="guideResult" class="mt-8 hidden fade-in"></div>
+</section>
+
+<!-- ==================== TAB: 猜流派 ==================== -->
+<section id="tab-quiz" class="tab-content hidden px-4 sm:px-8 mx-auto pb-16" style="max-width: 42rem;">
+  <div id="quizIntro" class="text-center py-12 fade-in">
+    <div class="text-5xl mb-4 opacity-30">🎯</div>
+    <h2 class="font-serif-cn text-xl font-semibold mb-2">猜猜这是哪个流派</h2>
+    <p class="text-sm text-[var(--gray-mid)] mb-6">我会给你一段视觉描述，你来猜它属于哪个设计风格</p>
+    <button id="startQuizBtn" class="px-6 py-2.5 bg-[var(--near-black)] text-white text-sm rounded hover:opacity-80 transition-opacity">
+      开始答题
+    </button>
+  </div>
+  <div id="quizArea" class="hidden fade-in">
+    <div class="mb-2 flex justify-between items-center text-xs text-[var(--gray-mid)]">
+      <span id="quizProgress">第 1 题</span>
+      <span id="quizScore">得分：0</span>
+    </div>
+    <div id="quizClue" class="bg-white bg-opacity-70 border border-[var(--gray-light)] rounded-lg p-6 mb-6">
+      <div class="text-xs uppercase tracking-wider text-[var(--gold)] mb-2 font-medium">视觉描述</div>
+      <div id="quizClueText" class="text-sm leading-relaxed"></div>
+    </div>
+    <div id="quizOptions" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6"></div>
+    <div id="quizResult" class="hidden fade-in">
+      <div id="quizResultInner" class="bg-white bg-opacity-70 border border-[var(--gray-light)] rounded-lg p-5 text-sm leading-relaxed"></div>
+      <div class="flex gap-3 mt-4">
+        <button id="nextQuizBtn" class="px-5 py-2 bg-[var(--near-black)] text-white text-sm rounded hover:opacity-80 transition-opacity">下一题</button>
+        <button id="resetQuizBtn" class="px-5 py-2 border border-[var(--gray-light)] text-sm rounded hover:bg-white transition-colors">重新开始</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-[var(--gray-light)] py-6 text-center text-xs text-[var(--gray-mid)]">
+  <span class="text-gold">◆</span> 设计语言博物馆 · AI 功能原型 · API 密钥仅本地使用
+</footer>
+
+<script>
+// ============================================================
+// DATA — 12 个设计风格（内联自 data/styles.json）
+// ============================================================
+const STYLES = [
+  { id:"brutalism", name:"Brutalism", nameZh:"粗野主义", coreLine:"裸露结构即是装饰，诚实材料即是美学。", color:"#8C8A86", emotion:"压迫、诚实",
+    visual:"构图：粗重边框、不对齐网格 ｜ 色彩：灰、原始混凝土色 ｜ 字体：无装饰、功能优先 ｜ 空间：厚重、纪念碑式体量" },
+  { id:"art-nouveau", name:"Art Nouveau", nameZh:"新艺术运动", coreLine:"用自然曲线对抗工业冷漠，美即是目的本身。", color:"#E9E2CF", emotion:"优雅、丰盛",
+    visual:"构图：有机曲线、不对称、零直角 ｜ 色彩：金色、深绿、米色 ｜ 字体：笔画如植物卷曲 ｜ 空间：大量留白、细线描边" },
+  { id:"memphis-design", name:"Memphis Design", nameZh:"孟菲斯", coreLine:"好看不需要理由，功能不是唯一目的。", color:"#F4ECDF", emotion:"躁动、反叛",
+    visual:"构图：之字形+波点+条纹叠加、几何混沌 ｜ 色彩：荧光粉+柠檬黄+钴蓝 ｜ 字体：粗体无衬线 ｜ 空间：不对称、撞色高密度" },
+  { id:"wabi-sabi", name:"Wabi-Sabi", nameZh:"侘寂", coreLine:"残缺即完整，消逝本身就是美。", color:"#E6DECF", emotion:"静默、接受",
+    visual:"构图：不均齐、刻意偏离对称 ｜ 色彩：燕麦、米白、大地低饱和 ｜ 字体：手写体、克制 ｜ 空间：有意的空、纸张肌理" },
+  { id:"bauhaus", name:"Bauhaus", nameZh:"包豪斯", coreLine:"形式服从功能，设计是让所有人都能用的艺术。", color:"#ECE7DB", emotion:"理性、民主",
+    visual:"构图：严格网格、水平/垂直轴线 ｜ 色彩：红黄蓝三原色+黑白灰 ｜ 字体：无衬线、去除多余笔画 ｜ 空间：开阔理性、留白是呼吸" },
+  { id:"cyberpunk", name:"Cyberpunk", nameZh:"赛博朋克", coreLine:"技术吞噬人类，霓虹还在亮着。", color:"#0A0A12", emotion:"绝望、躁动抵抗",
+    visual:"构图：垂直压缩的城市密度 ｜ 色彩：纯黑底+霓虹青/洋红/警示橙 ｜ 字体：故障字体、等宽终端 ｜ 空间：极度压缩、永恒黑夜" },
+  { id:"ukiyo-e", name:"Ukiyo-e", nameZh:"浮世绘", coreLine:"轮廓比真实更真实，线条即是世界本身。", color:"#E8DEC6", emotion:"瞬间、轻盈",
+    visual:"构图：非对称、大胆裁切、平面压缩 ｜ 色彩：平涂无渐变、靛蓝/朱红/墨黑 ｜ 字体：毛笔书法融入画面 ｜ 空间：二维平面化、无透视" },
+  { id:"pop-art", name:"Pop Art", nameZh:"波普艺术", coreLine:"把你视而不见的东西放大，直到你不得不问它为何存在。", color:"#F2ECDD", emotion:"喧嚣、反讽",
+    visual:"构图：重复网格、单一主体放大 ｜ 色彩：高饱和平涂、撞色、CMYK感 ｜ 字体：漫画粗黑描边+对话气泡 ｜ 空间：绝对平面、无阴影" },
+  { id:"deconstructivism", name:"Deconstructivism", nameZh:"解构主义", coreLine:"秩序从未真正存在过——建筑只是让这件事可见。", color:"#E4E1DA", emotion:"失稳、质疑",
+    visual:"构图：无中心、多轴线冲突、碎片叠加 ｜ 色彩：金属银/钛反光、服从冲突逻辑 ｜ 字体：字母拆散重组、多层叠压 ｜ 空间：动态不稳定、永远即将崩塌" },
+  { id:"art-deco", name:"Art Deco", nameZh:"装饰艺术", coreLine:"机器时代的奢华宣言：几何即高贵，对称即权力。", color:"#15140F", emotion:"奢华、权力",
+    visual:"构图：严格左右对称、竖向线条、放射扇形 ｜ 色彩：黑金为核心、孔雀蓝 ｜ 字体：几何等线宽大写、字距宽松 ｜ 空间：满而有序、竖向纪念碑感" },
+  { id:"swiss-style", name:"Swiss Style", nameZh:"瑞士国际主义", coreLine:"网格是真理，信息传达是唯一目的。", color:"#F2F2F0", emotion:"客观、秩序",
+    visual:"构图：严格数学网格、每个位置可计算 ｜ 色彩：黑白为主、最多一强调色 ｜ 字体：Helvetica、绝对无衬线 ｜ 空间：留白是计算结果" },
+  { id:"constructivism", name:"Constructivism", nameZh:"构成主义", coreLine:"设计不是装饰世界，而是建造世界。", color:"#E8E4DC", emotion:"号召、张力",
+    visual:"构图：强对角线动势、非对称但有平衡 ｜ 色彩：红黑白三色铁律 ｜ 字体：粗壮几何无衬线、排版即构图 ｜ 空间：动态张力、摄影蒙太奇" }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let apiKey = '';
+let currentQuiz = null; // { style, options: [], correctId }
+let quizScore = 0;
+let quizCount = 0;
+const QUIZ_ROUNDS = 6;
+let usedQuizIds = [];
+let isGuideLoading = false;
+let isQuizLoading = false;
+
+// ============================================================
+// DOM REFS
+// ============================================================
+const $ = id => document.getElementById(id);
+const styleGrid = $('styleGrid');
+const guideResult = $('guideResult');
+const quizIntro = $('quizIntro');
+const quizArea = $('quizArea');
+const quizClueText = $('quizClueText');
+const quizOptions = $('quizOptions');
+const quizResult = $('quizResult');
+const quizResultInner = $('quizResultInner');
+const quizProgress = $('quizProgress');
+const quizScoreEl = $('quizScore');
+const apiKeyInput = $('apiKey');
+const keyStatus = $('keyStatus');
+
+// Restore key from sessionStorage
+(function() {
+  const saved = sessionStorage.getItem('museum_ai_key');
+  if (saved) { apiKeyInput.value = saved; apiKey = saved; keyStatus.textContent = '✓ API Key 已加载（本地存储）'; keyStatus.style.color = '#2E7D5B'; }
+})();
+
+// ============================================================
+// CLAUDE API
+// ============================================================
+async function callClaude(prompt) {
+  if (!apiKey) throw new Error('请先输入 API Key');
+  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 500,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  const body = await resp.json();
+  if (!resp.ok) {
+    const msg = body.error?.message || body.error?.type || '请求失败';
+    if (resp.status === 401) throw new Error('API Key 无效，请检查后重试');
+    if (resp.status === 429) throw new Error('请求太频繁，请稍后再试');
+    throw new Error(`API 错误：${msg}`);
+  }
+  return body.content[0].text;
+}
+
+// ============================================================
+// RENDER — Style Grid (Guide Tab)
+// ============================================================
+function renderStyleGrid() {
+  styleGrid.innerHTML = STYLES.map(s => `
+    <button class="style-card rounded-lg p-3 sm:p-4 text-left border bg-white bg-opacity-70 border-[var(--gray-light)]"
+            data-id="${s.id}"
+            style="border-left: 3px solid ${s.color}"
+            onclick="handleGuideClick('${s.id}')">
+      <div class="font-serif-cn font-semibold text-sm sm:text-base leading-tight">${s.nameZh}</div>
+      <div class="text-[10px] sm:text-xs text-[var(--gray-mid)] mt-0.5 truncate">${s.name}</div>
+      <div class="text-[10px] sm:text-xs text-[var(--gray-mid)] mt-1 leading-relaxed line-clamp-2 hidden sm:block">${s.coreLine}</div>
+    </button>
+  `).join('');
+}
+
+// ============================================================
+// GUIDE — AI 导览
+// ============================================================
+async function handleGuideClick(id) {
+  const style = STYLES.find(s => s.id === id);
+  if (!style || isGuideLoading) return;
+
+  // Highlight
+  document.querySelectorAll('.style-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.style-card[data-id="${id}"]`)?.classList.add('active');
+
+  guideResult.classList.remove('hidden');
+  guideResult.innerHTML = `
+    <div class="flex items-start gap-3 p-5 bg-white bg-opacity-70 border border-[var(--gray-light)] rounded-lg">
+      <div class="spinner mt-0.5 shrink-0"></div>
+      <div>
+        <div class="font-serif-cn font-semibold text-base">${style.nameZh} <span class="text-[var(--gray-mid)] font-normal text-xs">${style.name}</span></div>
+        <div class="text-xs text-[var(--gray-mid)] mt-1">正在向 AI 请教...</div>
+      </div>
+    </div>
+  `;
+
+  isGuideLoading = true;
+  try {
+    const prompt = `你是一个设计博物馆的儿童导览员。用户选择了"${style.nameZh}（${style.name}）"这个设计流派。
+流派核心：${style.coreLine}
+视觉语言：${style.visual}
+
+请用 **12 岁小孩也能听懂的话**，在 150 字以内解释清楚这个流派最大的特点。用中文回答。`;
+
+    const text = await callClaude(prompt);
+    guideResult.innerHTML = `
+      <div class="bg-white bg-opacity-70 border border-[var(--gray-light)] rounded-lg p-5 fade-in" style="border-left: 3px solid ${style.color}">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-serif-cn font-semibold text-base">${style.nameZh}</span>
+          <span class="text-xs text-[var(--gray-mid)]">${style.name}</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full" style="background:${style.color}20;color:${style.color}">${style.emotion}</span>
+        </div>
+        <p class="text-sm leading-relaxed">${text}</p>
+        <p class="text-xs text-[var(--gray-mid)] mt-3 italic">「${style.coreLine}」</p>
+      </div>
+    `;
+  } catch (err) {
+    guideResult.innerHTML = `
+      <div class="bg-red-50 border border-red-200 rounded-lg p-4 fade-in">
+        <p class="text-sm text-red-700"><i class="fa fa-exclamation-circle mr-1.5"></i>${err.message}</p>
+        <p class="text-xs text-red-500 mt-1">请检查 API Key 是否正确，或网络连接是否正常</p>
+      </div>
+    `;
+  } finally {
+    isGuideLoading = false;
+  }
+}
+
+// ============================================================
+// QUIZ — 猜流派
+// ============================================================
+function startQuiz() {
+  quizIntro.classList.add('hidden');
+  quizArea.classList.remove('hidden');
+  quizScore = 0;
+  quizCount = 0;
+  usedQuizIds = [];
+  nextQuizRound();
+}
+
+function pickRandom(arr, n) {
+  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, n);
+}
+
+function nextQuizRound() {
+  // Pick a random unused style
+  const available = STYLES.filter(s => !usedQuizIds.includes(s.id));
+  if (available.length === 0 || quizCount >= QUIZ_ROUNDS) {
+    // Show final score
+    quizOptions.innerHTML = '';
+    quizResult.classList.remove('hidden');
+    quizResultInner.innerHTML = `
+      <div class="text-center py-4">
+        <div class="text-4xl mb-3 opacity-30">🏆</div>
+        <div class="font-serif-cn text-lg font-semibold mb-1">答题结束！</div>
+        <div class="text-sm">你答对了 <span class="text-gold font-bold text-lg">${quizScore}</span> / ${quizCount} 题</div>
+        <div class="text-xs text-[var(--gray-mid)] mt-2">得分：${Math.round(quizScore / quizCount * 100)}%</div>
+        <button onclick="startQuiz()" class="mt-4 px-5 py-2 bg-[var(--near-black)] text-white text-sm rounded hover:opacity-80 transition-opacity">再来一轮</button>
+      </div>
+    `;
+    document.getElementById('nextQuizBtn').classList.add('hidden');
+    return;
+  }
+
+  const style = available[Math.floor(Math.random() * available.length)];
+  usedQuizIds.push(style.id);
+  quizCount++;
+
+  // Generate 4 options (1 correct + 3 random)
+  const others = STYLES.filter(s => s.id !== style.id);
+  const wrong = pickRandom(others, 3);
+  const options = [{ ...style, isCorrect: true }, ...wrong.map(s => ({ ...s, isCorrect: false }))]
+    .sort(() => Math.random() - 0.5);
+
+  currentQuiz = { style, options, correctId: style.id };
+
+  // Update UI
+  quizProgress.textContent = `第 ${quizCount} 题（共 ${QUIZ_ROUNDS} 题）`;
+  quizScoreEl.textContent = `得分：${quizScore}`;
+  quizClueText.textContent = style.visual;
+
+  quizOptions.innerHTML = options.map(o => `
+    <button class="option-btn px-4 py-3 rounded-lg border border-[var(--gray-light)] text-sm text-left bg-white bg-opacity-70"
+            data-id="${o.id}" data-correct="${o.isCorrect}"
+            onclick="handleQuizAnswer(this, '${o.id}')">
+      <span class="font-serif-cn font-medium">${o.nameZh}</span>
+      <span class="text-[var(--gray-mid)] text-xs ml-1">${o.name}</span>
+    </button>
+  `).join('');
+
+  quizResult.classList.add('hidden');
+  document.getElementById('nextQuizBtn').classList.remove('hidden');
+}
+
+async function handleQuizAnswer(btn, selectedId) {
+  if (isQuizLoading || btn.classList.contains('disabled')) return;
+
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(b => b.classList.add('disabled'));
+
+  // Highlight correct/wrong
+  allBtns.forEach(b => {
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+    else if (b === btn && !isCorrect) b.classList.add('wrong');
+    else b.classList.add('disabled');
+  });
+  if (isCorrect) btn.classList.add('correct');
+  if (isCorrect) quizScore++;
+  quizScoreEl.textContent = `得分：${quizScore}`;
+
+  // Call Claude for commentary
+  quizResult.classList.remove('hidden');
+  quizResultInner.innerHTML = `<div class="flex items-center gap-2"><div class="spinner"></div><span class="text-sm text-[var(--gray-mid)]">AI 正在点评...</span></div>`;
+
+  isQuizLoading = true;
+  try {
+    const style = currentQuiz.style;
+    const selectedStyle = STYLES.find(s => s.id === selectedId);
+    const prompt = `用户在玩"猜设计流派"游戏。
+题目：以下视觉描述属于哪个流派？
+视觉描述：${style.visual}
+
+用户${isCorrect ? '选对了' : '选错了'}。用户选择：${selectedStyle.nameZh}（${selectedStyle.name}）${isCorrect ? '' : '，正确答案是 ' + style.nameZh + '（' + style.name + '）'}
+
+请用 60 字以内、有趣的方式${isCorrect ? '解释为什么这些特征指向该风格' : '给出一个关于该风格的提示'}。用中文回答。`;
+
+    const text = await callClaude(prompt);
+    quizResultInner.innerHTML = `
+      <div class="flex items-start gap-2">
+        <span class="text-lg">${isCorrect ? '✓' : '✗'}</span>
+        <div>
+          <div class="font-medium text-sm mb-1">${isCorrect ? '答对了！' : `答案是 ${style.nameZh}（${style.name}）`}</div>
+          <div class="text-sm leading-relaxed">${text}</div>
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    quizResultInner.innerHTML = `<p class="text-sm text-red-600"><i class="fa fa-exclamation-circle mr-1"></i>${err.message}</p>`;
+  } finally {
+    isQuizLoading = false;
+  }
+}
+
+function resetQuiz() {
+  quizArea.classList.add('hidden');
+  quizIntro.classList.remove('hidden');
+  quizScore = 0; quizCount = 0; usedQuizIds = [];
+  document.getElementById('nextQuizBtn').classList.remove('hidden');
+}
+
+// ============================================================
+// TABS
+// ============================================================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+  });
+});
+
+// ============================================================
+// API KEY
+// ============================================================
+$('saveKeyBtn').addEventListener('click', () => {
+  const val = apiKeyInput.value.trim();
+  if (!val) { keyStatus.textContent = '请粘贴 API Key'; keyStatus.style.color = '#C0392B'; return; }
+  if (!val.startsWith('sk-ant-')) { keyStatus.textContent = 'Key 格式似乎不对（应以 sk-ant- 开头）'; keyStatus.style.color = '#C0392B'; return; }
+  apiKey = val;
+  sessionStorage.setItem('museum_ai_key', val);
+  keyStatus.textContent = '✓ API Key 已保存（仅当前浏览器会话有效）';
+  keyStatus.style.color = '#2E7D5B';
+});
+
+// ============================================================
+// EVENT BINDINGS
+// ============================================================
+$('startQuizBtn').addEventListener('click', startQuiz);
+$('nextQuizBtn').addEventListener('click', nextQuizRound);
+$('resetQuizBtn').addEventListener('click', resetQuiz);
+
+// ============================================================
+// INIT
+// ============================================================
+renderStyleGrid();
+
+// 深链：从主站「让 AI 讲讲」进来时，?s=<id> 预选该流派（有 key 则自动导览）
+(function(){
+  const sid = new URLSearchParams(location.search).get('s');
+  if (!sid || !STYLES.find(s => s.id === sid)) return;
+  const card = document.querySelector(`.style-card[data-id="${sid}"]`);
+  if (card) { card.classList.add('active'); card.scrollIntoView({block:'center', behavior:'smooth'}); }
+  if (apiKey) handleGuideClick(sid);
+  else { keyStatus.textContent = '已选中流派，填入 API Key 后即可让 AI 讲解'; keyStatus.style.color = '#B08D4F'; }
+})();
+</script>
+</body>
+</html>

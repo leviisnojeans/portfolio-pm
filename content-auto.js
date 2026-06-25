@@ -14,6 +14,8 @@ var PORTFOLIO_AUTO_DATA = {
       "auto-wr-decluttering_retention_conversion-title": `少即是多：C端界面降噪如何撬动用户停留与转化`,
       "auto-wr-parasocial_analysis-tag": `产品分析`,
       "auto-wr-parasocial_analysis-title": `直播间的社交引擎：Parasocial Relationship 如何驱动互动与营收`,
+      "auto-sw-art_gallery-desc": ``,
+      "auto-sw-art_gallery-name": `art gallery`,
       "auto-sw-philforum-desc": `沉浸式思想圆桌应用。把真实问题交给历史上的哲学家，看他们如何回应、辩论、碰撞。`,
       "auto-sw-philforum-name": `The Philosopher's Forum`,
       "auto-sw-travelmap-desc": `一个帮你找到最佳旅行时机的交互工具。结合气候数据与个人偏好，可视化呈现全球目的地的适宜出行窗口。`,
@@ -30,6 +32,8 @@ var PORTFOLIO_AUTO_DATA = {
       "auto-wr-decluttering_retention_conversion-title": `The Leverage of Less: How UI Decluttering Drives Retention & Conversion`,
       "auto-wr-parasocial_analysis-tag": `Product Analysis`,
       "auto-wr-parasocial_analysis-title": `The Social Engine of Live Streaming: How Parasocial Relationships Drive Engagement & Revenue`,
+      "auto-sw-art_gallery-desc": ``,
+      "auto-sw-art_gallery-name": `art gallery`,
       "auto-sw-philforum-desc": `An immersive roundtable experience. Bring your questions to history's greatest thinkers and watch them respond, debate, and collide.`,
       "auto-sw-philforum-name": `The Philosopher's Forum`,
       "auto-sw-travelmap-desc": `An interactive tool to find your ideal travel timing. Combines climate data with personal preferences to visualize the best windows for destinations worldwide.`,
@@ -69,6 +73,14 @@ var PORTFOLIO_AUTO_DATA = {
     },
   ],
   smallWorks: [
+    {
+      id: "art_gallery",
+      nameKey: "auto-sw-art_gallery-name",
+      descKey: "auto-sw-art_gallery-desc",
+      file: "source/\u5c0f\u4f5c\u54c1/art gallery/ai-guide.html",
+      productDesc: null,
+      productDescInline: {},
+    },
     {
       id: "travelmap",
       nameKey: "auto-sw-travelmap-name",

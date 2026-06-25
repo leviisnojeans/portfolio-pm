@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#F4ECDF"/>
+  <!-- 之字形 -->
+  <path d="M-20 250 L120 180 L260 250 L400 180 L540 250 L680 180 L820 250" fill="none" stroke="#2B6CF0" stroke-width="20" stroke-linejoin="round"/>
+  <!-- 波点撞色 -->
+  <g fill="#FF4FA3">
+    <circle cx="140" cy="430" r="20"/><circle cx="220" cy="430" r="20"/><circle cx="300" cy="430" r="20"/>
+    <circle cx="140" cy="510" r="20"/><circle cx="220" cy="510" r="20"/><circle cx="300" cy="510" r="20"/>
+  </g>
+  <!-- 三角 -->
+  <path d="M560 380 L680 380 L620 500 Z" fill="#FFE14D" stroke="#111" stroke-width="6"/>
+  <!-- 荧光色块 -->
+  <rect x="120" y="640" width="180" height="180" fill="#1BC7B4" transform="rotate(-8 210 730)"/>
+  <rect x="420" y="600" width="150" height="150" fill="#FF4FA3"/>
+  <!-- 曲线 squiggle -->
+  <path d="M420 840 q40 -60 80 0 t80 0 t80 0" fill="none" stroke="#2B6CF0" stroke-width="14" stroke-linecap="round"/>
+  <!-- 散点 -->
+  <g fill="#111"><circle cx="660" cy="640" r="10"/><circle cx="700" cy="700" r="10"/><circle cx="640" cy="720" r="10"/></g>
+  <!-- 细条纹 -->
+  <g stroke="#111" stroke-width="5"><line x1="80" y1="900" x2="240" y2="900"/><line x1="80" y1="918" x2="240" y2="918"/><line x1="80" y1="936" x2="240" y2="936"/></g>
+</svg>

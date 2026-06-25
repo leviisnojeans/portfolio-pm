@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#F2F2F0"/>
+  <!-- 数学网格 -->
+  <g stroke="#000" stroke-width="1" opacity="0.12">
+    <line x1="100" y1="0" x2="100" y2="1000"/><line x1="250" y1="0" x2="250" y2="1000"/><line x1="400" y1="0" x2="400" y2="1000"/><line x1="550" y1="0" x2="550" y2="1000"/><line x1="700" y1="0" x2="700" y2="1000"/>
+    <line x1="0" y1="150" x2="800" y2="150"/><line x1="0" y1="350" x2="800" y2="350"/><line x1="0" y1="550" x2="800" y2="550"/><line x1="0" y1="750" x2="800" y2="750"/>
+  </g>
+  <!-- 同心弧 + 对角（构成式几何，非具体海报） -->
+  <g>
+    <circle cx="400" cy="470" r="260" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="400" cy="470" r="190" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="400" cy="470" r="120" fill="#E2231A"/>
+    <path d="M100 750 L700 190" stroke="#000" stroke-width="3"/>
+  </g>
+  <!-- 客观层级排版 -->
+  <text x="100" y="840" font-family="Helvetica, Arial, sans-serif" font-size="92" font-weight="700" fill="#000" letter-spacing="-2">Grid</text>
+  <text x="104" y="892" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="400" fill="#000" letter-spacing="3">SYSTEMS · ORDNUNG</text>
+  <rect x="100" y="910" width="600" height="3" fill="#E2231A"/>
+</svg>
