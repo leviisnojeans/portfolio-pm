@@ -77,7 +77,7 @@ var PORTFOLIO_AUTO_DATA = {
       id: "art_gallery",
       nameKey: "auto-sw-art_gallery-name",
       descKey: "auto-sw-art_gallery-desc",
-      file: "source/\u5c0f\u4f5c\u54c1/art gallery/ai-guide.html",
+      file: "source/\u5c0f\u4f5c\u54c1/art gallery/index.html",
       productDesc: null,
       productDescInline: {},
     },

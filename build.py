@@ -52,9 +52,9 @@ EMBED_REPLACEMENTS = {}
 # 用于有独立生产构建的小作品（如旅行地图的多文件优化版部署在 /travel-map/），
 # 让线上入口指向构建产物而非源目录中的单文件 HTML。
 SMALL_WORK_FILE_OVERRIDES = {
-    # 用目录 URL（带尾斜杠）而非 index.html，确保多文件构建的相对资源路径
-    # 在本地 serve 与 Cloudflare Pages 上都能正确解析。
+    # 明确指定首页，兼容本地文件打开与线上托管。
     'travelmap': 'travel-map/index.html',
+    'art_gallery': 'source/小作品/art gallery/index.html',
 }
 
 
