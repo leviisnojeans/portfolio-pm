@@ -54,7 +54,7 @@ EMBED_REPLACEMENTS = {}
 SMALL_WORK_FILE_OVERRIDES = {
     # 用目录 URL（带尾斜杠）而非 index.html，确保多文件构建的相对资源路径
     # 在本地 serve 与 Cloudflare Pages 上都能正确解析。
-    'travelmap': 'travel-map/',
+    'travelmap': 'travel-map/index.html',
 }
 
 
