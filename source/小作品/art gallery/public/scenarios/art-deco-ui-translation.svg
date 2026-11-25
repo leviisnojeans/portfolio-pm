@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><rect width="1200" height="900" fill="#171713"/>
+<rect x="38" y="38" width="1124" height="824" rx="8" fill="none" stroke="#f3e4bd" stroke-opacity=".16"/>
+<path d="M80 180 H1120 M80 196 H1120" stroke="#d2ae64" stroke-width="2"/>
+<path d="M600 170 l18 18 -18 18 -18 -18z" fill="#d2ae64"/>
+<text x="470" y="130" font-family="Georgia, serif" font-size="24" font-weight="500" letter-spacing="5" fill="#f3e4bd">THE ASTER HOTEL</text>
+<text x="530" y="268" font-family="Arial, sans-serif" font-size="13" font-weight="500" letter-spacing="3" fill="#d2ae64">NEW YORK · EST. 1928</text>
+<text x="390" y="370" font-family="Georgia, serif" font-size="70" font-weight="400" letter-spacing="1" fill="#f3e4bd">A stay</text>
+<text x="350" y="450" font-family="Georgia, serif" font-size="70" font-weight="400" letter-spacing="1" fill="#f3e4bd">above the</text>
+<text x="420" y="530" font-family="Georgia, serif" font-size="70" font-weight="400" letter-spacing="1" fill="#f3e4bd">ordinary.</text>
+<path d="M600 574 L740 700 H460Z" fill="none" stroke="#d2ae64" stroke-width="3"/>
+<path d="M600 598 L704 700 H496Z" fill="#655437" opacity=".55"/>
+<text x="492" y="748" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#d2ae64">DISCOVER THE ASTER</text>
+<path d="M80 790 H1120 M80 806 H1120" stroke="#d2ae64" stroke-width="2"/>
+</svg>

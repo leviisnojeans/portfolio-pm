@@ -79,11 +79,12 @@
     <label class="text-xs font-medium uppercase tracking-wider text-[var(--gray-mid)] shrink-0" for="apiKey">
       <i class="fa fa-key mr-1"></i>API Key
     </label>
-    <div class="flex-1 w-full sm:w-auto flex gap-2">
+    <div class="flex-1 w-full sm:w-auto flex flex-wrap gap-2">
       <input id="apiKey" type="password" class="key-input flex-1 px-3 py-1.5 text-sm border border-[var(--gray-light)] rounded bg-white bg-opacity-80 w-full" placeholder="粘贴你的 Anthropic API Key..." autocomplete="off" />
       <button id="saveKeyBtn" class="px-4 py-1.5 text-sm bg-[var(--near-black)] text-white rounded hover:opacity-80 transition-opacity shrink-0">保存</button>
+      <button id="clearKeyBtn" type="button" class="px-4 py-1.5 text-sm border border-[var(--gray-light)] rounded hover:bg-white transition-colors shrink-0">清除</button>
     </div>
-    <p class="text-xs text-[var(--gray-mid)] w-full sm:w-auto">仅存于本地浏览器，<span class="text-gold">不会上传</span></p>
+    <p class="text-xs text-[var(--gray-mid)] w-full sm:w-auto leading-relaxed">密钥仅保存在当前标签页；生成讲解时，浏览器会将请求直接发送至 Anthropic。请勿使用生产环境密钥。</p>
   </div>
   <p id="keyStatus" class="text-xs mt-1.5 text-[var(--gray-mid)]"></p>
 </section>
@@ -139,7 +140,7 @@
 
 <!-- Footer -->
 <footer class="border-t border-[var(--gray-light)] py-6 text-center text-xs text-[var(--gray-mid)]">
-  <span class="text-gold">◆</span> 设计语言博物馆 · AI 功能原型 · API 密钥仅本地使用
+  <span class="text-gold">◆</span> 设计语言博物馆 · AI 功能原型 · 密钥保存在当前标签页，生成请求直连 Anthropic
 </footer>
 
 <script>
@@ -205,7 +206,7 @@ const keyStatus = $('keyStatus');
 // Restore key from sessionStorage
 (function() {
   const saved = sessionStorage.getItem('museum_ai_key');
-  if (saved) { apiKeyInput.value = saved; apiKey = saved; keyStatus.textContent = '✓ API Key 已加载（本地存储）'; keyStatus.style.color = '#2E7D5B'; }
+  if (saved) { apiKeyInput.value = saved; apiKey = saved; keyStatus.textContent = 'API Key 已从当前标签页会话恢复'; keyStatus.style.color = '#2E7D5B'; }
 })();
 
 // ============================================================
@@ -453,6 +454,13 @@ $('saveKeyBtn').addEventListener('click', () => {
   apiKey = val;
   sessionStorage.setItem('museum_ai_key', val);
   keyStatus.textContent = '✓ API Key 已保存（仅当前浏览器会话有效）';
+  keyStatus.style.color = '#2E7D5B';
+});
+$('clearKeyBtn').addEventListener('click', () => {
+  apiKey = '';
+  apiKeyInput.value = '';
+  sessionStorage.removeItem('museum_ai_key');
+  keyStatus.textContent = '已从当前标签页清除 API Key';
   keyStatus.style.color = '#2E7D5B';
 });
 

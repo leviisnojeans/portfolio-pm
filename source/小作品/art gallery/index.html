@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>设计语言博物馆 · Museum of Design Languages</title>
+<script type="x-metadata">
+{
+  "id": "art_gallery",
+  "entry": true,
+  "name": {"zh": "设计语言博物馆", "en": "Museum of Design Languages"},
+  "desc": {"zh": "看作品，读懂风格；比较流派，找到界面灵感。通过代表作品、视觉 DNA、时间线与原创 UI 转译，探索 12 种设计语言。", "en": "Explore 12 design languages through representative works, visual DNA, timelines, and original UI translations. Compare movements and turn visual principles into interface ideas."}
+}
+</script>
 <meta name="description" content="一个视觉优先的设计语言博物馆——12 个设计风格，从侘寂到赛博朋克。每个流派含 UI 转化视角与东西方对照。" />
 <meta name="theme-color" content="#F5F2EC" />
 <meta property="og:type" content="website" />
@@ -155,6 +163,15 @@
     z-index:40; font-size:10px; letter-spacing:.24em; text-transform:uppercase;
     color:var(--muted); opacity:.7;
   }
+  .gallery-intro{position:fixed;left:clamp(20px,5vw,56px);bottom:clamp(84px,12vh,112px);z-index:35;width:min(330px,calc(100vw - 40px));padding:18px 20px;color:var(--ink);background:color-mix(in srgb,var(--paper) 88%,transparent);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .gallery-intro .gi-kicker{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .gallery-intro h1{font:26px/1.2 "Songti SC","Noto Serif CJK SC",serif;margin:7px 0}
+  .gallery-intro p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}.gallery-quicklinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.gallery-quicklinks a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);font-size:11px;padding:3px 0}.gallery-quicklinks a:hover{color:var(--gold)}
+  .gallery-controls{position:fixed;right:clamp(20px,5vw,56px);bottom:clamp(84px,12vh,112px);z-index:40;display:flex;gap:8px}
+  .gallery-controls button{min-width:48px;min-height:48px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 88%,transparent);color:var(--ink);font-size:19px;cursor:pointer;backdrop-filter:blur(12px)}
+  .gallery-controls button:hover{border-color:var(--gold);color:var(--gold)}
+  .gallery-controls button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  @media(max-width:640px){.gallery-intro{left:16px;bottom:92px;padding:13px 15px;width:min(290px,calc(100vw - 104px))}.gallery-intro h1{font-size:21px}.gallery-intro p{font-size:12px}.gallery-controls{right:14px;bottom:96px;flex-direction:column;gap:6px}.gallery-controls button{min-width:40px;min-height:40px}.dots{bottom:30px}.hint{bottom:10px;font-size:9px}}
   .stage-caption{
     position:fixed; left:50%; top:14%; transform:translateX(-50%);
     z-index:30; text-align:center; pointer-events:none;
@@ -190,6 +207,26 @@
     border:1px solid var(--line); border-radius:6px; padding:16px 18px;
   }
   .dna i{ font-size:24px; color:var(--gold); }
+
+  /* 应用场景示意图卡片 */
+  .scenario-card{ display:flex; flex-direction:column; }
+  .scenario-shot{
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    background:color-mix(in srgb, var(--ink) 5%, transparent);
+    display:flex; align-items:center; justify-content:center;
+    aspect-ratio:4/3; padding:14px;
+  }
+  .scenario-shot img{ max-width:100%; max-height:100%; object-fit:contain;
+    border-radius:4px; transition:transform .4s ease; }
+  .scenario-card:hover .scenario-shot img{ transform:scale(1.02); }
+  .scenario-cap{ margin-top:12px; }
+  .scenario-cap-head{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .scenario-cap-head .font-serif-display{ font-size:17px; color:var(--ink); }
+  .scenario-tag{
+    font-size:11px; letter-spacing:.08em; padding:2px 9px; border-radius:99px;
+    color:var(--gold); border:1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+    background:color-mix(in srgb, var(--gold) 8%, transparent); white-space:nowrap;
+  }
 
   /* 焦点可见（键盘可达性） */
   .card:focus-visible{ outline:none; }
@@ -372,6 +409,14 @@
           "source": "Wikimedia Commons",
           "rights": "CC BY-SA 3.0 / GFDL，作者 Cricu"
         }
+      ],
+      "scenarios": [
+        {
+          "image": "public/scenarios/brutalism-ui-translation.svg",
+          "title": "开放式项目工作台",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：让信息结构、状态与原始内容直接可见，演示粗野主义的硬边和反装饰表达。"
+        }
       ]
     },
     {
@@ -430,6 +475,14 @@
           "珠宝 / 婚礼品牌"
         ]
       },
+      "scenarios": [
+        {
+          "image": "public/scenarios/art-nouveau-1.png",
+          "title": "香氛电商商品页",
+          "type": "UI 界面",
+          "note": "曲线藤蔓边框、对称花卉纹样配合留白与烫金细节，把奢侈品的优雅带入商品详情页。"
+        }
+      ],
       "eastWest": {
         "west": "Mucha 用流动女性人物 + 蔓藤金线，为一个时代定义了‘美’。",
         "east": "新艺术的有机曲线、花卉纹样与摩登女性形象，1920–30 年代经上海月份牌广告画被本土吸收：杭穉英、谢之光、金梅生等画师把『蔓藤金线＋摩登女郎』用于香烟与化妆品招贴。在欧洲它是反工业化的艺术先锋姿态，到了上海，同一套装饰语言却被收编进消费广告与殖民现代性——同样的『美』，一处是宣言，一处是橱窗。"
@@ -617,6 +670,14 @@
           "source": "Wikimedia Commons",
           "rights": "⚠ 设计仍在版权期，建议用风格化示意替代"
         }
+      ],
+      "scenarios": [
+        {
+          "image": "public/scenarios/memphis-design-ui-translation.svg",
+          "title": "潮流商品专题页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：以撞色、几何图形和强烈标题制造轻快的商品活动氛围。"
+        }
       ]
     },
     {
@@ -739,6 +800,14 @@
           "image": "public/artworks/wabi-sabi/wabi-sabi-mw2.jpg",
           "source": "Wikimedia Commons",
           "rights": "公有领域（古籍插图）"
+        }
+      ],
+      "scenarios": [
+        {
+          "image": "public/scenarios/wabi-sabi-ui-translation.svg",
+          "title": "慢生活茶事品牌首页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：用柔和纸色、克制排版和不规则自然形态表达慢节奏与留白。"
         }
       ]
     },
@@ -872,7 +941,15 @@
           "rights": "CC BY-SA 4.0，作者 JensKunstfreund"
         }
       ],
-      "imageTodo": "补代表作图（德绍校舍 / 瓦西里椅 / Universal 字体样张）；字体与早期平面多为公有领域"
+      "imageTodo": "补代表作图（德绍校舍 / 瓦西里椅 / Universal 字体样张）；字体与早期平面多为公有领域",
+      "scenarios": [
+        {
+          "image": "public/scenarios/bauhaus-ui-translation.svg",
+          "title": "日用家具商店",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：以几何构成、功能分区和清晰信息层级展示形式追随功能。"
+        }
+      ]
     },
     {
       "id": "cyberpunk",
@@ -933,6 +1010,14 @@
           "科技感活动页"
         ]
       },
+      "scenarios": [
+        {
+          "image": "public/scenarios/cyberpunk-1.png",
+          "title": "科技 HUD 仪表盘",
+          "type": "UI 界面",
+          "note": "霓虹青／品红描边、暗底发光、切角棱线与高密度数据模块，营造未来控制台的沉浸感。"
+        }
+      ],
       "eastWest": {
         "west": "原型城市是 1980s 的东京——西方眼中的‘未来亚洲’。高密度、汉字霓虹、精英技术与底层混乱并存，全来自对东亚城市的想象投射。",
         "east": "国内语境中更多是去政治化的视觉消费品（游戏、B站特效、蒸汽波）。但部分创作者开始反向阅读——用赛博朋克框架审视平台数据权力、骑手算法困境，与 Zuboff《监控资本主义》的批判逻辑高度重合。"
@@ -1116,7 +1201,15 @@
           "rights": "公有领域（歌川广重 1858 年逝世）"
         }
       ],
-      "imageTodo": "Met Open Access 搜 Hokusai Great Wave / Hiroshige Tokaido 取 CC0 高清图（公有领域，最省心）"
+      "imageTodo": "Met Open Access 搜 Hokusai Great Wave / Hiroshige Tokaido 取 CC0 高清图（公有领域，最省心）",
+      "scenarios": [
+        {
+          "image": "public/scenarios/ukiyo-e-ui-translation.svg",
+          "title": "京都茶屋文化导览",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：借用平面轮廓、季节意象与有限色彩，构造文化导览入口。"
+        }
+      ]
     },
     {
       "id": "pop-art",
@@ -1229,7 +1322,15 @@
         "rights": "CC0 · 本项目自制 SVG · Ben-Day 网点 + 爆炸星形 + 对话气泡"
       },
       "masterworks": [],
-      "imageTodo": "版权敏感：避免原作，用风格化网点/撞色示意图"
+      "imageTodo": "版权敏感：避免原作，用风格化网点/撞色示意图",
+      "scenarios": [
+        {
+          "image": "public/scenarios/pop-art-ui-translation.svg",
+          "title": "流行文化限量商品页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：用粗描边、爆炸图形和高对比色彩构造流行文化商品专题。"
+        }
+      ]
     },
     {
       "id": "deconstructivism",
@@ -1353,7 +1454,15 @@
           "rights": "CC BY 3.0，作者 Mr a"
         }
       ],
-      "imageTodo": "找 CC 授权建筑摄影；广州大剧院可自摄/找授权"
+      "imageTodo": "找 CC 授权建筑摄影；广州大剧院可自摄/找授权",
+      "scenarios": [
+        {
+          "image": "public/scenarios/deconstructivism-ui-translation.svg",
+          "title": "城市艺术节数字展览",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：打破对称网格，让标题、形状和导航错位组合，但仍保留可读入口。"
+        }
+      ]
     },
     {
       "id": "art-deco",
@@ -1484,9 +1593,13 @@
           "rights": "CC0，作者 Hermann Luyken"
         }
       ],
-      "_todo": [
-        "补代表作图片（克莱斯勒大厦 / 外滩 / Cassandre 海报）",
-        "Cassandre 海报版权需核"
+      "scenarios": [
+        {
+          "image": "public/scenarios/art-deco-ui-translation.svg",
+          "title": "装饰艺术风格酒店预订页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：以对称构图、金色细线和几何轮廓营造酒店品牌的仪式感。"
+        }
       ]
     },
     {
@@ -1546,6 +1659,14 @@
           "Figma 自身 UI"
         ]
       },
+      "scenarios": [
+        {
+          "image": "public/scenarios/swiss-style-1.png",
+          "title": "新闻资讯 App",
+          "type": "UI 界面",
+          "note": "严格 8px 网格、左右对齐的图文卡片，红色作唯一强调色；层级全靠字号差与留白，无任何装饰。"
+        }
+      ],
       "eastWest": {
         "west": "包豪斯理想的工程化落地版——包豪斯给哲学，瑞士人给操作手册；经 Helvetica 全球扩散，成为‘现代性’的视觉代名词。",
         "east": "直接传承于互联网大厂设计规范（字节 / 腾讯 / 阿里的 MDS、TDesign、Ant Design 骨子里都是网格+层级的瑞士逻辑）。但中文等宽特性对网格提出独特挑战，催生‘汉字网格’本土化探索。"
@@ -1603,10 +1724,23 @@
         "source": "原创示意图（避开版权期原作）",
         "rights": "CC0 · 本项目自制 SVG · 数学网格 + 构成几何 + Helvetica 层级"
       },
-      "masterworks": [],
-      "_todo": [
-        "补代表作图片（Müller-Brockmann 海报版权敏感）",
-        "可用 Helvetica 字体样张作安全替代"
+      "masterworks": [
+        {
+          "title": "Musica Viva · Juni-Festwochen Zürich",
+          "artist": "Josef Müller-Brockmann",
+          "year": 1957,
+          "image": "public/artworks/swiss-style/swiss-style-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域"
+        },
+        {
+          "title": "Kunsthalle Basel · Gubler / Zurkinden 展览海报",
+          "artist": "Armin Hofmann",
+          "year": 1959,
+          "image": "public/artworks/swiss-style/swiss-style-mw2.jpg",
+          "source": "Wikimedia Commons（Museum für Gestaltung Zürich 海报收藏 02-0769）",
+          "rights": "公有领域"
+        }
       ]
     },
     {
@@ -1741,8 +1875,13 @@
           "rights": "公有领域（El Lissitzky 1941 年逝世）"
         }
       ],
-      "_todo": [
-        "补图片：El Lissitzky / Rodchenko 多为公有领域，Wikimedia 可取"
+      "scenarios": [
+        {
+          "image": "public/scenarios/constructivism-ui-translation.svg",
+          "title": "城市公共文化节活动页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：用斜切色块、强烈动势和红色行动按钮引导公共活动参与。"
+        }
       ]
     }
   ]
@@ -2067,11 +2206,12 @@ function renderHome(){
   setAmbient(GALLERY[0].themeColor, GALLERY[0].isDark);
   app.innerHTML = `
     ${navHTML('gallery')}
+    <section class="gallery-intro" aria-labelledby="gallery-title"><div class="gi-kicker">Museum of Design Languages · 12 个展厅</div><h1 id="gallery-title">看见设计如何表达</h1><p>从一件作品出发，读懂一种视觉语言，再看看它如何进入今天的界面。</p><div class="gallery-quicklinks"><a href="#/compare">比较两种风格</a><a href="#/timeline">浏览设计时间线</a><a href="ai-guide.html">开始 AI 导览</a></div></section>
     <div class="stage-caption" id="caption"></div>
     <div class="stage" id="stage">
       <div class="track" id="track">
         ${GALLERY.map((s,i)=>`
-          <div class="card" data-i="${i}" data-id="${s.id}" role="link" tabindex="0"
+          <div class="card" data-i="${i}" data-id="${s.id}" role="group" aria-roledescription="展厅封面"
                aria-label="${esc(s.nameZh)} ${esc(s.name)}，${esc(s.coreLine)}">
             <div class="card-inner">
               ${cardArtHTML(s)}
@@ -2081,16 +2221,17 @@ function renderHome(){
                 <div class="ci-en">${esc(s.name)}</div>
                 <div class="ci-meta">${esc(s.region)} · ${esc(s.period.label)}</div>
                 <div class="ci-core">${esc(s.coreLine)}</div>
-                <a class="ci-learn" href="#/${s.id}">LEARN →</a>
+                <span class="ci-learn">ENTER EXHIBITION →</span>
               </div>
             </div>
           </div>`).join('')}
       </div>
     </div>
     <div class="dots" id="dots">
-      ${GALLERY.map((s,i)=>`<button data-i="${i}" title="${esc(s.nameZh)}"></button>`).join('')}
+      ${GALLERY.map((s,i)=>`<button data-i="${i}" aria-label="查看${esc(s.nameZh)}" title="${esc(s.nameZh)}"></button>`).join('')}
     </div>
-    <div class="hint">拖拽 · 滚轮 · ← →</div>
+    <div class="gallery-controls" aria-label="展厅浏览控制"><button type="button" id="gallery-prev" aria-label="上一个流派">←</button><button type="button" id="gallery-next" aria-label="下一个流派">→</button></div>
+    <div class="hint">浏览封面；中央卡片可进入展厅 · ← →</div>
   `;
   navScroll();
   initCarousel();
@@ -2193,25 +2334,31 @@ function initCarousel(){
   stage.addEventListener('pointercancel', endDrag);
 
   // click card: center -> detail; side -> bring to center
-  cards.forEach(card=>{
-    card.addEventListener('click', e=>{
-      if(moved) return;
-      const i = +card.dataset.i;
-      if(i === Math.round(pos)){ location.hash = '#/' + card.dataset.id; }
-      else { animTarget = i; vel = 0; }
-    });
+  // 注意：pointerdown 时在 stage 上调用了 setPointerCapture，浏览器会把随后的
+  // click 事件改派到捕获目标（stage）而非卡片本身，故在 stage 上做事件委托，
+  // 通过 elementFromPoint 反查命中的卡片。
+  stage.addEventListener('click', e=>{
+    if(moved) return;
+    const hit = document.elementFromPoint(e.clientX, e.clientY);
+    const card = hit && hit.closest && hit.closest('.card');
+    if(!card) return;
+    const i = +card.dataset.i;
+    if(i === Math.round(pos)){ location.hash = '#/' + card.dataset.id; }
+    else { animTarget = i; vel = 0; }
   });
 
   // dots
   dots.forEach(d=> d.addEventListener('click', ()=>{ animTarget = +d.dataset.i; vel = 0; }));
+  document.getElementById('gallery-prev').addEventListener('click',()=>{animTarget=clamp(Math.round(pos)-1);vel=0;});
+  document.getElementById('gallery-next').addEventListener('click',()=>{animTarget=clamp(Math.round(pos)+1);vel=0;});
 
   // keys：← → 转动，Enter / Space 打开中央卡
   if(window._carKey) document.removeEventListener('keydown', window._carKey);
   function onKey(e){
     if(document.body.classList.contains('on-detail')) return;
-    if(e.key === 'ArrowRight'){ animTarget = clamp(Math.round(pos)+1); vel=0; }
-    else if(e.key === 'ArrowLeft'){ animTarget = clamp(Math.round(pos)-1); vel=0; }
-    else if(e.key === 'Enter' || e.key === ' '){
+    if(e.key === 'ArrowRight'){ e.preventDefault();animTarget = clamp(Math.round(pos)+1); vel=0; }
+    else if(e.key === 'ArrowLeft'){ e.preventDefault();animTarget = clamp(Math.round(pos)-1); vel=0; }
+    else if((e.key === 'Enter' || e.key === ' ') && !e.target.closest('button,a')){
       const c = GALLERY[clamp(Math.round(pos))];
       if(c){ e.preventDefault(); location.hash = '#/' + c.id; }
     }
@@ -2271,6 +2418,44 @@ function renderDetail(s){
 
   const keyFigures = (s.origin && s.origin.keyFigures) || [];
 
+  // 应用场景：示意图（UI / 平面 / 建筑等）+ 文字用例
+  const scenarios = s.scenarios || [];
+  const useCases = ui.useCases || [];
+  const scenarioShotsHTML = scenarios.length
+    ? `<div class="grid gap-5 ${scenarios.length>1?'md:grid-cols-2':''}">
+        ${scenarios.map(sc=>`
+          <figure class="scenario-card">
+            <div class="scenario-shot">
+              <img loading="lazy" src="${esc(sc.image)}" alt="${esc(sc.title)}"
+                   onerror="museumImgFail(this,'${s.id}')" />
+            </div>
+            <figcaption class="scenario-cap">
+              <div class="scenario-cap-head">
+                <span class="font-serif-display">${esc(sc.title)}</span>
+                ${sc.type?`<span class="scenario-tag">${esc(sc.type)}</span>`:''}
+              </div>
+              ${sc.note?`<p style="color:var(--muted);line-height:1.6;margin-top:6px;font-size:14px">${esc(sc.note)}</p>`:''}
+            </figcaption>
+          </figure>`).join('')}
+      </div>`
+    : '';
+  const useCasesHTML = useCases.length
+    ? `<div class="${scenarios.length?'mt-8':''}">
+        <div class="text-xs tracking-[.2em] uppercase mb-3" style="color:var(--muted)">典型用例</div>
+        <div class="flex flex-wrap gap-3">${useCases.map(u=>`<span class="chip" style="cursor:default">${esc(u)}</span>`).join('')}</div>
+      </div>`
+    : '';
+  const scenarioSectionHTML = (scenarios.length || useCases.length)
+    ? `<section class="section reveal">
+        <div class="eyebrow">UI Translation · 当代界面转译</div>
+        ${scenarios.length
+          ? `<p class="mb-6 max-w-2xl" style="color:var(--muted);line-height:1.6">以下为基于该流派视觉原则制作的原创界面练习，用来展示历史设计语言如何转化为当代产品界面；它不是历史作品或真实品牌页面。</p>`
+          : ''}
+        ${scenarioShotsHTML}
+        ${useCasesHTML}
+      </section>`
+    : '';
+
   app.innerHTML = `
     ${navHTML()}
 
@@ -2283,7 +2468,7 @@ function renderDetail(s){
         <h1 class="font-serif-zh mt-3" style="font-size:clamp(40px,7vw,76px);line-height:1.04">${esc(s.nameZh)}</h1>
         <div class="font-serif-display mt-1" style="font-size:clamp(15px,2vw,20px);letter-spacing:.18em;text-transform:uppercase;opacity:.85">${esc(s.name)}</div>
         <p class="mt-5 max-w-2xl" style="font-size:clamp(16px,2vw,20px);line-height:1.6;opacity:.95">${esc(s.coreLine)}</p>
-        <a href="ai-guide.html?s=${s.id}" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:10px 18px;border:1px solid rgba(255,255,255,.5);border-radius:99px;color:#fff;text-decoration:none;font-size:13px;letter-spacing:.04em;transition:background .25s">✨ 让 AI 用大白话讲讲${esc(s.nameZh)}</a>
+        <a href="ai-guide.html?s=${s.id}" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:10px 18px;border:1px solid rgba(255,255,255,.5);border-radius:99px;color:#fff;text-decoration:none;font-size:13px;letter-spacing:.04em;transition:background .25s">✨ 用 AI 导览认识${esc(s.nameZh)}</a>
       </div>
       ${cover && (s.coverArtwork.source || s.coverArtwork.rights) ? `<div style="position:absolute;right:14px;bottom:12px;z-index:10;font-size:10px;letter-spacing:.04em;color:rgba(255,255,255,.6);max-width:62%;text-align:right;line-height:1.4">${esc([s.coverArtwork.title, s.coverArtwork.source, s.coverArtwork.rights].filter(Boolean).join(' · '))}</div>` : ''}
     </header>
@@ -2320,11 +2505,10 @@ function renderDetail(s){
         <div><div class="font-serif-display text-lg mb-2">组件</div><p style="color:var(--muted);line-height:1.6">${esc(ui.components||'')}</p></div>
         <div><div class="font-serif-display text-lg mb-2">交互</div><p style="color:var(--muted);line-height:1.6">${esc(ui.interaction||'')}</p></div>
       </div>
-      ${(ui.useCases&&ui.useCases.length)?`<div class="mt-8">
-        <div class="text-xs tracking-[.2em] uppercase mb-3" style="color:var(--muted)">应用场景</div>
-        <div class="flex flex-wrap gap-3">${ui.useCases.map(u=>`<span class="chip" style="cursor:default">${esc(u)}</span>`).join('')}</div>
-      </div>`:''}
     </section>
+
+    <!-- 应用场景（独立模块） -->
+    ${scenarioSectionHTML}
 
     <!-- 东西方视角 -->
     <section class="section reveal">

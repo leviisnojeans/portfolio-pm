@@ -152,6 +152,14 @@
           "source": "Wikimedia Commons",
           "rights": "CC BY-SA 3.0 / GFDL，作者 Cricu"
         }
+      ],
+      "scenarios": [
+        {
+          "image": "public/scenarios/brutalism-ui-translation.svg",
+          "title": "开放式项目工作台",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：让信息结构、状态与原始内容直接可见，演示粗野主义的硬边和反装饰表达。"
+        }
       ]
     },
     {
@@ -210,6 +218,14 @@
           "珠宝 / 婚礼品牌"
         ]
       },
+      "scenarios": [
+        {
+          "image": "public/scenarios/art-nouveau-1.png",
+          "title": "香氛电商商品页",
+          "type": "UI 界面",
+          "note": "曲线藤蔓边框、对称花卉纹样配合留白与烫金细节，把奢侈品的优雅带入商品详情页。"
+        }
+      ],
       "eastWest": {
         "west": "Mucha 用流动女性人物 + 蔓藤金线，为一个时代定义了‘美’。",
         "east": "新艺术的有机曲线、花卉纹样与摩登女性形象，1920–30 年代经上海月份牌广告画被本土吸收：杭穉英、谢之光、金梅生等画师把『蔓藤金线＋摩登女郎』用于香烟与化妆品招贴。在欧洲它是反工业化的艺术先锋姿态，到了上海，同一套装饰语言却被收编进消费广告与殖民现代性——同样的『美』，一处是宣言，一处是橱窗。"
@@ -397,6 +413,14 @@
           "source": "Wikimedia Commons",
           "rights": "⚠ 设计仍在版权期，建议用风格化示意替代"
         }
+      ],
+      "scenarios": [
+        {
+          "image": "public/scenarios/memphis-design-ui-translation.svg",
+          "title": "潮流商品专题页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：以撞色、几何图形和强烈标题制造轻快的商品活动氛围。"
+        }
       ]
     },
     {
@@ -519,6 +543,14 @@
           "image": "public/artworks/wabi-sabi/wabi-sabi-mw2.jpg",
           "source": "Wikimedia Commons",
           "rights": "公有领域（古籍插图）"
+        }
+      ],
+      "scenarios": [
+        {
+          "image": "public/scenarios/wabi-sabi-ui-translation.svg",
+          "title": "慢生活茶事品牌首页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：用柔和纸色、克制排版和不规则自然形态表达慢节奏与留白。"
         }
       ]
     },
@@ -652,7 +684,15 @@
           "rights": "CC BY-SA 4.0，作者 JensKunstfreund"
         }
       ],
-      "imageTodo": "补代表作图（德绍校舍 / 瓦西里椅 / Universal 字体样张）；字体与早期平面多为公有领域"
+      "imageTodo": "补代表作图（德绍校舍 / 瓦西里椅 / Universal 字体样张）；字体与早期平面多为公有领域",
+      "scenarios": [
+        {
+          "image": "public/scenarios/bauhaus-ui-translation.svg",
+          "title": "日用家具商店",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：以几何构成、功能分区和清晰信息层级展示形式追随功能。"
+        }
+      ]
     },
     {
       "id": "cyberpunk",
@@ -713,6 +753,14 @@
           "科技感活动页"
         ]
       },
+      "scenarios": [
+        {
+          "image": "public/scenarios/cyberpunk-1.png",
+          "title": "科技 HUD 仪表盘",
+          "type": "UI 界面",
+          "note": "霓虹青／品红描边、暗底发光、切角棱线与高密度数据模块，营造未来控制台的沉浸感。"
+        }
+      ],
       "eastWest": {
         "west": "原型城市是 1980s 的东京——西方眼中的‘未来亚洲’。高密度、汉字霓虹、精英技术与底层混乱并存，全来自对东亚城市的想象投射。",
         "east": "国内语境中更多是去政治化的视觉消费品（游戏、B站特效、蒸汽波）。但部分创作者开始反向阅读——用赛博朋克框架审视平台数据权力、骑手算法困境，与 Zuboff《监控资本主义》的批判逻辑高度重合。"
@@ -896,7 +944,15 @@
           "rights": "公有领域（歌川广重 1858 年逝世）"
         }
       ],
-      "imageTodo": "Met Open Access 搜 Hokusai Great Wave / Hiroshige Tokaido 取 CC0 高清图（公有领域，最省心）"
+      "imageTodo": "Met Open Access 搜 Hokusai Great Wave / Hiroshige Tokaido 取 CC0 高清图（公有领域，最省心）",
+      "scenarios": [
+        {
+          "image": "public/scenarios/ukiyo-e-ui-translation.svg",
+          "title": "京都茶屋文化导览",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：借用平面轮廓、季节意象与有限色彩，构造文化导览入口。"
+        }
+      ]
     },
     {
       "id": "pop-art",
@@ -1009,7 +1065,15 @@
         "rights": "CC0 · 本项目自制 SVG · Ben-Day 网点 + 爆炸星形 + 对话气泡"
       },
       "masterworks": [],
-      "imageTodo": "版权敏感：避免原作，用风格化网点/撞色示意图"
+      "imageTodo": "版权敏感：避免原作，用风格化网点/撞色示意图",
+      "scenarios": [
+        {
+          "image": "public/scenarios/pop-art-ui-translation.svg",
+          "title": "流行文化限量商品页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：用粗描边、爆炸图形和高对比色彩构造流行文化商品专题。"
+        }
+      ]
     },
     {
       "id": "deconstructivism",
@@ -1133,7 +1197,15 @@
           "rights": "CC BY 3.0，作者 Mr a"
         }
       ],
-      "imageTodo": "找 CC 授权建筑摄影；广州大剧院可自摄/找授权"
+      "imageTodo": "找 CC 授权建筑摄影；广州大剧院可自摄/找授权",
+      "scenarios": [
+        {
+          "image": "public/scenarios/deconstructivism-ui-translation.svg",
+          "title": "城市艺术节数字展览",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：打破对称网格，让标题、形状和导航错位组合，但仍保留可读入口。"
+        }
+      ]
     },
     {
       "id": "art-deco",
@@ -1264,9 +1336,13 @@
           "rights": "CC0，作者 Hermann Luyken"
         }
       ],
-      "_todo": [
-        "补代表作图片（克莱斯勒大厦 / 外滩 / Cassandre 海报）",
-        "Cassandre 海报版权需核"
+      "scenarios": [
+        {
+          "image": "public/scenarios/art-deco-ui-translation.svg",
+          "title": "装饰艺术风格酒店预订页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：以对称构图、金色细线和几何轮廓营造酒店品牌的仪式感。"
+        }
       ]
     },
     {
@@ -1326,6 +1402,14 @@
           "Figma 自身 UI"
         ]
       },
+      "scenarios": [
+        {
+          "image": "public/scenarios/swiss-style-1.png",
+          "title": "新闻资讯 App",
+          "type": "UI 界面",
+          "note": "严格 8px 网格、左右对齐的图文卡片，红色作唯一强调色；层级全靠字号差与留白，无任何装饰。"
+        }
+      ],
       "eastWest": {
         "west": "包豪斯理想的工程化落地版——包豪斯给哲学，瑞士人给操作手册；经 Helvetica 全球扩散，成为‘现代性’的视觉代名词。",
         "east": "直接传承于互联网大厂设计规范（字节 / 腾讯 / 阿里的 MDS、TDesign、Ant Design 骨子里都是网格+层级的瑞士逻辑）。但中文等宽特性对网格提出独特挑战，催生‘汉字网格’本土化探索。"
@@ -1383,10 +1467,23 @@
         "source": "原创示意图（避开版权期原作）",
         "rights": "CC0 · 本项目自制 SVG · 数学网格 + 构成几何 + Helvetica 层级"
       },
-      "masterworks": [],
-      "_todo": [
-        "补代表作图片（Müller-Brockmann 海报版权敏感）",
-        "可用 Helvetica 字体样张作安全替代"
+      "masterworks": [
+        {
+          "title": "Musica Viva · Juni-Festwochen Zürich",
+          "artist": "Josef Müller-Brockmann",
+          "year": 1957,
+          "image": "public/artworks/swiss-style/swiss-style-mw1.jpg",
+          "source": "Wikimedia Commons",
+          "rights": "公有领域"
+        },
+        {
+          "title": "Kunsthalle Basel · Gubler / Zurkinden 展览海报",
+          "artist": "Armin Hofmann",
+          "year": 1959,
+          "image": "public/artworks/swiss-style/swiss-style-mw2.jpg",
+          "source": "Wikimedia Commons（Museum für Gestaltung Zürich 海报收藏 02-0769）",
+          "rights": "公有领域"
+        }
       ]
     },
     {
@@ -1521,8 +1618,13 @@
           "rights": "公有领域（El Lissitzky 1941 年逝世）"
         }
       ],
-      "_todo": [
-        "补图片：El Lissitzky / Rodchenko 多为公有领域，Wikimedia 可取"
+      "scenarios": [
+        {
+          "image": "public/scenarios/constructivism-ui-translation.svg",
+          "title": "城市公共文化节活动页",
+          "type": "原创 UI 转译",
+          "note": "原创界面练习：用斜切色块、强烈动势和红色行动按钮引导公共活动参与。"
+        }
       ]
     }
   ]

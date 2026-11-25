@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><rect width="1200" height="900" fill="#f2e8d2"/>
+<rect x="38" y="38" width="1124" height="824" rx="8" fill="none" stroke="#203f50" stroke-opacity=".16"/>
+<path d="M52 195 Q620 95 1148 200 L1148 624 Q630 724 52 624Z" fill="#d8e4df"/>
+<path d="M770 592 Q860 442 940 592Z" fill="#bd5339"/>
+<path d="M160 600 C230 530 250 430 340 390 C395 360 445 430 500 408 C560 385 580 300 660 280" fill="none" stroke="#203f50" stroke-width="9"/>
+<text x="90" y="112" font-family="Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="3" fill="#203f50">KISSA · 喫茶</text>
+<text x="928" y="112" font-family="Arial, sans-serif" font-size="16" font-weight="400" letter-spacing="0" fill="#203f50">季節を探す</text>
+<text x="100" y="290" font-family="Georgia, serif" font-size="62" font-weight="700" letter-spacing="-1" fill="#203f50">A season</text>
+<text x="100" y="362" font-family="Georgia, serif" font-size="62" font-weight="700" letter-spacing="-1" fill="#203f50">in every cup.</text>
+<text x="102" y="417" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#bd5339">KYOTO · TEA &amp; PRINTS</text>
+<text x="102" y="480" font-family="Arial, sans-serif" font-size="18" font-weight="400" letter-spacing="0" fill="#203f50">Find the quiet corner between rain and spring.</text>
+<rect x="102" y="520" width="196" height="54" rx="27" fill="#203f50"/>
+<text x="132" y="555" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#ffffff">ENTER THE KISSA  →</text>
+<path d="M925 294 C960 263 1010 275 1024 315 C1034 345 1014 380 986 388 C953 379 933 344 925 294Z" fill="#d5ad5c" stroke="#203f50" stroke-width="2"/>
+<text x="102" y="706" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#203f50">TEA  /  PRINTS  /  SLOW DAYS</text>
+</svg>
