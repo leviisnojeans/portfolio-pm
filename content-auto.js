@@ -17,9 +17,9 @@ var PORTFOLIO_AUTO_DATA = {
       "auto-sw-art_gallery-desc": `看作品，读懂风格；比较流派，找到界面灵感。通过代表作品、视觉 DNA、时间线与原创 UI 转译，探索 12 种设计语言。`,
       "auto-sw-art_gallery-name": `设计语言博物馆`,
       "auto-sw-philforum-desc": `沉浸式思想圆桌应用。把真实问题交给历史上的哲学家，看他们如何回应、辩论、碰撞。`,
-      "auto-sw-philforum-name": `The Philosopher's Forum`,
+      "auto-sw-philforum-name": `哲学论坛`,
       "auto-sw-travelmap-desc": `一个帮你找到最佳旅行时机的交互工具。结合气候数据与个人偏好，可视化呈现全球目的地的适宜出行窗口。`,
-      "auto-sw-travelmap-name": `Levi's Travel Map`,
+      "auto-sw-travelmap-name": `旅行灵感月历`,
     },
     en: {
       "auto-wr-01-cold-start-paradox-tag": `Product Analysis`,

@@ -133,9 +133,9 @@ const PORTFOLIO_DATA = {
       'sec4-title':   '个人作品',
       'sec4-meta':    '动手做',
 
-      'sw1-name':     "Levi's Travel Map",
+      'sw1-name':     "旅行灵感月历",
       'sw1-desc':     '一个帮你找到最佳旅行时机的交互工具。结合气候数据与个人偏好，可视化呈现全球目的地的适宜出行窗口。',
-      'sw2-name':     "The Philosopher's Forum",
+      'sw2-name':     "哲学论坛",
       'sw2-desc':     '沉浸式思想圆桌应用。把真实问题交给历史上的哲学家，看他们如何回应、辩论、碰撞。',
       'sw-btn-try':   '体验',
       'sw-btn-desc':  '产品说明书',
